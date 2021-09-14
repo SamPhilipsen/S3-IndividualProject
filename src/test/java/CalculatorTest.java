@@ -7,6 +7,6 @@ public class CalculatorTest {
     void AddTwoNumbersTest()
     {
         Calculator c = new Calculator();
-        assertEquals(2, c.AddTwoNumbers(1, 1));
+        assertEquals(3, c.AddTwoNumbers(1, 1));
     }
 }
