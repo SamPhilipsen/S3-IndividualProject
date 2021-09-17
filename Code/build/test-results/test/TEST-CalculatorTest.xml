@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CalculatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-14T08:33:18" hostname="LAPTOP-L1C7HI3H" time="0.016">
-  <properties/>
-  <testcase name="AddTwoNumbersTest()" classname="CalculatorTest" time="0.016"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
