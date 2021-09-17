@@ -10,9 +10,9 @@ public class UserDataStorage {
     private List<User> userList = new ArrayList<>();
 
     public UserDataStorage() {
-        User Peter = new User("Peter", 0, 100);
-        User Johan = new User("Johan", 1, 100);
-        User Henk = new User("Henk", 2, 100);
+        User Peter = new User("Peter", "123", 0, 100);
+        User Johan = new User("Johan", "ABC", 1, 100);
+        User Henk = new User("Henk", "000", 2, 100);
 
         userList.add(Peter);
         userList.add(Johan);

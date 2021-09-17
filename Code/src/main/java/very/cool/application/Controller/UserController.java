@@ -15,15 +15,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    //Will move this to work with dependency injection in sprint 2
     private static UserDataStorage userDataStorage = new UserDataStorage();
-
-    @GetMapping("/hello")
-    @ResponseBody
-    public String SayHello()
-    {
-        String msg = "Hello, your resources work!";
-        return msg;
-    }
 
     @GetMapping("{id}")
     public ResponseEntity<User> getUserPath(@PathVariable(value = "id") int id ) {
