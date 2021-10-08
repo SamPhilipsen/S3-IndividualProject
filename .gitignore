@@ -20,6 +20,8 @@
 *.rar
 
 !gradle/wrapper/gradle-wrapper.jar
+!gradlew
+!gradlew.bat
 
 *.idea
 
