@@ -17,63 +17,77 @@ const MainSite = () => {
     const handleLogin = () => {
         async function fetchData() {
             const response = await client.get("");
-            setUser(response.data);
+            setUser(response.data[0]);
         }
         fetchData();
         loggedIn = true;
     }
 
     //Could not get this to work.
-    /*const gameResultHandling = () => {
+    const gameResultHandling = () => {
         async function sendData() {
-            const response = await axios.post("http://localhost:8080/users", {user})
+            try {
+                const response = await axios.put("http://localhost:8080/users", user);
+                return response
+            } catch (error) {
+                console.error(error);
+            }
         }
-    }*/
+        sendData().then(r => console.log());
+    }
 
     const handleCointoss = () => {
         let coinSide;
+        var newPoints;
 
         let resultNumber = Math.floor(Math.random() * 2);
         if(resultNumber === 0) {
             coinSide = "heads";
+            newPoints = user.points + 50;
             setWinText("You win! " + coinSide)
         } else {
             coinSide = "tails";
+            newPoints = user.points - 50;
             setWinText("You lose! " + coinSide)
         }
+        setUser({
+            ...user,
+            points: newPoints,
+        })
+        gameResultHandling()
     }
 
     let loginButtonView = {}
     let coinTossView = {}
+    let loggedInInformation = {}
 
     if(loggedIn) {
         loginButtonView.display = "none"
     } else {
         coinTossView.display = "none"
+        loggedInInformation.display = "none"
     }
 
     if(!user) return null
 
     return (
         <div>
-            {user.map(data => (
-                <h1>Welcome, {data.name}</h1>
-                ))}
-            {user.map(data => (
-                <h2>ID: {data.id}</h2>
-            ))}
-            {user.map(data => (
-                <h2>Points: {data.points}</h2>
-            ))}
             <button onClick={handleLogin} style={loginButtonView}>
                 Log in
             </button>
-            <div className="coinTossCointainer" style={coinTossView}>
-                <p>Default coin side is <b>Heads</b>. Win = +50 points, lose = -50 points</p>
-                <button onClick={handleCointoss}>
-                    Flip coin
-                </button>
-                <p>{winText}</p>
+
+            <div style={loggedInInformation}>
+                <h1>welcome, {user.name}</h1>
+                <h2 key={user.id}>id: {user.id}</h2>
+                <h2>points: {user.points}</h2>
+
+                <div className="coinTossCointainer" style={coinTossView}>
+                    <p>Default coin side is <b>Heads</b>. Win = +50 points, lose = -50 points</p>
+                    <button onClick={handleCointoss}>
+                        Flip coin
+                    </button>
+                    <p>{winText}</p>
+                </div>
             </div>
         </div>
     );
