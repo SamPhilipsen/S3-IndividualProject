@@ -67,6 +67,7 @@ public class UserController {
         }
     }*/
 
+    @CrossOrigin
     @DeleteMapping("{id}")
     public ResponseEntity deletePost(@PathVariable int id) {
         userManager.deleteUser(id);
@@ -79,6 +80,7 @@ public class UserController {
     //    "id": 3,
     //    "points": 1000
     //}
+    @CrossOrigin
     @PostMapping()
     public ResponseEntity<User> createUser(@RequestBody User user) {
         if(!userManager.addUser(user)) {
@@ -91,6 +93,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @PutMapping()
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         if(userManager.updateUser(user)) {
@@ -100,6 +103,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("points") int points ) {
         User user = userManager.getUser(id);
