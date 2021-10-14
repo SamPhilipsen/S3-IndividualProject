@@ -8,6 +8,7 @@ build:
     - cd "REST API"
     - ./gradlew build -x test
     - ./gradlew.bat --stop
+    - --info
 
 test:
   stage: test
