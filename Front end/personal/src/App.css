@@ -1,0 +1,44 @@
+body {
+    font-family: "Abadi", Arial, sans-serif;
+    color: #383838
+}
+
+.userInformation {
+    color: #f7f7f7;
+    padding: 10px;
+    width: 100%;
+    margin: -8px;
+    margin-top: -16px;
+    background-color: #383838;
+}
+
+.userInformation li {
+    font-size: 30px;
+    padding-top: 8px;
+    display: inline-block;
+}
+.userInformation li:last-child {
+    float: right;
+}
+.userInformation li:first-child {
+    float: left;
+}
+.userInformation li:nth-child(even) {
+    margin-left: 33%;
+    margin-right: 33%;
+}
+
+.loginContainer {
+}
+
+#loginButton {
+    align-items: center;
+    font-size: 30px;
+    padding: 20px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

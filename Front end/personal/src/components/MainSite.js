@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
-
-const client = axios.create({
-    baseURL: "http://localhost:8080/users?name=Peter"
-});
-
-let loggedIn = false;
+import {Route, Switch, useLocation } from 'react-router-dom'
+import Login from "../pages/login";
 
 const MainSite = () => {
     const [user, setUser] = useState([]);
     const [winText, setWinText] = useState("");
+    const location = useLocation();
 
-    useEffect( () => {
-    }, []);
+    useEffect(() => {
+            setUser(location.state);
+    }, [location.state])
 
-    const handleLogin = () => {
-        async function fetchData() {
-            const response = await client.get("");
-            setUser(response.data[0]);
-        }
-        fetchData();
-        loggedIn = true;
-    }
 
-    //Could not get this to work.
     const gameResultHandling = () => {
         async function sendData() {
             try {
@@ -57,39 +46,34 @@ const MainSite = () => {
         gameResultHandling()
     }
 
-    let loginButtonView = {}
-    let coinTossView = {}
-    let loggedInInformation = {}
-
-    if(loggedIn) {
-        loginButtonView.display = "none"
-    } else {
-        coinTossView.display = "none"
-        loggedInInformation.display = "none"
-    }
-
-    if(!user) return null
+    if(!user) return (
+        <Login />   
+    )
 
     return (
-        <div>
-            <button onClick={handleLogin} style={loginButtonView}>
-                Log in
-            </button>
+            <Switch>
+                <Route exact path="/">
+                    <Login />
+                </Route>
+                <Route path="/menu">
+                    <div>
+                        <ul className="userInformation">
+                            <li>Name: {user.name}</li>
+                            <li key={user.id}>Id: {user.id}</li>
+                            <li>Points: {user.points}</li>
+                        </ul>
 
-            <div style={loggedInInformation}>
-                <h1>welcome, {user.name}</h1>
-                <h2 key={user.id}>id: {user.id}</h2>
-                <h2>points: {user.points}</h2>
+                        <div className="coinTossContainer">
+                            <p>Default coin side is <b>Heads</b>. Win = +50 points, lose = -50 points</p>
+                            <button onClick={handleCointoss}>
+                                Flip coin
+                            </button>
+                            <p>{winText}</p>
+                        </div>
+                    </div>
+                </Route>
+            </Switch>
 
-                <div className="coinTossCointainer" style={coinTossView}>
-                    <p>Default coin side is <b>Heads</b>. Win = +50 points, lose = -50 points</p>
-                    <button onClick={handleCointoss}>
-                        Flip coin
-                    </button>
-                    <p>{winText}</p>
-                </div>
-            </div>
-        </div>
     );
 }
 

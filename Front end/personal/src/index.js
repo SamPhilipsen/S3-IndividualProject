@@ -1,15 +1,18 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import MainSite from "./components/MainSite"
+import { BrowserRouter as Router } from "react-router-dom";
 
 //stylesheet
-//import "App.css"
+import "./App.css"
 
 //component file
+import MainSite from "./components/MainSite"
 
 ReactDOM.render(
     <React.StrictMode>
-            <MainSite />
+        <Router>
+            <MainSite/>
+        </Router>
     </React.StrictMode>,
     document.getElementById("root")
-)
+);
