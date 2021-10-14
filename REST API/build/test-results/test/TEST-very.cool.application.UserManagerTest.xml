@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="very.cool.application.UserManagerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-10-05T08:37:56" hostname="LAPTOP-L1C7HI3H" time="0.033">
+<testsuite name="very.cool.application.UserManagerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-10-14T13:29:29" hostname="LAPTOP-L1C7HI3H" time="0.045">
   <properties/>
-  <testcase name="GetUsersFailsTest()" classname="very.cool.application.UserManagerTest" time="0.03"/>
+  <testcase name="GetUsersFailsTest()" classname="very.cool.application.UserManagerTest" time="0.043"/>
   <testcase name="contextLoads()" classname="very.cool.application.UserManagerTest" time="0.001"/>
-  <testcase name="GetAllUsersTest()" classname="very.cool.application.UserManagerTest" time="0.001"/>
+  <testcase name="GetAllUsersTest()" classname="very.cool.application.UserManagerTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
