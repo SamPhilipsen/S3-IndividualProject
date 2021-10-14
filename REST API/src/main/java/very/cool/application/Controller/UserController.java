@@ -36,10 +36,16 @@ public class UserController {
 
     @CrossOrigin
     @GetMapping
-    public ResponseEntity<List<User>> getUser(@RequestParam(value = "name") Optional<String> name) {
+    public ResponseEntity<List<User>> getUsers(@RequestParam(value = "name") Optional<String> name) {
         List<User> users = null;
 
-        users = userManager.getUsers(name.get());
+        if(name.isPresent()) {
+            users = userManager.getUsers(name.get());
+        }
+        else {
+            users = userManager.getUsers();
+        }
+
         if(users != null) {
             return ResponseEntity.ok().body(users);
         }
