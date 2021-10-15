@@ -6,7 +6,7 @@ build:
   stage: build
   script:
     - cd "REST API"
-    - ./gradlew build -x test
+    - ./gradlew build -x test --info
     - ./gradlew.bat --stop
 
 test:
