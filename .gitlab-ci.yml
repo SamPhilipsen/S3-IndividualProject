@@ -1,4 +1,5 @@
 stages:
+  - sonarqube-check
   - build
   - test
 
@@ -15,7 +16,6 @@ script: gradle sonarqube
 allow_failure: true
 only:
   - master # or the name of your main branch
-
 
 build:
   stage: build
