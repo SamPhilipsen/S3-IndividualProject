@@ -16,10 +16,10 @@ public class FakeUserManager implements IUserManager {
         return null;
     }
 
-    /*@Override
+    @Override
     public List<User> getUsers(int points) {
         return null;
-    }*/
+    }
 
     @Override
     public User getUser(int id) {
