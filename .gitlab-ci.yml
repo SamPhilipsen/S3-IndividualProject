@@ -29,8 +29,8 @@ sonarqube-check:
       - .sonar/cache
   script: 
     - cd "REST API"
-    - ./gradlew sonar-scanner
-    - ./gradlew.bat --stop
+    - gradle sonar-scanner
+    - gradle.bat --stop
   allow_failure: true
   only:
     - main # or the name of your main branch
