@@ -29,7 +29,7 @@ sonarqube-check:
       - .sonar/cache
   script: 
     - cd "REST API"
-    - ./gradlew sonar-scanner
+    - ./gradlew sonarqube
     - ./gradlew.bat --stop
   allow_failure: true
   only:
