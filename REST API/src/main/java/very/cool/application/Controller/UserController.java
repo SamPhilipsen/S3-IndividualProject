@@ -39,9 +39,14 @@ public class UserController {
     public ResponseEntity<List<User>> getUser(@RequestParam(value = "name") Optional<String> name) {
         List<User> users = null;
 
-        users = userManager.getUsers(name.get());
-        if(users != null) {
-            return ResponseEntity.ok().body(users);
+        if(name.isPresent()) {
+            users = userManager.getUsers(name.get());
+            if(users != null) {
+                return ResponseEntity.ok().body(users);
+            }
+            else {
+                return ResponseEntity.notFound().build();
+            }
         }
         else {
             return ResponseEntity.notFound().build();
