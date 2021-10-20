@@ -1,0 +1,16 @@
+very/cool/application/Interfaces/IUserData.java
+ very.cool.application.Interfaces.IUserData
+very/cool/application/Model/User.java
+ very.cool.application.Model.User
+very/cool/application/Interfaces/IUserManager.java
+ very.cool.application.Interfaces.IUserManager
+very/cool/application/MainApplication.java
+ very.cool.application.MainApplication
+very/cool/application/Controller/UserController.java
+ very.cool.application.Controller.UserController
+very/cool/application/Repository/UserDataStorage.java
+ very.cool.application.Repository.UserDataStorage
+very/cool/application/Game_logic/Cointoss.java
+ very.cool.application.Game_logic.Cointoss
+very/cool/application/Logic/UserManager.java
+ very.cool.application.Logic.UserManager

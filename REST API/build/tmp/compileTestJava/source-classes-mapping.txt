@@ -1,0 +1,4 @@
+very/cool/application/FakeUserManager.java
+ very.cool.application.FakeUserManager
+very/cool/application/UserManagerTest.java
+ very.cool.application.UserManagerTest
