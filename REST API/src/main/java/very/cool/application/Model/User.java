@@ -1,9 +1,31 @@
 package very.cool.application.Model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="user")
 public class User {
-    private String name;
-    private String password;
+
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.AUTO,
+            generator= "native"
+    )
+    @GenericGenerator(
+            name = "native",
+            strategy = "native"
+    )
     private int id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "points")
     private int points;
 
     public User(String name, String password, int id, int points) {
@@ -19,6 +41,9 @@ public class User {
 
     public String getName() { return this.name; }
     public void setName(String name) { this.name = name; }
+
+    public String getPassword() { return this.password; }
+    public void setPassword(String password) { this.password = password; }
 
     public int getId() { return this.id; }
     public void setId(int id) { this.id = id; }

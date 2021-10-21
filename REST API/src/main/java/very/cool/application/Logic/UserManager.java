@@ -1,17 +1,21 @@
 package very.cool.application.Logic;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import very.cool.application.Interfaces.IUserData;
 import very.cool.application.Interfaces.IUserManager;
 import very.cool.application.Model.User;
 
 import java.util.List;
 
-@Component
+//Service class
+@Service
 public class UserManager implements IUserManager {
 
     private IUserData fakeData;
 
+    @Autowired
     public UserManager(IUserData userData)
     {
         fakeData = userData;

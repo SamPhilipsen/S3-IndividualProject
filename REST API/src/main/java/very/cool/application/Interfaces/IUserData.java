@@ -3,7 +3,9 @@ package very.cool.application.Interfaces;
 import very.cool.application.Model.User;
 
 import java.util.List;
+import java.util.Optional;
 
+//IUserDal
 public interface IUserData {
     public List<User> getUsers();
     public List<User> getUsers(String name);
