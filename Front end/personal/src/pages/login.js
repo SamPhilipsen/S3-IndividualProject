@@ -9,7 +9,8 @@ const Login = () => {
     const handleLogin = () => {
         async function fetchData() {
             const response = await axios.get("http://localhost:8080/users?name=Peter");
-            history.push("/menu", response.data[0]);
+            localStorage.setItem('loggedInUser', JSON.stringify(response.data[0]));
+            history.push("/menu");
         }
         fetchData();
     }

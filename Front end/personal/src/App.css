@@ -42,3 +42,16 @@ body {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+#logoutButton {
+    background-color: darkred;
+    color: #f7f7f7;
+    font-size: 25px;
+}
+#logoutButton:hover {
+    background-color: red;
+}
+
+.cointossContainer {
+
+}

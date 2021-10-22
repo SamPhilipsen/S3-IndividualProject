@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React, {useEffect, useState} from "react"
+import { Route, Switch } from 'react-router-dom'
+import Login from "../pages/Login";
+import Header from "./Header";
+import CointossContainer from "./CointossContainer";
 import axios from "axios";
-import {Route, Switch, useLocation } from 'react-router-dom'
-import Login from "../pages/login";
 
-const MainSite = () => {
-    const [user, setUser] = useState([]);
-    const [winText, setWinText] = useState("");
-    const location = useLocation();
+const MainSite = props => {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('loggedInUser')));
 
     useEffect(() => {
-            setUser(location.state);
-    }, [location.state])
-
-
-    const gameResultHandling = () => {
+        localStorage.setItem('loggedInUser', JSON.stringify(user))
         async function sendData() {
             try {
                 const response = await axios.put("http://localhost:8080/users", user);
@@ -22,59 +18,40 @@ const MainSite = () => {
                 console.error(error);
             }
         }
-        sendData().then(r => console.log());
-    }
+        sendData();
+    })
 
-    const handleCointoss = () => {
-        let coinSide;
-        var newPoints;
-
-        let resultNumber = Math.floor(Math.random() * 2);
-        if(resultNumber === 0) {
-            coinSide = "heads";
-            newPoints = user.points + 50;
-            setWinText("You win! " + coinSide)
-        } else {
-            coinSide = "tails";
-            newPoints = user.points - 50;
-            setWinText("You lose! " + coinSide)
-        }
+    const handlePointsChange = (newPoints) => {
         setUser({
             ...user,
             points: newPoints,
         })
-        gameResultHandling()
     }
 
-    if(!user) return (
-        <Login />   
-    )
-
-    return (
+    if(user) {
+        return (
             <Switch>
                 <Route exact path="/">
                     <Login />
                 </Route>
                 <Route path="/menu">
                     <div>
-                        <ul className="userInformation">
-                            <li>Name: {user.name}</li>
-                            <li key={user.id}>Id: {user.id}</li>
-                            <li>Points: {user.points}</li>
-                        </ul>
-
-                        <div className="coinTossContainer">
-                            <p>Default coin side is <b>Heads</b>. Win = +50 points, lose = -50 points</p>
-                            <button onClick={handleCointoss}>
-                                Flip coin
-                            </button>
-                            <p>{winText}</p>
-                        </div>
+                        <Header
+                            loggedInUser={user}
+                        />
+                        <CointossContainer
+                            loggedInUser={user}
+                            gamePointsChanged = {handlePointsChange}
+                        />
                     </div>
                 </Route>
             </Switch>
 
-    );
+        );
+    }
+    return (
+        <Login />
+    )
 }
 
 export default MainSite
