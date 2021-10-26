@@ -9,7 +9,7 @@ import very.cool.application.Logic.UserManager;
 import very.cool.application.Model.User;
 import very.cool.application.Repository.UserDataStorage;
 
-public class UserManagerTest {
+public class UserControllerTest {
 
     @Test
     void contextLoads() {
