@@ -28,21 +28,6 @@ body {
     margin-right: 33%;
 }
 
-.loginContainer {
-}
-
-#loginButton {
-    align-items: center;
-    font-size: 30px;
-    padding: 20px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
 #logoutButton {
     background-color: darkred;
     color: #f7f7f7;
@@ -52,6 +37,4 @@ body {
     background-color: red;
 }
 
-.cointossContainer {
 
-}

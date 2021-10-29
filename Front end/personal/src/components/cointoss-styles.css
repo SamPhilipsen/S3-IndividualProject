@@ -1,0 +1,42 @@
+.coinTossContainer {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-style: solid;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.coinTossForm {
+    margin-left: 25%;
+    margin-right: 25%;
+
+}
+
+.coinTossForm input, button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coinTossForm input[type=text] {
+    width: 88%;
+    padding: 10px;
+    margin: 10px;
+}
+
+.coinTossForm input[type=radio] {
+    display: inline;
+    height: 25px;
+    width: 25px;
+}
+
+.coinTossForm .bet-submit {
+    border-radius: 50%;
+    color: blue;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin-left:45%;
+    margin-right:45%;
+}
