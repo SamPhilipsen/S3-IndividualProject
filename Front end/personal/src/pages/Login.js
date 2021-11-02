@@ -10,12 +10,15 @@ const Login = () => {
 
     const handleLogin = () => {
         async function fetchData() {
+            let startTime = new Date();
             try {
                 const response = await axios.get("http://localhost:8080/users?name=Peter");
                 localStorage.setItem('loggedInUser', JSON.stringify(response.data[0]));
                 history.push("/menu");
             } catch (error) {
-                setErrorText("Could not establish a connection with the API!");
+                let endTime = new Date();
+                let elapsedTime = (endTime - startTime)
+                setErrorText("Could not establish a connection with the API! Elapsed time: " + elapsedTime + "ms");
             }
 
         }
