@@ -53,7 +53,8 @@ const CointossContainer = props => {
     }
 
     return (
-        <div className="coinTossContainer">
+        <div className="gameBaseContainer">
+            <h1>Game 1</h1>
             <form onSubmit={handleCointoss} className="coinTossForm">
                 <input
                     type="text"

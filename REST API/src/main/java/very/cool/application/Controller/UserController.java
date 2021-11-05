@@ -12,6 +12,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -24,7 +25,7 @@ public class UserController {
         this.userManager = userManager;
     }
 
-    @CrossOrigin
+
     @GetMapping("{id}")
     public ResponseEntity<User> getUserPath(@PathVariable(value = "id") int id ) {
         User user = userManager.getUser(id);
@@ -36,7 +37,6 @@ public class UserController {
         }
     }
 
-    @CrossOrigin
     @GetMapping
     public ResponseEntity<List<User>> getUsers(@RequestParam(value = "name") Optional<String> name) {
         List<User> users = null;

@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Header from "./Header";
 import CointossContainer from "./CointossContainer";
 import axios from "axios";
+import Game2Container from "./Game2Container";
 
 const MainSite = props => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('loggedInUser')));
@@ -40,6 +41,10 @@ const MainSite = props => {
                             loggedInUser={user}
                         />
                         <CointossContainer
+                            loggedInUser={user}
+                            gamePointsChanged = {handlePointsChange}
+                        />
+                        <Game2Container
                             loggedInUser={user}
                             gamePointsChanged = {handlePointsChange}
                         />

@@ -8,9 +8,9 @@ very/cool/application/Interfaces/IUserManager.java
  very.cool.application.Interfaces.IUserManager
 very/cool/application/Logic/UserManager.java
  very.cool.application.Logic.UserManager
-very/cool/application/Controller/UserController.java
- very.cool.application.Controller.UserController
-very/cool/application/Repository/IUserRepository.java
- very.cool.application.Repository.IUserRepository
 very/cool/application/Repository/UserDataStorage.java
  very.cool.application.Repository.UserDataStorage
+very/cool/application/Repository/IUserRepository.java
+ very.cool.application.Repository.IUserRepository
+very/cool/application/Controller/UserController.java
+ very.cool.application.Controller.UserController

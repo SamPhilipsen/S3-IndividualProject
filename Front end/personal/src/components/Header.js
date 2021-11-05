@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom";
+import "./header-styles.css"
 
 const Header = props => {
     const [user, setUser] = useState(props.loggedInUser);
