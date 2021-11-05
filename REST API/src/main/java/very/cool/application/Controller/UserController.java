@@ -56,25 +56,6 @@ public class UserController {
 
     }
 
-    /*@CrossOrigin
-    @GetMapping
-    public ResponseEntity<List<User>> getUsers(@RequestParam(value = "points") Optional<Integer> points) {
-        List<User> users = null;
-
-        if(points.isPresent()) {
-            users = userManager.getUsers(points.get());
-        }
-        else {
-            users = userManager.getUsers();
-        }
-        if(users != null) {
-            return ResponseEntity.ok().body(users);
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
-    }*/
-
     @CrossOrigin
     @DeleteMapping("{id}")
     public ResponseEntity deletePost(@PathVariable int id) {
