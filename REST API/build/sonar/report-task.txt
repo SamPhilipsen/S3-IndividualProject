@@ -1,0 +1,6 @@
+projectKey=I467404_its-individual-track_AXyEI-W9927Jwc7X5cS7
+serverUrl=http://localhost:9000
+serverVersion=9.1.0.47736
+dashboardUrl=http://localhost:9000/dashboard?id=I467404_its-individual-track_AXyEI-W9927Jwc7X5cS7
+ceTaskId=AXyXnxlGJ57GVesX7iWn
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXyXnxlGJ57GVesX7iWn

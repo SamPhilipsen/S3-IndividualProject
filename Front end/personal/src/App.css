@@ -1,0 +1,13 @@
+body {
+    font-family: "Abadi", Arial, sans-serif;
+    color: #383838
+}
+
+.gameBaseContainer {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-style: solid;
+    border-radius: 2px;
+    text-align: center;
+}

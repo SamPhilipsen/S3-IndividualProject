@@ -1,0 +1,8 @@
+very/cool/application/FakeUserManager.java
+ very.cool.application.FakeUserManager
+very/cool/application/UserManagerTest.java
+ very.cool.application.UserManagerTest
+very/cool/application/FakeUserDataStorage.java
+ very.cool.application.FakeUserDataStorage
+very/cool/application/UserControllerTest.java
+ very.cool.application.UserControllerTest

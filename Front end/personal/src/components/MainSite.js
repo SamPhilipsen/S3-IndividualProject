@@ -1,82 +1,62 @@
-import React, { useState, useEffect } from "react"
+import React, {useEffect, useState} from "react"
+import { Route, Switch } from 'react-router-dom'
+import Login from "../pages/Login";
+import Header from "./Header";
+import CointossContainer from "./CointossContainer";
 import axios from "axios";
+import Game2Container from "./Game2Container";
 
-const client = axios.create({
-    baseURL: "http://localhost:8080/users?name=Peter"
-});
+const MainSite = props => {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('loggedInUser')));
 
-let loggedIn = false;
-
-const MainSite = () => {
-    const [user, setUser] = useState([]);
-    const [winText, setWinText] = useState("");
-
-    useEffect( () => {
-    }, []);
-
-    const handleLogin = () => {
-        async function fetchData() {
-            const response = await client.get("");
-            setUser(response.data);
-        }
-        fetchData();
-        loggedIn = true;
-    }
-
-    //Could not get this to work.
-    /*const gameResultHandling = () => {
+    useEffect(() => {
+        localStorage.setItem('loggedInUser', JSON.stringify(user))
         async function sendData() {
-            const response = await axios.post("http://localhost:8080/users", {user})
+            try {
+                const response = await axios.put("http://localhost:8080/users", user);
+                return response
+            } catch (error) {
+                console.error(error);
+            }
         }
-    }*/
+        sendData();
+    })
 
-    const handleCointoss = () => {
-        let coinSide;
-
-        let resultNumber = Math.floor(Math.random() * 2);
-        if(resultNumber === 0) {
-            coinSide = "heads";
-            setWinText("You win! " + coinSide)
-        } else {
-            coinSide = "tails";
-            setWinText("You lose! " + coinSide)
-        }
+    const handlePointsChange = (newPoints) => {
+        setUser({
+            ...user,
+            points: newPoints,
+        })
     }
 
-    let loginButtonView = {}
-    let coinTossView = {}
+    if(user) {
+        return (
+            <Switch>
+                <Route exact path="/">
+                    <Login />
+                </Route>
+                <Route path="/menu">
+                    <div>
+                        <Header
+                            loggedInUser={user}
+                        />
+                        <CointossContainer
+                            loggedInUser={user}
+                            gamePointsChanged = {handlePointsChange}
+                        />
+                        <Game2Container
+                            loggedInUser={user}
+                            gamePointsChanged = {handlePointsChange}
+                        />
+                    </div>
+                </Route>
+            </Switch>
 
-    if(loggedIn) {
-        loginButtonView.display = "none"
-    } else {
-        coinTossView.display = "none"
+        );
     }
-
-    if(!user) return null
-
     return (
-        <div>
-            {user.map(data => (
-                <h1>Welcome, {data.name}</h1>
-                ))}
-            {user.map(data => (
-                <h2>ID: {data.id}</h2>
-            ))}
-            {user.map(data => (
-                <h2>Points: {data.points}</h2>
-            ))}
-            <button onClick={handleLogin} style={loginButtonView}>
-                Log in
-            </button>
-            <div className="coinTossCointainer" style={coinTossView}>
-                <p>Default coin side is <b>Heads</b>. Win = +50 points, lose = -50 points</p>
-                <button onClick={handleCointoss}>
-                    Flip coin
-                </button>
-                <p>{winText}</p>
-            </div>
-        </div>
-    );
+        <Login />
+    )
 }
 
 export default MainSite

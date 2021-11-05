@@ -1,6 +1,7 @@
 package very.cool.application.Controller;
 
 import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+    @Autowired
     private IUserManager userManager;
 
     public UserController(IUserManager userManager)
@@ -22,7 +25,7 @@ public class UserController {
         this.userManager = userManager;
     }
 
-    @CrossOrigin
+
     @GetMapping("{id}")
     public ResponseEntity<User> getUserPath(@PathVariable(value = "id") int id ) {
         User user = userManager.getUser(id);
@@ -34,12 +37,17 @@ public class UserController {
         }
     }
 
-    @CrossOrigin
     @GetMapping
-    public ResponseEntity<List<User>> getUser(@RequestParam(value = "name") Optional<String> name) {
+    public ResponseEntity<List<User>> getUsers(@RequestParam(value = "name") Optional<String> name) {
         List<User> users = null;
 
-        users = userManager.getUsers(name.get());
+        if(name.isPresent()) {
+            users = userManager.getUsers(name.get());
+        }
+        else {
+            users = userManager.getUsers();
+        }
+
         if(users != null) {
             return ResponseEntity.ok().body(users);
         }
@@ -67,6 +75,7 @@ public class UserController {
         }
     }*/
 
+    @CrossOrigin
     @DeleteMapping("{id}")
     public ResponseEntity deletePost(@PathVariable int id) {
         userManager.deleteUser(id);
@@ -77,8 +86,10 @@ public class UserController {
     //{
     //    "name": "Sam",
     //    "id": 3,
+    //    "password": "987"
     //    "points": 1000
     //}
+    @CrossOrigin
     @PostMapping()
     public ResponseEntity<User> createUser(@RequestBody User user) {
         if(!userManager.addUser(user)) {
@@ -91,6 +102,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @PutMapping()
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         if(userManager.updateUser(user)) {
@@ -100,6 +112,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("points") int points ) {
         User user = userManager.getUser(id);
