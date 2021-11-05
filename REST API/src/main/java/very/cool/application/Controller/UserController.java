@@ -43,17 +43,17 @@ public class UserController {
 
         if(name.isPresent()) {
             users = userManager.getUsers(name.get());
-        }
-        else {
-            users = userManager.getUsers();
-        }
-
-        if(users != null) {
-            return ResponseEntity.ok().body(users);
+            if(users != null) {
+                return ResponseEntity.ok().body(users);
+            }
+            else {
+                return ResponseEntity.notFound().build();
+            }
         }
         else {
             return ResponseEntity.notFound().build();
         }
+
     }
 
     /*@CrossOrigin

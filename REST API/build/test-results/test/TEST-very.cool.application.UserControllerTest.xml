@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="very.cool.application.UserControllerTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-11-05T21:35:34" hostname="LAPTOP-L1C7HI3H" time="0.042">
+  <properties/>
+  <testcase name="getUserByNameFailsTest()" classname="very.cool.application.UserControllerTest" time="0.029"/>
+  <testcase name="GetUsersFailsTest()" classname="very.cool.application.UserControllerTest" time="0.001"/>
+  <testcase name="updateUserWithObjectTest()" classname="very.cool.application.UserControllerTest" time="0.001"/>
+  <testcase name="createUserTestFail()" classname="very.cool.application.UserControllerTest" time="0.005"/>
+  <testcase name="createUserTest()" classname="very.cool.application.UserControllerTest" time="0.002"/>
+  <testcase name="updateUserWithVarsTest()" classname="very.cool.application.UserControllerTest" time="0.001"/>
+  <testcase name="updateUserTestWithObjectFailed()" classname="very.cool.application.UserControllerTest" time="0.0"/>
+  <testcase name="contextLoads()" classname="very.cool.application.UserControllerTest" time="0.0"/>
+  <testcase name="getUsersByNameTest()" classname="very.cool.application.UserControllerTest" time="0.001"/>
+  <testcase name="updateUserTestWithVarsFailed()" classname="very.cool.application.UserControllerTest" time="0.0"/>
+  <testcase name="deleteUserTest()" classname="very.cool.application.UserControllerTest" time="0.001"/>
+  <testcase name="GetAllUsersTest()" classname="very.cool.application.UserControllerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
