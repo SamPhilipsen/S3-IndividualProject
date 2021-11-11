@@ -3,10 +3,9 @@ package very.cool.application.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import very.cool.application.Interfaces.IUserData;
-import very.cool.application.Model.User;
+import very.cool.application.Model.Member;
 
 import java.util.List;
-import java.util.Optional;
 
 //UserDalJPA
 @Repository
@@ -27,22 +26,22 @@ public class UserDataStorage implements IUserData {
         userList.add(Henk);
     }*/
 
-    public List<User> getUsers() { return repo.findAll(); }
+    public List<Member> getMembers() { return repo.findAll(); }
 
-    public List<User> getUsers(String name) {
-        return (List<User>) repo.getUsersByName(name);
+    public List<Member> getMembers(String name) {
+        return (List<Member>) repo.getMembersByName(name);
     }
 
-    public List<User> getUsers(int points) {
-        return (List<User>) repo.getUsersByPoints(points);
+    public List<Member> getMembers(int points) {
+        return (List<Member>) repo.getMembersByPoints(points);
     }
 
-    public User getUser(int id) {
-        return repo.getUserById(id);
+    public Member getMember(int id) {
+        return repo.getMemberById(id);
     }
 
-    public boolean deleteUser(int id) {
-        User user = getUser(id);
+    public boolean deleteMember(int id) {
+        Member user = getMember(id);
         if(user != null) {
             repo.delete(user);
             return true;
@@ -50,13 +49,13 @@ public class UserDataStorage implements IUserData {
         else return false;
     }
 
-    public boolean addUser(User user) {
+    public boolean addMember(Member user) {
         repo.save(user);
         return true;
     }
 
-    public boolean updateUser(User user) {
-        User oldUser = this.getUser(user.getId());
+    public boolean updateMember(Member user) {
+        Member oldUser = this.getMember(user.getId());
         if(oldUser != null) {
            oldUser.setName(user.getName());
            oldUser.setPoints(user.getPoints());

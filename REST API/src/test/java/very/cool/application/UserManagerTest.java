@@ -4,89 +4,89 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import very.cool.application.Service.UserManager;
-import very.cool.application.Model.User;
+import very.cool.application.Model.Member;
 
 public class UserManagerTest {
 
     UserManager manager;
-    User testUser;
-    User wrongUser;
+    Member testUser;
+    Member wrongUser;
 
     @BeforeEach
     private void setup() {
         manager = new UserManager(new FakeUserDataStorage());
-        testUser = new User("TestUser", "00000", 0, 100);
-        wrongUser = new User("Not the test user!", "00000", 0, 100);
+        testUser = new Member("TestUser", "00000", 0, 100);
+        wrongUser = new Member("Not the test user!", "00000", 0, 100);
     }
 
     /*@Test
-    private void getUsersByName()
+    private void getMembersByName()
     {
-        List<User> result = manager.getUsers("Peter");
+        List<User> result = manager.getMembers("Peter");
 
         Assertions.assertTrue(result instanceof User);
     }*/
 
     @Test
-    public void getUserTest()
+    public void getMemberTest()
     {
-        User result = manager.getUser(1);
+        Member result = manager.getMember(1);
 
-        Assertions.assertTrue(result instanceof User);
+        Assertions.assertTrue(result instanceof Member);
     }
 
     @Test
-    public void getUserTestFail()
+    public void getMemberTestFail()
     {
-        User result = manager.getUser(2);
+        Member result = manager.getMember(2);
 
-        Assertions.assertFalse(result instanceof User);
+        Assertions.assertFalse(result instanceof Member);
     }
 
     @Test
-    public void deleteUserTest()
+    public void deleteMemberTest()
     {
-        boolean result = manager.deleteUser(1);
+        boolean result = manager.deleteMember(1);
 
         Assertions.assertTrue(result);
     }
 
     @Test
-    public void deleteUserTestFail()
+    public void deleteMemberTestFail()
     {
-        boolean result = manager.deleteUser(2);
+        boolean result = manager.deleteMember(2);
 
         Assertions.assertFalse(result);
     }
 
     @Test
-    public void addUserTest()
+    public void addMemberTest()
     {
-        boolean result = manager.addUser(testUser);
+        boolean result = manager.addMember(testUser);
 
         Assertions.assertTrue(result);
     }
 
     @Test
-    public void addUserTestFail()
+    public void addMemberTestFail()
     {
-        boolean result = manager.addUser(wrongUser);
+        boolean result = manager.addMember(wrongUser);
 
         Assertions.assertFalse(result);
     }
 
     @Test
-    public void updateUserTest()
+    public void updateMemberTest()
     {
-        boolean result = manager.updateUser(testUser);
+        boolean result = manager.updateMember(testUser);
 
         Assertions.assertTrue(result);
     }
 
     @Test
-    public void updateUserTestFail()
+    public void updateMemberTestFail()
     {
-        boolean result = manager.updateUser(wrongUser);
+        boolean result = manager.updateMember(wrongUser);
 
         Assertions.assertFalse(result);
     }

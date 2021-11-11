@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import very.cool.application.Controller.UserController;
-import very.cool.application.Model.User;
+import very.cool.application.Model.Member;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,14 +14,14 @@ import java.util.Optional;
 public class UserControllerTest {
 
     UserController controller;
-    User testUser;
-    User wrongUser;
+    Member testUser;
+    Member wrongUser;
 
     @BeforeEach
     private void setup() {
         controller = new UserController(new FakeUserManager());
-        testUser = new User("TestUser", "00000", 0, 100);
-        wrongUser = new User("Not the test user!", "00000", 0, 100);
+        testUser = new Member("TestUser", "00000", 0, 100);
+        wrongUser = new Member("Not the test user!", "00000", 0, 100);
     }
 
     @Test
@@ -32,40 +32,40 @@ public class UserControllerTest {
     @Test
     public void GetAllUsersTest()
     {
-        ResponseEntity<User> result = controller.getUserPath(1);
+        ResponseEntity<Member> result = controller.getMemberPath(1);
 
         Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
     @Test
-    void GetUsersFailsTest()
+    void getMembersFailsTest()
     {
-        ResponseEntity<User> result = controller.getUserPath(2);
+        ResponseEntity<Member> result = controller.getMemberPath(2);
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
-    void getUsersByNameTest()
+    void getMembersByNameTest()
     {
         Optional<String> name = Optional.of("Peter");
-        ResponseEntity<List<User>> result = controller.getUsers(name);
+        ResponseEntity<List<Member>> result = controller.getMembers(name);
 
         Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
 
     }
 
     @Test
-    void getUserByNameFailsTest()
+    void getMemberByNameFailsTest()
     {
         Optional<String> name = Optional.of("Not a real name!");
-        ResponseEntity<List<User>> result = controller.getUsers(name);
+        ResponseEntity<List<Member>> result = controller.getMembers(name);
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
-    void deleteUserTest()
+    void deleteMemberTest()
     {
         ResponseEntity result = controller.deletePost(1);
 
@@ -89,45 +89,45 @@ public class UserControllerTest {
     }
 
     @Test
-    void updateUserWithObjectTest()
+    void updateMemberWithObjectTest()
     {
-        ResponseEntity result = controller.updateUser(testUser);
+        ResponseEntity result = controller.updateMember(testUser);
 
         Assertions.assertEquals(HttpStatus.NO_CONTENT, result.getStatusCode());
     }
 
     @Test
-    void updateUserTestWithObjectFailed()
+    void updateMemberTestWithObjectFailed()
     {
-        ResponseEntity result = controller.updateUser(wrongUser);
+        ResponseEntity result = controller.updateMember(wrongUser);
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
-    void updateUserWithVarsTest()
+    void updateMemberWithVarsTest()
     {
         String name = "TestUser";
         int id = 0;
         int points = 100;
 
-        User user = new User(name, "00000", id, points);
+        Member user = new Member(name, "00000", id, points);
 
-        ResponseEntity result = controller.updateUser(user);
+        ResponseEntity result = controller.updateMember(user);
 
         Assertions.assertEquals(HttpStatus.NO_CONTENT, result.getStatusCode());
     }
 
     @Test
-    void updateUserTestWithVarsFailed()
+    void updateMemberTestWithVarsFailed()
     {
         String name = "Wrong user!";
         int id = 0;
         int points = 100;
 
-        User user = new User(name, "00000", id, points);
+        Member user = new Member(name, "00000", id, points);
 
-        ResponseEntity result = controller.updateUser(user);
+        ResponseEntity result = controller.updateMember(user);
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }

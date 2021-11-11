@@ -3,25 +3,23 @@ package very.cool.application.Filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import very.cool.application.Model.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import very.cool.application.Config.AuthenticationConfigConstants;
+import org.springframework.security.core.userdetails.User;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import lombok.RequiredArgsConstructor;
-import very.cool.application.Config.AuthenticationConfigConstants;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 
 @RequiredArgsConstructor
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -30,12 +28,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            User creds = new ObjectMapper()
-                    .readValue(request.getInputStream(), User.class);
+            Member creds = new ObjectMapper()
+                    .readValue(request.getInputStream(), Member.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            creds.getUsername(),
+                            creds.getName(),
                             creds.getPassword(),
                             new ArrayList<>())
             );

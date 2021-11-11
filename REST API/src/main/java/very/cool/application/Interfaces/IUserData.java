@@ -1,17 +1,16 @@
 package very.cool.application.Interfaces;
 
-import very.cool.application.Model.User;
+import very.cool.application.Model.Member;
 
 import java.util.List;
-import java.util.Optional;
 
 //IUserDal
 public interface IUserData {
-    public List<User> getUsers();
-    public List<User> getUsers(String name);
-    public List<User> getUsers(int points);
-    public User getUser(int id);
-    public boolean deleteUser(int id);
-    public boolean addUser(User user);
-    public boolean updateUser(User user);
+    public List<Member> getMembers();
+    public List<Member> getMembers(String name);
+    public List<Member> getMembers(int points);
+    public Member getMember(int id);
+    public boolean deleteMember(int id);
+    public boolean addMember(Member user);
+    public boolean updateMember(Member user);
 }

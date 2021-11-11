@@ -1,12 +1,11 @@
 package very.cool.application.Controller;
 
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import very.cool.application.Interfaces.IUserManager;
-import very.cool.application.Model.User;
+import very.cool.application.Model.Member;
 
 import java.net.URI;
 import java.util.List;
@@ -27,8 +26,8 @@ public class UserController {
 
 
     @GetMapping("{id}")
-    public ResponseEntity<User> getUserPath(@PathVariable(value = "id") int id ) {
-        User user = userManager.getUser(id);
+    public ResponseEntity<Member> getMemberPath(@PathVariable(value = "id") int id ) {
+        Member user = userManager.getMember(id);
 
         if(user != null) {
             return ResponseEntity.ok().body(user);
@@ -38,11 +37,11 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers(@RequestParam(value = "name") Optional<String> name) {
-        List<User> users = null;
+    public ResponseEntity<List<Member>> getMembers(@RequestParam(value = "name") Optional<String> name) {
+        List<Member> users = null;
 
         if(name.isPresent()) {
-            users = userManager.getUsers(name.get());
+            users = userManager.getMembers(name.get());
             if(users != null) {
                 return ResponseEntity.ok().body(users);
             }
@@ -59,7 +58,7 @@ public class UserController {
     @CrossOrigin
     @DeleteMapping("{id}")
     public ResponseEntity deletePost(@PathVariable int id) {
-        userManager.deleteUser(id);
+        userManager.deleteMember(id);
         return ResponseEntity.ok().build();
     }
 
@@ -72,8 +71,8 @@ public class UserController {
     //}
     @CrossOrigin
     @PostMapping()
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        if(!userManager.addUser(user)) {
+    public ResponseEntity<Member> createUser(@RequestBody Member user) {
+        if(!userManager.addMember(user)) {
             String entity = "User with id " + user.getId() + " already exists";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);
         } else {
@@ -85,8 +84,8 @@ public class UserController {
 
     @CrossOrigin
     @PutMapping()
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
-        if(userManager.updateUser(user)) {
+    public ResponseEntity<Member> updateMember(@RequestBody Member user) {
+        if(userManager.updateMember(user)) {
             return ResponseEntity.noContent().build();
         } else {
             return new ResponseEntity("Please provide a valid student number.", HttpStatus.NOT_FOUND);
@@ -95,8 +94,8 @@ public class UserController {
 
     @CrossOrigin
     @PutMapping("{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("points") int points ) {
-        User user = userManager.getUser(id);
+    public ResponseEntity<Member> updateMember(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("points") int points ) {
+        Member user = userManager.getMember(id);
         if(user == null) {
             return new ResponseEntity("Please provide a valid id.",HttpStatus.NOT_FOUND);
         }

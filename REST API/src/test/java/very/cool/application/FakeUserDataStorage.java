@@ -1,42 +1,42 @@
 package very.cool.application;
 
 import very.cool.application.Interfaces.IUserData;
-import very.cool.application.Model.User;
+import very.cool.application.Model.Member;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FakeUserDataStorage implements IUserData {
     @Override
-    public List<User> getUsers() {
+    public List<Member> getMembers() {
         return null;
     }
 
     @Override
-    public List<User> getUsers(String name) {
-        List<User> users = new ArrayList<>();
+    public List<Member> getMembers(String name) {
+        List<Member> users = new ArrayList<>();
         if(name == "Peter") {
-            users.add(new User());
+            users.add(new Member());
             return users;
         }
         return null;
     }
 
     @Override
-    public List<User> getUsers(int points) {
+    public List<Member> getMembers(int points) {
         return null;
     }
 
     @Override
-    public User getUser(int id) {
+    public Member getMember(int id) {
         if(id == 1) {
-            return new User();
+            return new Member();
         }
         return null;
     }
 
     @Override
-    public boolean deleteUser(int id) {
+    public boolean deleteMember(int id) {
         if(id == 1) {
             return true;
         }
@@ -44,7 +44,7 @@ public class FakeUserDataStorage implements IUserData {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public boolean addMember(Member user) {
         if(user.getName() == "TestUser") {
             return true;
         }
@@ -52,7 +52,7 @@ public class FakeUserDataStorage implements IUserData {
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public boolean updateMember(Member user) {
         if(user.getName() == "TestUser") {
             return true;
         }
