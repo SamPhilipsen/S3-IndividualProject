@@ -1,16 +1,12 @@
 package very.cool.application;
 
-import org.apache.juli.logging.Log;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import very.cool.application.Controller.UserController;
-import very.cool.application.Logic.UserManager;
 import very.cool.application.Model.User;
-import very.cool.application.Repository.UserDataStorage;
 
 import java.util.List;
 import java.util.Optional;

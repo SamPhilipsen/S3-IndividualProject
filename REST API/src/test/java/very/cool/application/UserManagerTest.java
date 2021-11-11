@@ -3,11 +3,8 @@ package very.cool.application;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import very.cool.application.Logic.UserManager;
+import very.cool.application.Service.UserManager;
 import very.cool.application.Model.User;
-import very.cool.application.Repository.UserDataStorage;
-
-import java.util.List;
 
 public class UserManagerTest {
 
