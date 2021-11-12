@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name="member")
 public class Member {
 
     @Id
@@ -19,8 +19,8 @@ public class Member {
     )
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -28,8 +28,8 @@ public class Member {
     @Column(name = "points")
     private int points;
 
-    public Member(String name, String password, int id, int points) {
-        this.name = name;
+    public Member(String username, String password, int id, int points) {
+        this.username = username;
         this.password = password;
         this.id = id;
         this.points = points;
@@ -39,8 +39,8 @@ public class Member {
 
     }
 
-    public String getName() { return this.name; }
-    public void setName(String name) { this.name = name; }
+    public String getUsername() { return this.username; }
+    public void setUsername(String username) { this.username = username; }
 
     public String getPassword() { return this.password; }
     public void setPassword(String password) { this.password = password; }
