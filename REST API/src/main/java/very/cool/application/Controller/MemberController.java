@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/members")
 public class MemberController {
@@ -55,7 +55,6 @@ public class MemberController {
 
     }
 
-    @CrossOrigin
     @DeleteMapping("{id}")
     public ResponseEntity deletePost(@PathVariable int id) {
         memberManager.deleteMember(id);
@@ -69,7 +68,6 @@ public class MemberController {
     //    "password": "987"
     //    "points": 1000
     //}
-    @CrossOrigin
     @PostMapping()
     public ResponseEntity<Member> createMember(@RequestBody Member member) {
         if(!memberManager.addMember(member)) {
@@ -82,7 +80,6 @@ public class MemberController {
         }
     }
 
-    @CrossOrigin
     @PutMapping()
     public ResponseEntity<Member> updateMember(@RequestBody Member member) {
         if(memberManager.updateMember(member)) {
@@ -92,7 +89,6 @@ public class MemberController {
         }
     }
 
-    @CrossOrigin
     @PutMapping("{id}")
     public ResponseEntity<Member> updateMember(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("points") int points ) {
         Member member = memberManager.getMember(id);

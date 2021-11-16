@@ -11,9 +11,21 @@ const Login = () => {
     const handleLogin = () => {
         async function fetchData() {
             let startTime = new Date();
+
+            let data = JSON.stringify({
+                "username": "Peter",
+                "password": "123"
+            });
+
+            const response = await axios.post("http://localhost:8080/login", data)
+            const token = response.data;
+
+            axios.defaults.headers.common['Authorization'] = token.Authorization;
+
             try {
-                const response = await axios.get("http://localhost:8080/users?name=Peter");
+                const response = await axios.get('http://localhost:8080/members?name=Peter');
                 localStorage.setItem('loggedInUser', JSON.stringify(response.data[0]));
+                localStorage.setItem('authenticationToken', token.Authorization)
                 history.push("/menu");
             } catch (error) {
                 let endTime = new Date();

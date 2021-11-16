@@ -28,8 +28,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
     }
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
