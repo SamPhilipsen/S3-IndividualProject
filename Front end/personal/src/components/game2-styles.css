@@ -3,21 +3,43 @@
     margin-right: 25%;
 }
 
-.game2container input, button {
+.game2container button {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.game2StartContainer input, button {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
 }
 
-.game2container input[type=text] {
+.game2StartContainer input[type=text] {
     width: 88%;
     padding: 10px;
     margin: 10px;
 }
-
-.game2container button {
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
+.controlButtons {
+    display: flex;
 }
+.controlButtons button{
+    width: 150px;
+}
+
+
+
+/*.game2container cardsDisplay {
+    width: 100%;
+    position: relative;
+    display: inline;
+}
+
+.playerCardsDisplay {
+    margin-left: -100%;
+}
+.dealerCardsDisplay {
+    margin-right: -100%;
+}*/
+

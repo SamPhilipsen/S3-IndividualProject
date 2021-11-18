@@ -4,6 +4,12 @@
     text-align: center;
 }
 
+.loading-gif {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
 #loginButton {
     align-items: center;
     font-size: 30px;
