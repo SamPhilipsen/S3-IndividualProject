@@ -18,6 +18,9 @@ const Game2Container = props => {
     ])
     const [playerCards, setPlayerCards] = useState([])
     const [dealerCards, setDealerCards] = useState([])
+
+    const [compareCards, setComparingCards] = useState(false);
+
     const [isPlaying, setPlaying] = useState(false)
 
     /*useEffect(() => {
@@ -32,20 +35,32 @@ const Game2Container = props => {
         if (cardsValue > 21) {
             alert("You lost!")
         }
-        if (cardsValue === 21) {
-            alert("You won!")
-        }
+
     },[playerCards])
 
     useEffect(() => {
-        const cardsValue = getDealerCardsValue()
+        const dealerCardsValue = getDealerCardsValue()
 
-        console.log("Dealer cards value = " + cardsValue)
+        console.log("Dealer cards value = " + dealerCardsValue)
 
-        if (cardsValue > 21) {
-            alert("You won!")
+        if(compareCards) {
+
+            const playerCardsValue = getPlayerCardsValue()
+
+            if (dealerCardsValue > 21) {
+                alert("You won!")
+            } else if (dealerCardsValue <= 21) {
+                if(playerCardsValue > dealerCardsValue) {
+                    alert("You won!")
+                }
+                if(playerCardsValue < dealerCardsValue) {
+                    alert("You lost!")
+                }
+                if(playerCardsValue === dealerCardsValue) {
+                    alert("Both card values are equal.")
+                }
+            }
         }
-
     }, [dealerCards])
 
     const drawCards = (cardAmount) => {
@@ -111,7 +126,6 @@ const Game2Container = props => {
 
     const playerDrawsCard = () => {
         async function getCard() {
-            console.log("Player drew card")
             let card = drawCards(1)
             await setPlayerCards(playerCards => [
                 ...playerCards, card[0]
@@ -121,44 +135,34 @@ const Game2Container = props => {
     }
 
     const playerStands = () => {
-        console.log("Player stands")
-        let newDeck = dealerCards;
+        let newDeck = dealerCards.map((card) => {
+            return card;
+        })
 
         function getCardsValue() {
             let value = 0;
             newDeck.map((card) => {
                 value += card.value;
             })
+            return value;
         }
 
-        async function checkDealerResults() {
+        function checkDealerResults() {
             const cardsValue = getCardsValue();
-            console.log("log 1: " + cardsValue)
             if(cardsValue <= 16 )
             {
-                console.log("log 2: " + cardsValue)
                 let card = drawCards(1)
                 newDeck.push(card[0])
-                console.log("log 3: " + cardsValue)
-                //dealerCards.push(card[0])
-                console.log("log 4: " + cardsValue)
                 checkDealerResults()
             }
-            else if (cardsValue >= 17)
-            {
-                const playerCardsValue = getPlayerCardsValue();
-                if(playerCardsValue > cardsValue) {
-                    alert("You won!")
-                } else {
-                    alert("You lost!")
-                }
-            }
+
+            setComparingCards(true);
             setDealerCards(newDeck)
         }
         checkDealerResults()
     }
 
-    const handleGame2Logic = e => {
+    const handleGameStart = e => {
         e.preventDefault()
         setPlaying(true);
 
@@ -186,7 +190,7 @@ const Game2Container = props => {
         <div className="gameBaseContainer">
             <div className="game2container">
                 <h1>Game 2</h1>
-                <form onSubmit={handleGame2Logic} className="game2StartContainer" style={betMode}>
+                <form onSubmit={handleGameStart} className="game2StartContainer" style={betMode}>
                     <input
                         type="text"
                         placeholder="Points you want to bet"
