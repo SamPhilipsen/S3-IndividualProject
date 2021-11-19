@@ -27,6 +27,8 @@ const Game2Container = props => {
     useEffect(() => {
         const cardsValue = getPlayerCardsValue()
 
+        console.log("Player cards value = " + cardsValue)
+
         if (cardsValue > 21) {
             alert("You lost!")
         }
@@ -34,6 +36,17 @@ const Game2Container = props => {
             alert("You won!")
         }
     },[playerCards])
+
+    useEffect(() => {
+        const cardsValue = getDealerCardsValue()
+
+        console.log("Dealer cards value = " + cardsValue)
+
+        if (cardsValue > 21) {
+            alert("You won!")
+        }
+
+    }, [dealerCards])
 
     const drawCards = (cardAmount) => {
 
@@ -97,38 +110,52 @@ const Game2Container = props => {
     }
 
     const playerDrawsCard = () => {
-        console.log("Player drew card")
-        let card = drawCards(1)
-        setPlayerCards(playerCards => [
-            ...playerCards, card[0]
-        ])
+        async function getCard() {
+            console.log("Player drew card")
+            let card = drawCards(1)
+            await setPlayerCards(playerCards => [
+                ...playerCards, card[0]
+            ])
+        }
+        getCard()
     }
 
     const playerStands = () => {
         console.log("Player stands")
+        let newDeck = dealerCards;
 
-        async function getCardsValue() {
-            const cardsValue = getDealerCardsValue();
-            console.log(cardsValue);
-            if(cardsValue <= 16 ) {
+        function getCardsValue() {
+            let value = 0;
+            newDeck.map((card) => {
+                value += card.value;
+            })
+        }
+
+        async function checkDealerResults() {
+            const cardsValue = getCardsValue();
+            console.log("log 1: " + cardsValue)
+            if(cardsValue <= 16 )
+            {
+                console.log("log 2: " + cardsValue)
                 let card = drawCards(1)
-                dealerCards.push(card[0])
-                await getCardsValue()
+                newDeck.push(card[0])
+                console.log("log 3: " + cardsValue)
+                //dealerCards.push(card[0])
+                console.log("log 4: " + cardsValue)
+                checkDealerResults()
             }
-            else if (cardsValue >= 17) {
-                if(cardsValue > 21) {
+            else if (cardsValue >= 17)
+            {
+                const playerCardsValue = getPlayerCardsValue();
+                if(playerCardsValue > cardsValue) {
                     alert("You won!")
                 } else {
-                    const playerCardsValue = getPlayerCardsValue();
-                    if(playerCardsValue > cardsValue) {
-                        alert("You won!")
-                    } else {
-                        alert("You lost!")
-                    }
+                    alert("You lost!")
                 }
             }
+            setDealerCards(newDeck)
         }
-        getCardsValue()
+        checkDealerResults()
     }
 
     const handleGame2Logic = e => {
