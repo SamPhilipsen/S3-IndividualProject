@@ -69,10 +69,10 @@ public class MemberController {
     //    "points": 1000
     //}
     @PostMapping()
-    public ResponseEntity<Member> createMember(@RequestBody Member member) {
+    public ResponseEntity<String> createMember(@RequestBody Member member) {
         if(!memberManager.addMember(member)) {
             String entity = "Member with id " + member.getId() + " already exists";
-            return new ResponseEntity(entity, HttpStatus.CONFLICT);
+            return new ResponseEntity<String>(entity, HttpStatus.CONFLICT);
         } else {
             String url = "member/" + member.getId();
             URI uri = URI.create(url);
