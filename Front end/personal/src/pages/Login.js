@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom";
-import "./login-styles.css"
+import "../styling/login-styles.css"
 import loadingGif from "../media/loading.gif"
 
 

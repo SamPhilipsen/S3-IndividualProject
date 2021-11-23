@@ -1,21 +1,65 @@
 import React, {useState, useEffect} from "react";
-import "./game2-styles.css"
+import "../styling/game2-styles.css"
+import BettingComponent from "./BettingComponent";
 
 const Game2Container = props => {
-    //const [user, setUser] = useState(props.loggedInUser);
-    //const [betAmount, setBetAmount] = useState();
-    const [cardDeck, setCardDeck] = useState([
-        {name: "card 1", value: 1},
-        {name: "card 2", value: 2},
-        {name: "card 3", value: 3},
-        {name: "card 4", value: 4},
-        {name: "card 5", value: 5},
-        {name: "card 6", value: 6},
-        {name: "card 7", value: 7},
-        {name: "card 8", value: 8},
-        {name: "card 9", value: 9},
-        {name: "card 10", value: 10}
-    ])
+    const [user, setUser] = useState(props.loggedInUser);
+    const [pointsText, setPointsText] = useState("")
+    const [resultText, setResultText] = useState("")
+
+    const [betAmount, setBetAmount] = useState();
+
+    const initialCardDeck = [
+        {name: "hearts 2", value: 2},
+        {name: "hearts 3", value: 3},
+        {name: "hearts 4", value: 4},
+        {name: "hearts 5", value: 5},
+        {name: "hearts 6", value: 6},
+        {name: "hearts 7", value: 7},
+        {name: "hearts 8", value: 8},
+        {name: "hearts 9", value: 9},
+        {name: "hearts 10", value: 10},
+        {name: "hearts jack", value: 10},
+        {name: "hearts queen", value: 10},
+        {name: "hearts king", value: 10},
+        {name: "spades 2", value: 2},
+        {name: "spades 3", value: 3},
+        {name: "spades 4", value: 4},
+        {name: "spades 5", value: 5},
+        {name: "spades 6", value: 6},
+        {name: "spades 7", value: 7},
+        {name: "spades 8", value: 8},
+        {name: "spades 9", value: 9},
+        {name: "spades 10", value: 10},
+        {name: "spades jack", value: 10},
+        {name: "spades queen", value: 10},
+        {name: "spades king", value: 10},
+        {name: "diamonds 2", value: 2},
+        {name: "diamonds 3", value: 3},
+        {name: "diamonds 4", value: 4},
+        {name: "diamonds 5", value: 5},
+        {name: "diamonds 6", value: 6},
+        {name: "diamonds 7", value: 7},
+        {name: "diamonds 8", value: 8},
+        {name: "diamonds 9", value: 9},
+        {name: "diamonds 10", value: 10},
+        {name: "diamonds jack", value: 10},
+        {name: "diamonds queen", value: 10},
+        {name: "diamonds king", value: 10},
+        {name: "clubs 2", value: 2},
+        {name: "clubs 3", value: 3},
+        {name: "clubs 4", value: 4},
+        {name: "clubs 5", value: 5},
+        {name: "clubs 6", value: 6},
+        {name: "clubs 7", value: 7},
+        {name: "clubs 8", value: 8},
+        {name: "clubs 9", value: 9},
+        {name: "clubs 10", value: 10},
+        {name: "clubs jack", value: 10},
+        {name: "clubs queen", value: 10},
+        {name: "clubs king", value: 10},
+    ]
+    const [cardDeck, setCardDeck] = useState(initialCardDeck)
     const [playerCards, setPlayerCards] = useState([])
     const [dealerCards, setDealerCards] = useState([])
 
@@ -23,9 +67,9 @@ const Game2Container = props => {
 
     const [isPlaying, setPlaying] = useState(false)
 
-    /*useEffect(() => {
+    useEffect(() => {
         setUser(props.loggedInUser)
-    }, [props.loggedInUser])*/
+    }, [props.loggedInUser])
 
     useEffect(() => {
         const cardsValue = getPlayerCardsValue()
@@ -33,7 +77,7 @@ const Game2Container = props => {
         console.log("Player cards value = " + cardsValue)
 
         if (cardsValue > 21) {
-            alert("You lost!")
+            onLoss()
         }
 
     },[playerCards])
@@ -48,13 +92,13 @@ const Game2Container = props => {
             const playerCardsValue = getPlayerCardsValue()
 
             if (dealerCardsValue > 21) {
-                alert("You won!")
+                onWin()
             } else if (dealerCardsValue <= 21) {
                 if(playerCardsValue > dealerCardsValue) {
-                    alert("You won!")
+                    onWin()
                 }
                 if(playerCardsValue < dealerCardsValue) {
-                    alert("You lost!")
+                    onLoss()
                 }
                 if(playerCardsValue === dealerCardsValue) {
                     alert("Both card values are equal.")
@@ -162,19 +206,56 @@ const Game2Container = props => {
         checkDealerResults()
     }
 
+    const onWin = () => {
+        setResultText("You won! You receive " + betAmount + " points.")
+        props.gamePointsChanged(betAmount)
+        resetGame()
+    }
+
+    const onLoss = () => {
+        setResultText("You lost! You lost " + betAmount + " points.")
+        const newPoints = -Math.abs(betAmount)
+        props.gamePointsChanged(newPoints)
+        resetGame()
+    }
+
+    const resetGame = () => {
+        setPlaying(false)
+        setComparingCards(false)
+    }
+
     const handleGameStart = e => {
         e.preventDefault()
-        setPlaying(true);
+        if (typeof betAmount == "number") {
+            if (user.points > 0 && user.points - betAmount > 0) {
+                setDealerCards([]);
+                setPlayerCards([]);
+                setCardDeck(initialCardDeck);
+                setPlaying(true);
+                setPointsText("");
+                setResultText("");
 
-        let cards = drawCards(4)
-        if(cards) {
-            setPlayerCards(playerCards => [
-                ...playerCards, cards[0], cards[1]
-            ])
-            setDealerCards(dealerCards => [
-                ...dealerCards, cards[2], cards[3]
-            ])
+                let cards = drawCards(4)
+                if (cards) {
+                    setPlayerCards(playerCards => [
+                        ...playerCards, cards[0], cards[1]
+                    ])
+                    setDealerCards(dealerCards => [
+                        ...dealerCards, cards[2], cards[3]
+                    ])
+                }
+            }
+            else {
+                setPointsText("You do not have sufficient points to play this game! (You have " + user.points + ", you need at least " + (betAmount) + " to play.)")
+            }
+        } else {
+            alert("Input has to be a number!")
         }
+
+    }
+
+    const setBet = (amount) => {
+        setBetAmount(amount)
     }
 
     let playMode = {}
@@ -189,13 +270,11 @@ const Game2Container = props => {
     return (
         <div className="gameBaseContainer">
             <div className="game2container">
-                <h1>Game 2</h1>
+                <h1>Blackjack</h1>
                 <form onSubmit={handleGameStart} className="game2StartContainer" style={betMode}>
-                    <input
-                        type="text"
-                        placeholder="Points you want to bet"
+                    <BettingComponent
+                        defineBet = {setBet}
                     />
-
                     <button input="submit" className="game-submit">
                         Start game
                     </button>
@@ -224,10 +303,12 @@ const Game2Container = props => {
                         })}
                     </div>
                 </div>
-                <h2>
-                    Cards left:
-                    {cardDeck.length}
-                </h2>
+                <p>
+                    {resultText}
+                </p>
+                <p>
+                    {pointsText}
+                </p>
             </div>
         </div>
     )

@@ -27,9 +27,10 @@ const MainSite = () => {
     })
 
     const handlePointsChange = (newPoints) => {
+        const totalPoints = user.points + newPoints;
         setUser({
             ...user,
-            points: newPoints,
+            points: totalPoints,
         })
     }
 
