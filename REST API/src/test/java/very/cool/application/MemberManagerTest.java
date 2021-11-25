@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import very.cool.application.Service.MemberManager;
 import very.cool.application.Model.Member;
 
-public class MemberManagerTest {
+class MemberManagerTest {
 
     MemberManager manager;
     Member testMember;
@@ -18,14 +18,6 @@ public class MemberManagerTest {
         testMember = new Member("TestMember", "00000", 0, 100);
         wrongMember = new Member("Not the test member!", "00000", 0, 100);
     }
-
-    /*@Test
-    private void getMembersByName()
-    {
-        List<User> result = manager.getMembers("Peter");
-
-        Assertions.assertTrue(result instanceof User);
-    }*/
 
     @Test
     public void getMemberTest()

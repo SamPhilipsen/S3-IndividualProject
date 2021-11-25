@@ -11,7 +11,7 @@ import very.cool.application.Model.Member;
 import java.util.List;
 import java.util.Optional;
 
-public class MemberControllerTest {
+class MemberControllerTest {
 
     MemberController controller;
     Member testUser;
@@ -26,7 +26,7 @@ public class MemberControllerTest {
 
     @Test
     void contextLoads() {
-
+        Assertions.assertNotNull(controller);
     }
 
     @Test

@@ -2,8 +2,8 @@ very/cool/application/Filter/JWTAuthenticationFilter.java
  very.cool.application.Filter.JWTAuthenticationFilter
 very/cool/application/Filter/JWTAuthorizationFilter.java
  very.cool.application.Filter.JWTAuthorizationFilter
-very/cool/application/MainApplication.java
- very.cool.application.MainApplication
+very/cool/application/Config/SecurityConfiguration.java
+ very.cool.application.Config.SecurityConfiguration
 very/cool/application/Config/AuthenticationConfigConstants.java
  very.cool.application.Config.AuthenticationConfigConstants
 very/cool/application/Config/WebConfiguration.java
@@ -27,5 +27,5 @@ very/cool/application/Service/AuthenticationUserDetailService.java
 very/cool/application/Config/CorsConfig.java
  very.cool.application.Config.CorsConfig
  very.cool.application.Config.CorsConfig$1
-very/cool/application/Config/SecurityConfiguration.java
- very.cool.application.Config.SecurityConfiguration
+very/cool/application/MainApplication.java
+ very.cool.application.MainApplication
