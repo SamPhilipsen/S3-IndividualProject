@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react"
-import "./cointoss-styles.css"
+import "../styling/cointoss-styles.css"
+import BettingComponent from "./BettingComponent";
 
 const CointossContainer = props => {
     const [user, setUser] = useState(props.loggedInUser);
     const [betAmount, setBetAmount] = useState();
+
     const [coinSide, setCoinSide] = useState("Heads");
-    const [winText, setWinText] = useState("");
+    const [pointsText, setPointsText] = useState("");
     const [winningSideText, setWinningSideText] = useState("");
 
     useEffect(() => {
@@ -14,7 +16,7 @@ const CointossContainer = props => {
 
     const handleCointoss = e => {
         e.preventDefault()
-        var newPoints = 0;
+        var newPoints;
         var sides = ['Heads', 'Tails'];
 
         if(typeof betAmount == "number") {
@@ -22,29 +24,20 @@ const CointossContainer = props => {
                 let result = sides[Math.floor(Math.random()*sides.length)]
 
                 if(result === coinSide) {
-                    newPoints = user.points + betAmount;
-                    setWinText("You win! You receive " + betAmount + " points. Your new balance is: " + newPoints + "!")
+                    newPoints = betAmount;
+                    setPointsText("You win! You receive " + betAmount + " points.")
                 } else {
-                    newPoints = user.points - betAmount;
-                    setWinText("You lose! You lost " + betAmount + " points. Your new balance is: " + newPoints + "!")
+                    newPoints = -Math.abs(betAmount)
+                    setPointsText("You lose! You lost " + betAmount + " points.")
                 }
                 setWinningSideText("The winning side is: " + result)
                 props.gamePointsChanged(newPoints);
             }
             else {
-                setWinText("You do not have sufficient points to play this game! (You have " + user.points + ", you need at least " + (betAmount + 1) + " to play.)")
+                setPointsText("You do not have sufficient points to play this game! (You have " + user.points + ", you need at least " + (betAmount) + " to play.)")
             }
         } else {
             alert("Input can only be a number!");
-        }
-    }
-
-    const onBetChange = e => {
-        var amount = parseInt(e.target.value)
-        if (!isNaN(amount)) {
-            setBetAmount(parseInt(amount))
-        } else {
-            setBetAmount("");
         }
     }
 
@@ -52,17 +45,16 @@ const CointossContainer = props => {
         setCoinSide(e.target.value)
     }
 
+    const setBet = (amount) => {
+        setBetAmount(amount);
+    }
+
     return (
         <div className="gameBaseContainer">
-            <h1>Game 1</h1>
+            <h1>Cointoss</h1>
             <form onSubmit={handleCointoss} className="coinTossForm">
-                <input
-                    type="text"
-                    className="bet-input"
-                    placeholder="Points you want to bet"
-                    value={betAmount}
-                    name="bet-points"
-                    onChange={onBetChange}
+                <BettingComponent
+                    defineBet = {setBet}
                 />
                 <input
                     type="radio"
@@ -83,9 +75,10 @@ const CointossContainer = props => {
                 <button input="submit" className="bet-submit">
                     Flip
                 </button>
+                <p>{winningSideText}</p>
+                <p>{pointsText}</p>
             </form>
-            <p>{winningSideText}</p>
-            <p>{winText}</p>
+
         </div>
     )
 }

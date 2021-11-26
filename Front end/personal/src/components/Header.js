@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom";
-import "./header-styles.css"
+import "../styling/header-styles.css"
 
 const Header = props => {
     const [user, setUser] = useState(props.loggedInUser);
@@ -13,6 +13,7 @@ const Header = props => {
     const handleLogout = () => {
         setUser([]);
         localStorage.removeItem('loggedInUser')
+        localStorage.removeItem('authenticationToken')
         history.push("");
     }
 
@@ -20,7 +21,7 @@ const Header = props => {
         <header>
             <div className="userInfoHeader">
                 <ul className="userInformation">
-                    <li key={user.id}>Name: {user.name}</li>
+                    <li key={user.id}>Name: {user.username}</li>
                     <li>Points: {user.points}</li>
                     <li><button id="logoutButton" onClick={handleLogout}>Log out</button></li>
                 </ul>

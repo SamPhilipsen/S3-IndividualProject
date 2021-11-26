@@ -6,14 +6,18 @@ import CointossContainer from "./CointossContainer";
 import axios from "axios";
 import Game2Container from "./Game2Container";
 
-const MainSite = props => {
+const MainSite = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('loggedInUser')));
+    const [token] = useState(localStorage.getItem('authenticationToken'));
+    axios.defaults.headers.common['Authorization'] = token;
 
     useEffect(() => {
         localStorage.setItem('loggedInUser', JSON.stringify(user))
+
         async function sendData() {
+
             try {
-                const response = await axios.put("http://localhost:8080/users", user);
+                const response = await axios.put("http://localhost:8080/members", user);
                 return response
             } catch (error) {
                 console.error(error);
@@ -23,9 +27,10 @@ const MainSite = props => {
     })
 
     const handlePointsChange = (newPoints) => {
+        const totalPoints = user.points + newPoints;
         setUser({
             ...user,
-            points: newPoints,
+            points: totalPoints,
         })
     }
 
