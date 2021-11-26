@@ -12,8 +12,8 @@ very/cool/application/Service/MemberManager.java
  very.cool.application.Service.MemberManager
 very/cool/application/Repository/IMemberRepository.java
  very.cool.application.Repository.IMemberRepository
-very/cool/application/Controller/MemberController.java
- very.cool.application.Controller.MemberController
+very/cool/application/MainApplication.java
+ very.cool.application.MainApplication
 very/cool/application/Model/Member.java
  very.cool.application.Model.Member
 very/cool/application/Interfaces/IMemberManager.java
@@ -27,5 +27,5 @@ very/cool/application/Service/AuthenticationUserDetailService.java
 very/cool/application/Config/CorsConfig.java
  very.cool.application.Config.CorsConfig
  very.cool.application.Config.CorsConfig$1
-very/cool/application/MainApplication.java
- very.cool.application.MainApplication
+very/cool/application/Controller/MemberController.java
+ very.cool.application.Controller.MemberController

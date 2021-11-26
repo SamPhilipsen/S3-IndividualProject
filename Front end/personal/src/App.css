@@ -1,10 +1,26 @@
+html {
+    height: 100%;
+}
 body {
     font-family: "Abadi", Arial, sans-serif;
-    color: #383838
+    /*color: #383838;*/
+    color: rgb(230, 230, 230);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background: linear-gradient(to bottom right, rgb(255, 50, 50), black);
 }
 
 button, input[type=button], input[type=radio] {
     cursor: pointer;
+}
+
+.gameResultText {
+    font-size: 30px;
+    color: white;
+}
+
+.gamePointsText {
+    font-size: 25px;
 }
 
 .gameBaseContainer {
@@ -13,5 +29,8 @@ button, input[type=button], input[type=radio] {
     margin-top: 20px;
     border-style: solid;
     border-radius: 2px;
+    border-color: #383838;
     text-align: center;
+    box-shadow: 10px 10px rgba(0, 0, 0, .7);
+    background-color: rgba(0, 0, 255, .5);
 }
