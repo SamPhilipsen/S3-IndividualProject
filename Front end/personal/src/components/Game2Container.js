@@ -303,10 +303,10 @@ const Game2Container = props => {
                         })}
                     </div>
                 </div>
-                <p>
+                <p className="gameResultText">
                     {resultText}
                 </p>
-                <p>
+                <p className="gamePointsText">
                     {pointsText}
                 </p>
             </div>

@@ -14,6 +14,15 @@ button, input[type=button], input[type=radio] {
     cursor: pointer;
 }
 
+.gameResultText {
+    font-size: 30px;
+    color: white;
+}
+
+.gamePointsText {
+    font-size: 25px;
+}
+
 .gameBaseContainer {
     width: 50%;
     margin: auto;

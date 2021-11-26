@@ -48,3 +48,8 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);*/
 }
+
+.network-error-text {
+    color: red;
+    text-align: center;
+}

@@ -75,8 +75,12 @@ const CointossContainer = props => {
                 <button input="submit" className="bet-submit">
                     Flip
                 </button>
-                <p>{winningSideText}</p>
-                <p>{pointsText}</p>
+                <p className="gameResultText">
+                    {winningSideText}
+                </p>
+                <p className="gamePointsText">
+                    {pointsText}
+                </p>
             </form>
 
         </div>
