@@ -1,8 +1,10 @@
 very/cool/application/FakeMemberManager.java
  very.cool.application.FakeMemberManager
-very/cool/application/FakeMemberDataStorage.java
- very.cool.application.FakeMemberDataStorage
 very/cool/application/MemberManagerTest.java
  very.cool.application.MemberManagerTest
 very/cool/application/MemberControllerTest.java
  very.cool.application.MemberControllerTest
+very/cool/application/FakeMemberDataStorage.java
+ very.cool.application.FakeMemberDataStorage
+very/cool/application/MemberManagerMockito.java
+ very.cool.application.MemberManagerMockito

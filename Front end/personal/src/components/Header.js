@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom";
 import "../styling/header-styles.css"
+import axios from "axios";
 
 const Header = props => {
     const [user, setUser] = useState(props.loggedInUser);
@@ -14,6 +15,7 @@ const Header = props => {
         setUser([]);
         localStorage.removeItem('loggedInUser')
         localStorage.removeItem('authenticationToken')
+        delete axios.defaults.headers.common["Authorization"]
         history.push("");
     }
 

@@ -9,6 +9,9 @@ import axios from "axios";
 const Login = () => {
     const [errorText, setErrorText] = useState("");
     const [isLoading, setLoading] = useState(false)
+
+    const [password, setPassword] = useState("123")
+    const [username, setUsername] = useState("Peter")
     const history = useHistory();
 
 
@@ -18,8 +21,8 @@ const Login = () => {
             setLoading(true);
 
             let data = JSON.stringify({
-                "username": "Peter",
-                "password": "123"
+                "username": username,
+                "password": password
             });
 
             try {
@@ -28,7 +31,7 @@ const Login = () => {
 
                 axios.defaults.headers.common['Authorization'] = token.Authorization;
 
-                response = await axios.get('http://localhost:8080/members?name=Peter');
+                response = await axios.get('http://localhost:8080/members?name=' + username);
                 localStorage.setItem('loggedInUser', JSON.stringify(response.data[0]));
                 localStorage.setItem('authenticationToken', token.Authorization);
 
@@ -49,24 +52,49 @@ const Login = () => {
     if(!isLoading) {
         loadingStyle.display = "none";
     }
+    const usernameChange = e => {
+        setUsername(e.target.value)
+    }
+
+    const passwordChange = e => {
+        setPassword(e.target.value)
+    }
 
     return (
-        <div className="loginContainer">
+        <div className="loginScreen">
             <h1 className="network-error-text">
                 {errorText}
             </h1>
-            <button onClick={handleLogin} id="loginButton">
-                Log in
-            </button>
-            <img
-                style={loadingStyle}
-                className="loading-gif"
-                src={loadingGif}
-                alt="Loading..."
-                width="50"
-                height="50"
-            />
+            <div className="loginContainer">
+                <h2>Username</h2>
+                <input
+                    type="text"
+                    value={username}
+                    onChange={usernameChange}
+                />
+                <h2>Password</h2>
+                <input
+                    type="text"
+                    value={password}
+                    onChange={passwordChange}
+                />
+                <br/>
+                <br/>
+                <br/>
+                <button onClick={handleLogin} id="loginButton">
+                    Log in
+                </button>
+                <img
+                    style={loadingStyle}
+                    className="loading-gif"
+                    src={loadingGif}
+                    alt="Loading..."
+                    width="50"
+                    height="50"
+                />
+            </div>
         </div>
+
     );
 }
 
