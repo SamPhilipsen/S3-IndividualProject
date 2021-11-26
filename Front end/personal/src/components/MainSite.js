@@ -49,6 +49,8 @@ const MainSite = () => {
                             loggedInUser={user}
                             gamePointsChanged = {handlePointsChange}
                         />
+                        <br />
+                        <br />
                         <Game2Container
                             loggedInUser={user}
                             gamePointsChanged = {handlePointsChange}
@@ -56,7 +58,6 @@ const MainSite = () => {
                     </div>
                 </Route>
             </Switch>
-
         );
     }
     return (
