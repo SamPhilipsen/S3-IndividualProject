@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import very.cool.application.Interfaces.IMemberManager;
 import very.cool.application.Model.Member;
+import very.cool.application.Model.MemberDTO;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,33 +28,35 @@ public class MemberController {
 
 
     @GetMapping("{id}")
-    public ResponseEntity<Member> getMemberPath(@PathVariable(value = "id") int id ) {
+    public ResponseEntity<MemberDTO> getMemberPath(@PathVariable(value = "id") int id ) {
         Member member = memberManager.getMember(id);
 
         if(member != null) {
-            return ResponseEntity.ok().body(member);
+            MemberDTO memberDTO = new MemberDTO(member.getUsername(), member.getPassword(), member.getId(), member.getPoints());
+            return ResponseEntity.ok().body(memberDTO);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<Member>> getMembers(@RequestParam(value = "name") Optional<String> name) {
+    public ResponseEntity<List<MemberDTO>> getMembers(@RequestParam(value = "name") Optional<String> name) {
         List<Member> members = null;
+        List<MemberDTO> DTOMembers = new ArrayList<MemberDTO>();
 
         if(name.isPresent()) {
             members = memberManager.getMembers(name.get());
-            if(members != null) {
-                return ResponseEntity.ok().body(members);
-            }
-            else {
-                return ResponseEntity.notFound().build();
-            }
         }
         else {
-            return ResponseEntity.notFound().build();
+            members = memberManager.getMembers();
         }
-
+        if(members != null) {
+            for(Member member : members) {
+                DTOMembers.add(new MemberDTO(member.getUsername(), member.getPassword(), member.getId(), member.getPoints()));
+            }
+            return ResponseEntity.ok().body(DTOMembers);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("{id}")
@@ -69,7 +73,9 @@ public class MemberController {
     //    "points": 1000
     //}
     @PostMapping()
-    public ResponseEntity<String> createMember(@RequestBody Member member) {
+    public ResponseEntity<String> createMember(@RequestBody MemberDTO memberDTO) {
+        Member member = new Member(memberDTO.getUsername(), memberDTO.getPassword(), memberDTO.getId(), memberDTO.getPoints());
+
         if(!memberManager.addMember(member)) {
             String entity = "Member with id " + member.getId() + " already exists";
             return new ResponseEntity<String>(entity, HttpStatus.CONFLICT);
@@ -81,7 +87,9 @@ public class MemberController {
     }
 
     @PutMapping()
-    public ResponseEntity<Member> updateMember(@RequestBody Member member) {
+    public ResponseEntity<Member> updateMember(@RequestBody MemberDTO memberDTO) {
+        Member member = new Member(memberDTO.getUsername(), memberDTO.getPassword(), memberDTO.getId(), memberDTO.getPoints());
+
         if(memberManager.updateMember(member)) {
             return ResponseEntity.noContent().build();
         } else {

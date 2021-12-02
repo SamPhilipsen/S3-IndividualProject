@@ -16,7 +16,7 @@ public class FakeMemberDataStorage implements IMemberData {
     public List<Member> getMembers(String name) {
         List<Member> members = new ArrayList<>();
         if(name == "Peter") {
-            members.add(new Member());
+            members.add(new Member("Peter", "123", 0, 100));
             return members;
         }
         return null;

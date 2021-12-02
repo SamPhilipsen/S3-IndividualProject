@@ -51,18 +51,4 @@ public class Member {
     public int getPoints() { return this.points; }
     public void setPoints(int points) { this.points = points; }
 
-    public boolean deductPoints(int deductingPoints)
-    {
-        int newPoints = this.points - deductingPoints;
-        if(newPoints < 0) {
-            return false;
-        }
-        else {
-            this.points = newPoints;
-            return true;
-        }
-    }
-    public void addPoints(int points) {
-        if(points > 0) { this.points += points; }
-    }
 }
