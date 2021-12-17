@@ -6,6 +6,11 @@ very/cool/application/MainApplication.java
  very.cool.application.MainApplication
 very/cool/application/Config/AuthenticationConfigConstants.java
  very.cool.application.Config.AuthenticationConfigConstants
+very/cool/application/Config/CorsConfig.java
+ very.cool.application.Config.CorsConfig
+ very.cool.application.Config.CorsConfig$1
+very/cool/application/Controller/MemberController.java
+ very.cool.application.Controller.MemberController
 very/cool/application/Config/WebConfiguration.java
  very.cool.application.Config.WebConfiguration
 very/cool/application/Repository/MemberDataStorage.java
@@ -24,10 +29,9 @@ very/cool/application/Interfaces/IMemberManager.java
  very.cool.application.Interfaces.IMemberManager
 very/cool/application/Interfaces/IMemberData.java
  very.cool.application.Interfaces.IMemberData
-very/cool/application/Controller/MemberController.java
- very.cool.application.Controller.MemberController
+very/cool/application/Controller/GameController.java
+ very.cool.application.Controller.GameController
 very/cool/application/Config/SecurityConfiguration.java
  very.cool.application.Config.SecurityConfiguration
-very/cool/application/Config/CorsConfig.java
- very.cool.application.Config.CorsConfig
- very.cool.application.Config.CorsConfig$1
+very/cool/application/GameLogic/Cointoss.java
+ very.cool.application.GameLogic.Cointoss
