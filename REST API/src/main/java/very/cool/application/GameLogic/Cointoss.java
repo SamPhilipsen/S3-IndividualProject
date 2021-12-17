@@ -1,18 +1,19 @@
 package very.cool.application.GameLogic;
 
-import lombok.Getter;
-
-import java.lang.reflect.Array;
 import java.util.Random;
 
 public class Cointoss {
     private String[] sides = {"Heads", "Tails"};
 
-    @Getter
     private String chosenSide;
-
-    @Getter
     private String coinSide;
+
+    public String getChosenSide() {
+        return this.chosenSide;
+    }
+    public String getCoinSide() {
+        return this.coinSide;
+    }
 
     public Cointoss() {
     }

@@ -9,17 +9,11 @@ import very.cool.application.Model.MemberDTO;
 @RequestMapping("/games")
 public class GameController {
 
-    private Cointoss game = new Cointoss();
+    @GetMapping("/cointoss")
+    public ResponseEntity playCointossGame(@RequestParam(value = "side") String side) {
+        Cointoss game = new Cointoss();
 
-    @GetMapping("/cointoss/pick-side")
-    public ResponseEntity pickCoinside(@RequestParam(value = "side") String side) {
         game.chooseSide(side);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/cointoss/play")
-    public ResponseEntity playCointossGame() {
-
         if(game.flipCoin() == true) {
             return ResponseEntity.ok().build();
         } else {
