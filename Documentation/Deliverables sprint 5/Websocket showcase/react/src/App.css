@@ -1,0 +1,23 @@
+.body {
+  display: flex;
+  font-size: large;
+}
+
+.chatBox {
+  padding: 10px;
+  border-style: solid;
+  width: 800px;
+  height: 60%;
+  font-size: large;
+}
+.chatBox input {
+  width: 35%;
+}
+.chatBox textarea {
+  width: 790px;
+  height: 300px;
+}
+
+.chatBox button {
+  width: 100%;
+}
