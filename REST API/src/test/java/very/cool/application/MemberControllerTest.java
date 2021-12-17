@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import very.cool.application.Controller.MemberController;
 import very.cool.application.Model.Member;
+import very.cool.application.Model.MemberDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,14 +15,14 @@ import java.util.Optional;
 class MemberControllerTest {
 
     MemberController controller;
-    Member testUser;
-    Member wrongUser;
+    MemberDTO testUser;
+    MemberDTO wrongUser;
 
     @BeforeEach
     private void setup() {
         controller = new MemberController(new FakeMemberManager());
-        testUser = new Member("TestUser", "00000", 0, 100);
-        wrongUser = new Member("Not the test user!", "00000", 0, 100);
+        testUser = new MemberDTO("TestUser", "00000", 0, 100);
+        wrongUser = new MemberDTO("Not the test user!", "00000", 0, 100);
     }
 
     @Test
@@ -32,7 +33,7 @@ class MemberControllerTest {
     @Test
     public void GetAllUsersTest()
     {
-        ResponseEntity<Member> result = controller.getMemberPath(1);
+        ResponseEntity<MemberDTO> result = controller.getMemberPath(1);
 
         Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
     }
@@ -40,7 +41,7 @@ class MemberControllerTest {
     @Test
     void getMembersFailsTest()
     {
-        ResponseEntity<Member> result = controller.getMemberPath(2);
+        ResponseEntity<MemberDTO> result = controller.getMemberPath(2);
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
@@ -49,7 +50,7 @@ class MemberControllerTest {
     void getMembersByNameTest()
     {
         Optional<String> name = Optional.of("Peter");
-        ResponseEntity<List<Member>> result = controller.getMembers(name);
+        ResponseEntity<List<MemberDTO>> result = controller.getMembers(name);
 
         Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
 
@@ -59,7 +60,7 @@ class MemberControllerTest {
     void getMemberByNameFailsTest()
     {
         Optional<String> name = Optional.of("Not a real name!");
-        ResponseEntity<List<Member>> result = controller.getMembers(name);
+        ResponseEntity<List<MemberDTO>> result = controller.getMembers(name);
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
@@ -111,9 +112,9 @@ class MemberControllerTest {
         int id = 0;
         int points = 100;
 
-        Member user = new Member(name, "00000", id, points);
+        MemberDTO memberDTO = new MemberDTO(name, "00000", id, points);
 
-        ResponseEntity result = controller.updateMember(user);
+        ResponseEntity result = controller.updateMember(memberDTO);
 
         Assertions.assertEquals(HttpStatus.NO_CONTENT, result.getStatusCode());
     }
@@ -125,9 +126,9 @@ class MemberControllerTest {
         int id = 0;
         int points = 100;
 
-        Member user = new Member(name, "00000", id, points);
+        MemberDTO memberDTO = new MemberDTO(name, "00000", id, points);
 
-        ResponseEntity result = controller.updateMember(user);
+        ResponseEntity result = controller.updateMember(memberDTO);
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }

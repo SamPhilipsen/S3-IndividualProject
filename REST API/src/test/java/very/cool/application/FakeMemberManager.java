@@ -16,7 +16,7 @@ public class FakeMemberManager implements IMemberManager {
     public List<Member> getMembers(String name) {
         List<Member> users = new ArrayList<>();
         if(name == "Peter") {
-            users.add(new Member());
+            users.add(new Member("Peter", "123", 0, 100));
             return users;
         }
         return null;

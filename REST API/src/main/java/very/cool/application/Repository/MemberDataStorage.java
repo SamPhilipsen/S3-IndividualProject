@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import very.cool.application.Interfaces.IMemberData;
 import very.cool.application.Model.Member;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //MemberDalJPA
