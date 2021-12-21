@@ -15,7 +15,6 @@ const MainSite = () => {
         localStorage.setItem('loggedInUser', JSON.stringify(user))
 
         async function sendData() {
-
             try {
                 const response = await axios.put("http://localhost:8080/members", user);
                 return response
@@ -27,10 +26,9 @@ const MainSite = () => {
     })
 
     const handlePointsChange = (newPoints) => {
-        const totalPoints = user.points + newPoints;
         setUser({
             ...user,
-            points: totalPoints,
+            points: newPoints,
         })
     }
 

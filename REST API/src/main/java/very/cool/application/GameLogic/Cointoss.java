@@ -27,7 +27,8 @@ public class Cointoss {
         int index = random.nextInt(sides.length);
         String result = sides[index];
         coinSide = result;
-        if(result == chosenSide) {
+
+        if(result.equals(chosenSide)) {
             return true;
         }
         return false;

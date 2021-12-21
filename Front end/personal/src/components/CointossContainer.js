@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react"
 import "../styling/cointoss-styles.css"
 import BettingComponent from "./BettingComponent";
+import axios from "axios";
 
 const CointossContainer = props => {
     const [user, setUser] = useState(props.loggedInUser);
@@ -14,33 +15,46 @@ const CointossContainer = props => {
         setUser(props.loggedInUser);
     }, [props.loggedInUser])
 
-    /*const flipCoinRequest = async () => {
-        try {
+    const flipCoinRequest = async () => {
 
-        }
-    }*/
+
+    }
 
     const handleCointoss = e => {
         e.preventDefault()
-        var newPoints;
-        var sides = ['Heads', 'Tails'];
 
         if(typeof betAmount == "number") {
-            if(user.points > 0 && user.points - betAmount > 0) {
-                let result = sides[Math.floor(Math.random()*sides.length)]
+            if(user.points > 0) {
 
-                if(result === coinSide) {
-                    newPoints = betAmount;
-                    setPointsText("You win! You receive " + betAmount + " points.")
-                } else {
-                    newPoints = -Math.abs(betAmount)
-                    setPointsText("You lose! You lost " + betAmount + " points.")
+                const data = {
+                    'id': user.id,
+                    'gameData': coinSide,
+                    'pointsBet': betAmount
                 }
-                setWinningSideText("The winning side is: " + result)
-                props.gamePointsChanged(newPoints);
+
+                async function getData() {
+                    try {
+                        let preText;
+                        const response = await axios.put("http://localhost:8080/games/cointoss", data)
+
+                        setWinningSideText("The winning side is: " + response.data.gameData)
+
+                        if(response.data.gameData === coinSide) {
+                            preText = "You won! You earned "
+                        } else {
+                            preText = "You lose! You lost "
+                        }
+                        setPointsText(preText + betAmount + " points.")
+
+                        props.gamePointsChanged(response.data.newPoints);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+                getData()
             }
             else {
-                setPointsText("You do not have sufficient points to play this game! (You have " + user.points + ", you need at least " + (betAmount) + " to play.)")
+                setPointsText("You do not have sufficient points to play this game!")
             }
         } else {
             alert("Input can only be a number!");
