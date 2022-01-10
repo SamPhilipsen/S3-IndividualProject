@@ -8,6 +8,7 @@ import very.cool.application.DTO.ReceiveGameDataRequest;
 import very.cool.application.DTO.MemberDTO;
 import very.cool.application.DTO.SendGameDataRequest;
 import very.cool.application.GameLogic.Cointoss;
+import very.cool.application.Interfaces.IGameManager;
 import very.cool.application.Interfaces.IMemberManager;
 import very.cool.application.Model.Member;
 
@@ -16,12 +17,14 @@ import very.cool.application.Model.Member;
 @RequestMapping("/games")
 public class GameController {
 
-    @Autowired
     private IMemberManager memberManager;
+    private IGameManager gameManager;
 
-    public GameController(IMemberManager memberManager)
+    @Autowired
+    public GameController(IMemberManager memberManager, IGameManager gameManager)
     {
         this.memberManager = memberManager;
+        this.gameManager = gameManager;
     }
 
     @PutMapping("/cointoss")

@@ -17,9 +17,9 @@ import java.util.Optional;
 @RequestMapping("/members")
 public class MemberController {
 
-    @Autowired
     private IMemberManager memberManager;
 
+    @Autowired
     public MemberController(IMemberManager memberManager)
     {
         this.memberManager = memberManager;
