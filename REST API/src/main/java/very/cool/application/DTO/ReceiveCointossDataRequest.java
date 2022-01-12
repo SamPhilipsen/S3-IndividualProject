@@ -1,6 +1,6 @@
 package very.cool.application.DTO;
 
-public class ReceiveGameDataRequest {
+public class ReceiveCointossDataRequest {
     private int userId;
     private Object gameData;
     private int pointsBet;
@@ -20,7 +20,7 @@ public class ReceiveGameDataRequest {
     public int getPointsBet() { return this.pointsBet; }
     public void setPointsBet(int pointsBet) { this.pointsBet = pointsBet; }
 
-    public ReceiveGameDataRequest(int id, Object gameData, int points) {
+    public ReceiveCointossDataRequest(int id, Object gameData, int points) {
         this.userId = id;
         this.gameData = gameData;
         this.pointsBet = points;

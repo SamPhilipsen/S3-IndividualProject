@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import very.cool.application.DTO.ReceiveGameDataRequest;
-import very.cool.application.DTO.MemberDTO;
-import very.cool.application.DTO.SendGameDataRequest;
+import very.cool.application.DTO.ReceiveCointossDataRequest;
+import very.cool.application.DTO.SendCointossDataRequest;
 import very.cool.application.GameLogic.Cointoss;
 import very.cool.application.Interfaces.IGameManager;
 import very.cool.application.Interfaces.IMemberManager;
@@ -28,7 +27,7 @@ public class GameController {
     }
 
     @PutMapping("/cointoss")
-    public ResponseEntity playCointossGame(@RequestBody ReceiveGameDataRequest data) {
+    public ResponseEntity playCointossGame(@RequestBody ReceiveCointossDataRequest data) {
         Cointoss game = new Cointoss();
         Member member = memberManager.getMember(data.getUserId());
 
@@ -42,7 +41,7 @@ public class GameController {
             }
             memberManager.updateMember(member);
 
-            SendGameDataRequest response = new SendGameDataRequest(member.getPoints(), game.getCoinSide());
+            SendCointossDataRequest response = new SendCointossDataRequest(member.getPoints(), game.getCoinSide());
             return new ResponseEntity(response, HttpStatus.ACCEPTED);
         }
         return ResponseEntity.notFound().build();

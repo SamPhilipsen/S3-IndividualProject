@@ -43,8 +43,19 @@ public class BlackjackLogicTests {
     }
 
     @Test
-    public void StandTest() {
+    public void playerStandsTest() {
+        game.startGame();
+        game.playerStands();
+        Assertions.assertNotNull(game.getWinner());
+    }
 
+    @Test
+    public void FullBlackjackGameTest() {
+        game.startGame();
+        game.drawPlayerCard();
+        game.playerStands();
+
+        Assertions.assertNotNull(game.getWinner());
     }
 
 }

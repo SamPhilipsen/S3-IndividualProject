@@ -40,7 +40,7 @@ public class Blackjack {
     public List<Card> getCardDeck() { return this.cardDeck; }
     public List<Card> getDealerCards() { return this.dealerCards; }
     public List<Card> getPlayerCards() { return this.playerCards; }
-
+    public String getWinner() { return this.winner; }
 
     public Blackjack() {
 
@@ -98,20 +98,17 @@ public class Blackjack {
         cardDeck.add(new Card("clubs king", 10));
     }
 
-    public void startGame() {
-        Collections.addAll(dealerCards, drawCard(), drawCard());
-        Collections.addAll(playerCards, drawCard(), drawCard());
+    private int getDeckValue(List<Card> cardDeck) {
+        int cardsValue = 0;
+        for(Card c : cardDeck) {
+            cardsValue += c.getValue();
+        }
+        return cardsValue;
     }
 
     private void checkIfHigherThan21() {
-        int dealerCardsValue = 0;
-        int playerCardsValue = 0;
-        for(Card c : dealerCards) {
-            dealerCardsValue += c.getValue();
-        }
-        for(Card c : playerCards) {
-            playerCardsValue += c.getValue();
-        }
+        int dealerCardsValue = getDeckValue(dealerCards);
+        int playerCardsValue = getDeckValue(playerCards);
 
         if(dealerCardsValue > 21) {
             this.winner = "player";
@@ -121,14 +118,8 @@ public class Blackjack {
     }
 
     private void compareCardsValues() {
-        int dealerCardsValue = 0;
-        int playerCardsValue = 0;
-        for(Card c : dealerCards) {
-            dealerCardsValue += c.getValue();
-        }
-        for(Card c : playerCards) {
-            playerCardsValue += c.getValue();
-        }
+        int dealerCardsValue = getDeckValue(dealerCards);
+        int playerCardsValue = getDeckValue(playerCards);
 
         if(dealerCardsValue > playerCardsValue) {
             this.winner = "dealer";
@@ -149,5 +140,29 @@ public class Blackjack {
 
         return randomCard;
     }
+
+    public void startGame() {
+        Collections.addAll(dealerCards, drawCard(), drawCard());
+        Collections.addAll(playerCards, drawCard(), drawCard());
+    }
+
+    public void drawPlayerCard() {
+        Card card = this.drawCard();
+        this.playerCards.add(card);
+        checkIfHigherThan21();
+    }
+
+    public void playerStands() {
+        int dealerCardsValue = getDeckValue(dealerCards);
+
+        while(getDeckValue(dealerCards) < 17 && this.winner == null){
+            dealerCards.add(drawCard());
+            checkIfHigherThan21();
+        }
+        if(this.winner == null) {
+            compareCardsValues();
+        }
+    }
+
 
 }
