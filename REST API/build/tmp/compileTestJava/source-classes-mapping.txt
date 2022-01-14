@@ -4,9 +4,9 @@ very/cool/application/MemberManagerTest.java
  very.cool.application.MemberManagerTest
 very/cool/application/FakeMemberManager.java
  very.cool.application.FakeMemberManager
-very/cool/application/MemberControllerTest.java
- very.cool.application.MemberControllerTest
 very/cool/application/CointossLogicTests.java
  very.cool.application.CointossLogicTests
+very/cool/application/MemberControllerTest.java
+ very.cool.application.MemberControllerTest
 very/cool/application/BlackjackLogicTests.java
  very.cool.application.BlackjackLogicTests

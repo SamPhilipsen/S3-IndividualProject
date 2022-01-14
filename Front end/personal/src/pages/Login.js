@@ -10,8 +10,8 @@ const Login = () => {
     const [errorText, setErrorText] = useState("");
     const [isLoading, setLoading] = useState(false)
 
-    const [password, setPassword] = useState("123")
-    const [username, setUsername] = useState("Peter")
+    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState("")
     const history = useHistory();
 
 
@@ -67,13 +67,13 @@ const Login = () => {
             </h1>
             <div className="loginContainer">
                 <h2>Username</h2>
-                <input
+                <input className="username-input"
                     type="text"
                     value={username}
                     onChange={usernameChange}
                 />
                 <h2>Password</h2>
-                <input
+                <input className="password-input"
                     type="text"
                     value={password}
                     onChange={passwordChange}
