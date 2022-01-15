@@ -2,6 +2,7 @@ package very.cool.application.GameLogic;
 
 import org.hibernate.annotations.GenericGenerator;
 import very.cool.application.Model.Card;
+import very.cool.application.Model.Member;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,26 +25,40 @@ public class Blackjack {
     )
     private Long id;
 
-    @OneToMany
+    @Column(name = "bet")
+    private int bet;
+
+    @Column(name = "playerId")
+    private int playerId;
+
+    @OneToMany(cascade = CascadeType.ALL)
     @Column(name = "cardDeck")
     private List<Card> cardDeck;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @Column(name = "dealerCards")
     private List<Card> dealerCards;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @Column(name = "playerCards")
     private List<Card> playerCards;
     private String winner;
 
+    public Long getId() { return this.id; }
+    public void setId(Long id) { this.id = id; }
     public List<Card> getCardDeck() { return this.cardDeck; }
+    public void setCardDeck(List<Card> deck) { this.cardDeck = deck; }
     public List<Card> getDealerCards() { return this.dealerCards; }
+    public void setDealerCards(List<Card> deck) { this.dealerCards = deck; }
     public List<Card> getPlayerCards() { return this.playerCards; }
+    public void setPlayerCards(List<Card> deck) { this.playerCards = deck; }
     public String getWinner() { return this.winner; }
 
-    public Blackjack() {
 
+    public Blackjack(int bet, int playerId) {
+
+        this.playerId = playerId;
+        this.bet = bet;
         this.winner = null;
         this.playerCards = new ArrayList<>();
         this.dealerCards = new ArrayList<>();
@@ -97,6 +112,18 @@ public class Blackjack {
         cardDeck.add(new Card("clubs queen", 10));
         cardDeck.add(new Card("clubs king", 10));
     }
+
+    public Blackjack(Long id, int bet, int playerId, List<Card> cardDeck, List<Card> dealerCards, List<Card> playerCards, String winner) {
+        this.id = id;
+        this.bet = bet;
+        this.playerId = playerId;
+        this.cardDeck = cardDeck;
+        this.dealerCards = dealerCards;
+        this.playerCards = playerCards;
+        this.winner = winner;
+    }
+
+    public Blackjack() {}
 
     private int getDeckValue(List<Card> cardDeck) {
         int cardsValue = 0;

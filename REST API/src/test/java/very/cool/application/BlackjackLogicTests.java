@@ -11,7 +11,7 @@ public class BlackjackLogicTests {
 
     @BeforeEach
     public void setup() {
-        game = new Blackjack();
+        game = new Blackjack(0, 0);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class BlackjackLogicTests {
     public void drawCardWhenDeckIsEmptyTest() {
         int deckSize = game.getCardDeck().size();
         for(int i = 0; i < deckSize; i++) {
-            //This is to set the carddeck to 0 without having a public setter in the blackjack class
+            //This is to set the card deck to 0 without having a public setter in the blackjack class
             game.drawCard();
         }
         Assertions.assertNull(game.drawCard());

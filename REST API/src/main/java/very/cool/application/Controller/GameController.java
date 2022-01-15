@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import very.cool.application.DTO.ReceiveBlackjackDataRequest;
 import very.cool.application.DTO.ReceiveCointossDataRequest;
+import very.cool.application.DTO.SendBlackjackDataRequest;
 import very.cool.application.DTO.SendCointossDataRequest;
+import very.cool.application.GameLogic.Blackjack;
 import very.cool.application.GameLogic.Cointoss;
 import very.cool.application.Interfaces.IGameManager;
 import very.cool.application.Interfaces.IMemberManager;
@@ -46,4 +49,37 @@ public class GameController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/blackjack")
+    public ResponseEntity startGame(@RequestBody ReceiveBlackjackDataRequest data) {
+
+        if(data == null) return ResponseEntity.notFound().build();
+
+        Blackjack blackjack = new Blackjack(data.getBet(), data.getPlayerId());
+        if(gameManager.createBlackjackGame(blackjack)) {
+            return ResponseEntity.ok().body(blackjack);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/blackjack")
+    public ResponseEntity updateGame(@RequestBody ReceiveBlackjackDataRequest data) {
+        if(data == null) return ResponseEntity.notFound().build();
+        Blackjack game = null;
+
+        if(data.getAction().equals("hit")) {
+            game = gameManager.playerDrawsCard(data.getGameId());
+        }
+        else if(data.getAction().equals("stand")) {
+            game = gameManager.playerStands(data.getGameId());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+        SendBlackjackDataRequest dto = new SendBlackjackDataRequest(game.getId(), game.getCardDeck(), game.getDealerCards(), game.getPlayerCards(), game.getWinner());
+
+        return ResponseEntity.ok().body(dto);
+
+    }
+
 }

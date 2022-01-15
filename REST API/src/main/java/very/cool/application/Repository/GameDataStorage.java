@@ -1,5 +1,6 @@
 package very.cool.application.Repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import very.cool.application.GameLogic.Blackjack;
 import very.cool.application.Interfaces.IGameData;
@@ -7,7 +8,12 @@ import very.cool.application.Interfaces.IGameData;
 @Repository
 public class GameDataStorage implements IGameData {
 
-    IGameRepository repo;
+    private IGameRepository repo;
+
+    @Autowired
+    public GameDataStorage(IGameRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
     public boolean createBlackjackGame(Blackjack game) {
@@ -28,5 +34,17 @@ public class GameDataStorage implements IGameData {
             return false;
         }
         return true;
+    }
+
+    public Blackjack updateBlackjackGame(Blackjack game) {
+        Blackjack oldGame = this.getBlackjackGame(game.getId());
+        if(oldGame != null) {
+            oldGame.setCardDeck(game.getCardDeck());
+            oldGame.setDealerCards(game.getDealerCards());
+            oldGame.setPlayerCards(game.getPlayerCards());
+            repo.save(oldGame);
+            return oldGame;
+        }
+        return null;
     }
 }

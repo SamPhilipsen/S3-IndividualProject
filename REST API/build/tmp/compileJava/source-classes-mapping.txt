@@ -24,8 +24,8 @@ very/cool/application/Model/Member.java
  very.cool.application.Model.Member
 very/cool/application/Repository/IMemberRepository.java
  very.cool.application.Repository.IMemberRepository
-very/cool/application/Model/Card.java
- very.cool.application.Model.Card
+very/cool/application/DTO/SendBlackjackDataRequest.java
+ very.cool.application.DTO.SendBlackjackDataRequest
 very/cool/application/GameLogic/Cointoss.java
  very.cool.application.GameLogic.Cointoss
 very/cool/application/DTO/MemberDTO.java
@@ -33,25 +33,27 @@ very/cool/application/DTO/MemberDTO.java
 very/cool/application/Config/CorsConfig.java
  very.cool.application.Config.CorsConfig
  very.cool.application.Config.CorsConfig$1
-very/cool/application/Repository/IGameRepository.java
- very.cool.application.Repository.IGameRepository
+very/cool/application/Model/Card.java
+ very.cool.application.Model.Card
 very/cool/application/Controller/MemberController.java
  very.cool.application.Controller.MemberController
-very/cool/application/DTO/SendBlackjackDTO.java
- very.cool.application.DTO.SendBlackjackDTO
-very/cool/application/DTO/ReceiveCointossDataRequest.java
- very.cool.application.DTO.ReceiveCointossDataRequest
 very/cool/application/DTO/SendCointossDataRequest.java
  very.cool.application.DTO.SendCointossDataRequest
-very/cool/application/Controller/GameController.java
- very.cool.application.Controller.GameController
+very/cool/application/DTO/ReceiveCointossDataRequest.java
+ very.cool.application.DTO.ReceiveCointossDataRequest
+very/cool/application/DTO/ReceiveBlackjackDataRequest.java
+ very.cool.application.DTO.ReceiveBlackjackDataRequest
+very/cool/application/Repository/IGameRepository.java
+ very.cool.application.Repository.IGameRepository
+very/cool/application/GameLogic/Blackjack.java
+ very.cool.application.GameLogic.Blackjack
 very/cool/application/Repository/GameDataStorage.java
  very.cool.application.Repository.GameDataStorage
 very/cool/application/Interfaces/IGameData.java
  very.cool.application.Interfaces.IGameData
+very/cool/application/Controller/GameController.java
+ very.cool.application.Controller.GameController
 very/cool/application/Interfaces/IGameManager.java
  very.cool.application.Interfaces.IGameManager
-very/cool/application/GameLogic/Blackjack.java
- very.cool.application.GameLogic.Blackjack
 very/cool/application/Service/GameManager.java
  very.cool.application.Service.GameManager

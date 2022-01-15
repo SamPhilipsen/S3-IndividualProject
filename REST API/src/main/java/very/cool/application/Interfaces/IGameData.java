@@ -6,4 +6,5 @@ public interface IGameData {
     boolean createBlackjackGame(Blackjack game);
     Blackjack getBlackjackGame(Long id);
     boolean deleteBlackjackGame(Blackjack game);
+    Blackjack updateBlackjackGame(Blackjack game);
 }
