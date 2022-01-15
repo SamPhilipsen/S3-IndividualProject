@@ -57,6 +57,7 @@ const Game2Container = props => {
                     setResultText("You lost!")
                     setPlaying(false)
                 }
+                props.gamePointsChanged();
             } catch (error) {
                 console.error(error);
             }
@@ -71,7 +72,6 @@ const Game2Container = props => {
     const handleGameStart = e => {
         e.preventDefault()
         if (typeof betAmount == "number") {
-            if (user.points > 0 && user.points - betAmount > 0) {
                 const data = {
                     bet: betAmount,
                     playerId: user.id,
@@ -86,19 +86,15 @@ const Game2Container = props => {
                         setPlaying(true);
                         setPointsText("");
                         setResultText("");
+                        props.gamePointsChanged()
                     } catch (error) {
                         console.error(error);
                     }
                 }
                 sendData()
-            }
-            else {
-                setPointsText("You do not have sufficient points to play this game! (You have " + user.points + ", you need at least " + (betAmount) + " to play.)")
-            }
         } else {
             alert("Input has to be a number!")
         }
-
     }
 
     const setBet = (amount) => {

@@ -7,6 +7,5 @@ public interface IGameManager {
     Blackjack getBlackjackGame(Long id);
     boolean deleteBlackjackGame(Blackjack game);
     Blackjack updateBlackjackGame(Blackjack game);
-    Blackjack playerDrawsCard(Long id);
-    Blackjack playerStands(Long id);
+    Blackjack playerPerformsAction(Long gameId, String action);
 }

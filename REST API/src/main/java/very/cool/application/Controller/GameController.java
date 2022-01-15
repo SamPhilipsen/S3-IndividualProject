@@ -51,30 +51,33 @@ public class GameController {
     }
 
     @PostMapping("/blackjack")
-    public ResponseEntity startGame(@RequestBody ReceiveBlackjackDataRequest data) {
+    public ResponseEntity<Blackjack> startGame(@RequestBody ReceiveBlackjackDataRequest data) {
+        int bet = data.getBet();
+        int playerId = data.getPlayerId();
 
         if(data == null) return ResponseEntity.notFound().build();
 
-        Blackjack blackjack = new Blackjack(data.getBet(), data.getPlayerId());
-        if(gameManager.createBlackjackGame(blackjack)) {
-            return ResponseEntity.ok().body(blackjack);
+        Member member = memberManager.getMember(data.getPlayerId());
+
+        if(member.deductPoints(bet)) {
+            Blackjack blackjack = new Blackjack(bet, playerId);
+            if(gameManager.createBlackjackGame(blackjack)) {
+                return ResponseEntity.ok().body(blackjack);
+            }
+        } else {
+            return ResponseEntity.badRequest().body(null);
         }
+
         return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/blackjack")
     public ResponseEntity updateGame(@RequestBody ReceiveBlackjackDataRequest data) {
         if(data == null) return ResponseEntity.notFound().build();
-        Blackjack game = null;
 
-        if(data.getAction().equals("hit")) {
-            game = gameManager.playerDrawsCard(data.getGameId());
-        }
-        else if(data.getAction().equals("stand")) {
-            game = gameManager.playerStands(data.getGameId());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        System.out.println("1" + data.getGameId());
+
+        Blackjack game = gameManager.playerPerformsAction(data.getGameId(), data.getAction());
 
         SendBlackjackDataRequest dto = new SendBlackjackDataRequest(game.getId(), game.getCardDeck(), game.getDealerCards(), game.getPlayerCards(), game.getWinner());
 

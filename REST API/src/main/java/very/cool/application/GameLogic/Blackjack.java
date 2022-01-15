@@ -53,6 +53,8 @@ public class Blackjack {
     public List<Card> getPlayerCards() { return this.playerCards; }
     public void setPlayerCards(List<Card> deck) { this.playerCards = deck; }
     public String getWinner() { return this.winner; }
+    public int getPlayerId() { return this.playerId; }
+    public int getBet() { return this.bet; }
 
 
     public Blackjack(int bet, int playerId) {
