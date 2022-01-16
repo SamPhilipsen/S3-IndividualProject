@@ -57,3 +57,7 @@ tasks.named('sonarqube').configure {
 test {
     useJUnitPlatform()
 }
+
+bootJar {
+    archiveFileName = "mainApplication.jar"
+}
