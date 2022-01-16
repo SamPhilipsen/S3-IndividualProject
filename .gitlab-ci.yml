@@ -26,7 +26,7 @@ frontend tests:
     - cd ..
     - cd "Front end"
     - npm ci
-    - npm run start:ci &
+    - npm run start:ci
     - npm run e2e
     - cd ..
     - cd "REST API"
