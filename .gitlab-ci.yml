@@ -22,7 +22,7 @@ frontend tests:
   stage: test
   script:
     - cd "REST API"
-    - ./gradlew start
+    - ./gradlew run
     - cd ..
     - cd "Front end"
     - npm ci
