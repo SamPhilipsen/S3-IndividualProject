@@ -24,8 +24,6 @@ const CointossContainer = props => {
         e.preventDefault()
 
         if(typeof betAmount == "number") {
-            if(user.points > 0) {
-
                 const data = {
                     'id': user.id,
                     'gameData': coinSide,
@@ -33,30 +31,27 @@ const CointossContainer = props => {
                 }
 
                 async function getData() {
-                    try {
-                        let preText;
-                        const response = await axios.put("http://localhost:8080/games/cointoss", data)
+                    let preText;
+                    await axios.put("http://localhost:8080/games/cointoss", data)
+                        .then((response) => {
+                            setWinningSideText("The winning side is: " + response.data.gameData)
 
-                        setWinningSideText("The winning side is: " + response.data.gameData)
-
-                        if(response.data.gameData === coinSide) {
-                            preText = "You won! You earned "
-                        } else {
-                            preText = "You lose! You lost "
-                        }
-                        setPointsText(preText + betAmount + " points.")
-
-                        props.gamePointsChanged(response.data.newPoints);
-                    } catch (error) {
-                        console.error(error);
-                    }
+                            if(response.data.gameData === coinSide) {
+                                preText = "You won! You earned "
+                            } else {
+                                preText = "You lose! You lost "
+                            }
+                            setPointsText(preText + betAmount + " points.")
+                            props.gamePointsChanged();
+                        })
+                        .catch((error) => {
+                            if(error.response.status === 400) {
+                                setPointsText("You do not have enough points to play")
+                            }
+                        })
                 }
                 getData()
-            }
-            else {
-                setPointsText("You do not have sufficient points to play this game!")
-            }
-        } else {
+            } else {
             alert("Input can only be a number!");
         }
     }

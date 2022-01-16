@@ -7,7 +7,7 @@ import axios from "axios";
 import Game2Container from "./Game2Container";
 
 const MainSite = () => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState();
     const [token] = useState(localStorage.getItem('authenticationToken'));
     axios.defaults.headers.common['Authorization'] = token;
 
@@ -19,8 +19,6 @@ const MainSite = () => {
         try {
             const response = await axios.get("http://localhost:8080/members/" + localStorage.getItem("userId"));
             setUser(response.data)
-            localStorage.setItem('loggedInUser', JSON.stringify(response.data))
-            console.log(response.data)
         } catch (error) {
             console.error(error);
         }

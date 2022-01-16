@@ -45,15 +45,15 @@ very/cool/application/Repository/IGameRepository.java
  very.cool.application.Repository.IGameRepository
 very/cool/application/Interfaces/IMemberManager.java
  very.cool.application.Interfaces.IMemberManager
-very/cool/application/Controller/GameController.java
- very.cool.application.Controller.GameController
+very/cool/application/GameLogic/Blackjack.java
+ very.cool.application.GameLogic.Blackjack
 very/cool/application/Repository/GameDataStorage.java
  very.cool.application.Repository.GameDataStorage
 very/cool/application/Interfaces/IGameData.java
  very.cool.application.Interfaces.IGameData
-very/cool/application/Interfaces/IGameManager.java
- very.cool.application.Interfaces.IGameManager
-very/cool/application/GameLogic/Blackjack.java
- very.cool.application.GameLogic.Blackjack
 very/cool/application/Service/GameManager.java
  very.cool.application.Service.GameManager
+very/cool/application/Interfaces/IGameManager.java
+ very.cool.application.Interfaces.IGameManager
+very/cool/application/Controller/GameController.java
+ very.cool.application.Controller.GameController

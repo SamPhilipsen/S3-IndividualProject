@@ -1,9 +1,12 @@
 package very.cool.application.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import very.cool.application.DTO.SendCointossDataRequest;
 import very.cool.application.GameLogic.Blackjack;
+import very.cool.application.GameLogic.Cointoss;
 import very.cool.application.Interfaces.IGameData;
 import very.cool.application.Interfaces.IGameManager;
 import very.cool.application.Interfaces.IMemberManager;
@@ -19,6 +22,24 @@ public class GameManager implements IGameManager {
     public GameManager(IGameData gameData, IMemberManager memberManager) {
         this.fakeData = gameData;
         this.memberManager = memberManager;
+    }
+
+    public String playCointossGame(int userId, Object gameData, int bet) {
+        Cointoss game = new Cointoss();
+        Member member = memberManager.getMember(userId);
+
+        if(member != null) {
+            if(member.deductPoints(bet)) {
+                game.chooseSide(gameData.toString());
+
+                if(game.flipCoin()) {
+                    member.setPoints(member.getPoints() + bet*2);
+                }
+                memberManager.updateMember(member);
+                return game.getCoinSide();
+            }
+        }
+        return null;
     }
 
     @Override

@@ -9,7 +9,7 @@ const Header = props => {
 
     useEffect(() => {
         setUser(props.loggedInUser);
-    }, [])
+    }, [props.loggedInUser])
 
     const handleLogout = () => {
         setUser([]);

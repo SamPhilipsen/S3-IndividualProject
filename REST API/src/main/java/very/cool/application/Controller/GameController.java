@@ -31,23 +31,17 @@ public class GameController {
 
     @PutMapping("/cointoss")
     public ResponseEntity playCointossGame(@RequestBody ReceiveCointossDataRequest data) {
-        Cointoss game = new Cointoss();
-        Member member = memberManager.getMember(data.getUserId());
 
-        if(member != null) {
-            game.chooseSide(data.getGameData().toString());
+        String coinSide = gameManager.playCointossGame(data.getUserId(), data.getGameData(), data.getPointsBet());
 
-            if(game.flipCoin() == true) {
-                member.setPoints(member.getPoints() + data.getPointsBet());
-            } else {
-                member.setPoints(member.getPoints() - data.getPointsBet());
-            }
-            memberManager.updateMember(member);
-
-            SendCointossDataRequest response = new SendCointossDataRequest(member.getPoints(), game.getCoinSide());
-            return new ResponseEntity(response, HttpStatus.ACCEPTED);
+        if(coinSide == null) {
+            return ResponseEntity.badRequest().body(null);
         }
-        return ResponseEntity.notFound().build();
+
+        int userPoints = memberManager.getMember(data.getUserId()).getPoints();
+        SendCointossDataRequest response = new SendCointossDataRequest(userPoints, coinSide);
+
+        return new ResponseEntity(response, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/blackjack")
