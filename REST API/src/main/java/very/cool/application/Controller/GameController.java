@@ -75,8 +75,6 @@ public class GameController {
     public ResponseEntity updateGame(@RequestBody ReceiveBlackjackDataRequest data) {
         if(data == null) return ResponseEntity.notFound().build();
 
-        System.out.println("1" + data.getGameId());
-
         Blackjack game = gameManager.playerPerformsAction(data.getGameId(), data.getAction());
 
         SendBlackjackDataRequest dto = new SendBlackjackDataRequest(game.getId(), game.getCardDeck(), game.getDealerCards(), game.getPlayerCards(), game.getWinner());

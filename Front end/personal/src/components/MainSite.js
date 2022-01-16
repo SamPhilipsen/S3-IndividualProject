@@ -17,7 +17,7 @@ const MainSite = () => {
 
     async function getUserData() {
         try {
-            const response = await axios.get("http://localhost:8080/members/0");
+            const response = await axios.get("http://localhost:8080/members/" + localStorage.getItem("userId"));
             setUser(response.data)
             localStorage.setItem('loggedInUser', JSON.stringify(response.data))
             console.log(response.data)

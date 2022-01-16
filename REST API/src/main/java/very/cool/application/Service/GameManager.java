@@ -51,33 +51,25 @@ public class GameManager implements IGameManager {
     }
 
     public Blackjack playerPerformsAction(Long gameId, String action) {
-        System.out.println("2" + gameId);
         Blackjack game = this.getBlackjackGame(gameId);
-        System.out.println("3" + game.getId());
 
         if(action.equals("hit")) {
             this.playerDrawsCard(game);
-            System.out.println("6" + game.getId());
         }
         else if(action.equals("stand")) {
             this.playerStands(game);
-            System.out.println("7" + game.getId());
         } else {
-            System.out.println("No action recorded");
             return null;
         }
-        System.out.println("4" + game.getId());
         return game;
     }
 
     private void playerDrawsCard(Blackjack game) {
-        System.out.println("5" + game.getId());
         game.drawPlayerCard();
         this.updateBlackjackGame(game);
     }
 
     private void playerStands(Blackjack game) {
-        System.out.println("6" + game.getId());
         game.playerStands();
         this.updateBlackjackGame(game);
     }

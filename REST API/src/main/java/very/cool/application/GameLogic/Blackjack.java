@@ -61,7 +61,7 @@ public class Blackjack {
 
         this.playerId = playerId;
         this.bet = bet;
-        this.winner = null;
+        this.winner = "";
         this.playerCards = new ArrayList<>();
         this.dealerCards = new ArrayList<>();
         this.cardDeck = new ArrayList<>();
@@ -155,7 +155,7 @@ public class Blackjack {
         } else if (playerCardsValue > dealerCardsValue) {
             this.winner = "player";
         } else {
-            this.winner = "undecided";
+            this.winner = "dealer";
         }
     }
 
@@ -182,16 +182,10 @@ public class Blackjack {
     }
 
     public void playerStands() {
-        int dealerCardsValue = getDeckValue(dealerCards);
-
-        while(getDeckValue(dealerCards) < 17 && this.winner == null){
+        while(getDeckValue(dealerCards) < 17 && this.winner.equals("")){
             dealerCards.add(drawCard());
-            checkIfHigherThan21();
         }
-        if(this.winner == null) {
-            compareCardsValues();
-        }
+        compareCardsValues();
+        checkIfHigherThan21();
     }
-
-
 }

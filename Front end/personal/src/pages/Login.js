@@ -32,7 +32,7 @@ const Login = () => {
                 axios.defaults.headers.common['Authorization'] = token.Authorization;
 
                 response = await axios.get('http://localhost:8080/members?name=' + username);
-                localStorage.setItem('loggedInUser', JSON.stringify(response.data[0]));
+                localStorage.setItem('userId', JSON.stringify(response.data[0].id));
                 localStorage.setItem('authenticationToken', token.Authorization);
 
                 history.push("/menu");

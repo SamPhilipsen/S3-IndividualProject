@@ -46,18 +46,20 @@ const Game2Container = props => {
         async function getCard() {
             try {
                 const response = await axios.put("http://localhost:8080/games/blackjack", data);
-                setCardDeck(response.data.cardDeck)
-                setDealerCards(response.data.dealerCards)
-                setPlayerCards(response.data.playerCards)
-                if(response.data.winner === "player") {
-                    setResultText("You won!")
-                    setPlaying(false)
+                if(response.status === 200) {
+                    setCardDeck(response.data.cardDeck)
+                    setDealerCards(response.data.dealerCards)
+                    setPlayerCards(response.data.playerCards)
+                    if(response.data.winner === "player") {
+                        setResultText("You won!")
+                        setPlaying(false)
+                    }
+                    if(response.data.winner === "dealer") {
+                        setResultText("You lost!")
+                        setPlaying(false)
+                    }
+                    props.gamePointsChanged();
                 }
-                if(response.data.winner === "dealer") {
-                    setResultText("You lost!")
-                    setPlaying(false)
-                }
-                props.gamePointsChanged();
             } catch (error) {
                 console.error(error);
             }
@@ -77,19 +79,22 @@ const Game2Container = props => {
                     playerId: user.id,
                 }
                 async function sendData() {
-                    try {
-                        const response = await axios.post("http://localhost:8080/games/blackjack", data);
-                        setCardDeck(response.data.cardDeck)
-                        setDealerCards(response.data.dealerCards)
-                        setPlayerCards(response.data.playerCards)
-                        setGameId(response.data.id)
-                        setPlaying(true);
-                        setPointsText("");
-                        setResultText("");
-                        props.gamePointsChanged()
-                    } catch (error) {
-                        console.error(error);
-                    }
+                        await axios.post("http://localhost:8080/games/blackjack", data)
+                            .then((response) => {
+                                setCardDeck(response.data.cardDeck)
+                                setDealerCards(response.data.dealerCards)
+                                setPlayerCards(response.data.playerCards)
+                                setGameId(response.data.id)
+                                setPlaying(true);
+                                setPointsText("");
+                                setResultText("");
+                                props.gamePointsChanged()
+                            })
+                            .catch((error) => {
+                            if(error.response.status === 400) {
+                                setPointsText("You do not have enough points to play")
+                            }
+                        })
                 }
                 sendData()
         } else {

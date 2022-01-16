@@ -9,11 +9,11 @@ const Header = props => {
 
     useEffect(() => {
         setUser(props.loggedInUser);
-    }, [props.loggedInUser])
+    }, [])
 
     const handleLogout = () => {
         setUser([]);
-        localStorage.removeItem('loggedInUser')
+        localStorage.removeItem('userId')
         localStorage.removeItem('authenticationToken')
         delete axios.defaults.headers.common["Authorization"]
         history.push("");
