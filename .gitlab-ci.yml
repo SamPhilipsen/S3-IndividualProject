@@ -28,6 +28,9 @@ frontend tests:
     - npm ci
     - npm run start:ci &
     - npm run e2e
+    - cd ..
+    - cd "REST API"
+    - ./gradlew.bat --stop
 
 sonarqube-check:
   stage: analyze
