@@ -1,143 +1,22 @@
 import React, {useState, useEffect} from "react";
 import "../styling/game2-styles.css"
 import BettingComponent from "./BettingComponent";
+import axios from "axios";
 
 const Game2Container = props => {
     const [user, setUser] = useState(props.loggedInUser);
     const [pointsText, setPointsText] = useState("")
     const [resultText, setResultText] = useState("")
+    const [betAmount, setBetAmount] = useState()
 
-    const [betAmount, setBetAmount] = useState();
-
-    const initialCardDeck = [
-        {name: "hearts 2", value: 2},
-        {name: "hearts 3", value: 3},
-        {name: "hearts 4", value: 4},
-        {name: "hearts 5", value: 5},
-        {name: "hearts 6", value: 6},
-        {name: "hearts 7", value: 7},
-        {name: "hearts 8", value: 8},
-        {name: "hearts 9", value: 9},
-        {name: "hearts 10", value: 10},
-        {name: "hearts jack", value: 10},
-        {name: "hearts queen", value: 10},
-        {name: "hearts king", value: 10},
-        {name: "spades 2", value: 2},
-        {name: "spades 3", value: 3},
-        {name: "spades 4", value: 4},
-        {name: "spades 5", value: 5},
-        {name: "spades 6", value: 6},
-        {name: "spades 7", value: 7},
-        {name: "spades 8", value: 8},
-        {name: "spades 9", value: 9},
-        {name: "spades 10", value: 10},
-        {name: "spades jack", value: 10},
-        {name: "spades queen", value: 10},
-        {name: "spades king", value: 10},
-        {name: "diamonds 2", value: 2},
-        {name: "diamonds 3", value: 3},
-        {name: "diamonds 4", value: 4},
-        {name: "diamonds 5", value: 5},
-        {name: "diamonds 6", value: 6},
-        {name: "diamonds 7", value: 7},
-        {name: "diamonds 8", value: 8},
-        {name: "diamonds 9", value: 9},
-        {name: "diamonds 10", value: 10},
-        {name: "diamonds jack", value: 10},
-        {name: "diamonds queen", value: 10},
-        {name: "diamonds king", value: 10},
-        {name: "clubs 2", value: 2},
-        {name: "clubs 3", value: 3},
-        {name: "clubs 4", value: 4},
-        {name: "clubs 5", value: 5},
-        {name: "clubs 6", value: 6},
-        {name: "clubs 7", value: 7},
-        {name: "clubs 8", value: 8},
-        {name: "clubs 9", value: 9},
-        {name: "clubs 10", value: 10},
-        {name: "clubs jack", value: 10},
-        {name: "clubs queen", value: 10},
-        {name: "clubs king", value: 10},
-    ]
-    const [cardDeck, setCardDeck] = useState(initialCardDeck)
+    const [gameId, setGameId] = useState()
+    const [cardDeck, setCardDeck] = useState([])
     const [playerCards, setPlayerCards] = useState([])
     const [dealerCards, setDealerCards] = useState([])
 
-    const [compareCards, setComparingCards] = useState(false);
-
     const [isPlaying, setPlaying] = useState(false)
 
-    useEffect(() => {
-        setUser(props.loggedInUser)
-    }, [props.loggedInUser])
-
-    useEffect(() => {
-        const cardsValue = getPlayerCardsValue()
-
-        console.log("Player cards value = " + cardsValue)
-
-        if (cardsValue > 21) {
-            onLoss()
-        }
-
-    },[playerCards])
-
-    useEffect(() => {
-        const dealerCardsValue = getDealerCardsValue()
-
-        console.log("Dealer cards value = " + dealerCardsValue)
-
-        if(compareCards) {
-
-            const playerCardsValue = getPlayerCardsValue()
-
-            if (dealerCardsValue > 21) {
-                onWin()
-            } else if (dealerCardsValue <= 21) {
-                if(playerCardsValue > dealerCardsValue) {
-                    onWin()
-                }
-                if(playerCardsValue < dealerCardsValue) {
-                    onLoss()
-                }
-                if(playerCardsValue === dealerCardsValue) {
-                    alert("Both card values are equal.")
-                }
-            }
-        }
-    }, [dealerCards])
-
-    const drawCards = (cardAmount) => {
-
-        if(cardDeck.length >= cardAmount) {
-            let results = [];
-
-            for(let i = 0; i < cardAmount; i++) {
-                let result = cardDeck[Math.floor(Math.random()*cardDeck.length)];
-                results.map((card) => {
-                    if(card === result) {
-                        result = cardDeck[Math.floor(Math.random()*cardDeck.length)];
-                    }
-                })
-                results.push(result);
-            }
-
-            let newDeck = cardDeck.filter((card) => {
-                if(!results.includes(card)) { return card; }
-            })
-
-            if(results != null) {
-                setCardDeck(newDeck)
-                return results
-            }
-        } else {
-            console.log("Attempting to draw more cards than there are in the card deck.")
-            return false;
-        }
-    }
-
-    /*
-    Dealer gives every player, including himself a card face up.
+    /*Dealer gives every player, including himself a card face up.
     Then, everyone gets another card also face up, except for the dealer's which will be hidden.
     If a player's cards total to 21 already by this point, they receive 1.5x their bet from the dealer.
     Any players who did not get this plays further.
@@ -149,109 +28,78 @@ const Game2Container = props => {
     If the value of the dealer's cards is 17 or higher, they stand.
     If the dealer busts due to the value of cards being higher than 21, everyone still in the game wins twice their bet.
     If the dealer does not bust, and cannot draw any more cards, the players who's card values are higher than that of the dealer win twice their bet.
-    The rest lose their entire bet.
-    */
+    The rest lose their entire bet.*/
 
-    const getPlayerCardsValue = () => {
-        let cardsValue = 0;
-        playerCards.map((card) =>
-            cardsValue += card.value
-        );
-        return cardsValue
+    const playerHits = () => {
+        playerPerformsAction("hit")
     }
 
-    const getDealerCardsValue = () => {
-        let cardsValue = 0;
-        dealerCards.map((card) =>
-            cardsValue += card.value
-        );
-        return cardsValue
+    const playerStands = () => {
+        playerPerformsAction("stand")
     }
 
-    const playerDrawsCard = () => {
+    function playerPerformsAction(action) {
+        const data = {
+            gameId: gameId,
+            action: action,
+        }
         async function getCard() {
-            let card = drawCards(1)
-            await setPlayerCards(playerCards => [
-                ...playerCards, card[0]
-            ])
+            try {
+                const response = await axios.put("http://localhost:8080/games/blackjack", data);
+                if(response.status === 200) {
+                    setCardDeck(response.data.cardDeck)
+                    setDealerCards(response.data.dealerCards)
+                    setPlayerCards(response.data.playerCards)
+                    if(response.data.winner === "player") {
+                        setResultText("You won!")
+                        setPlaying(false)
+                    }
+                    if(response.data.winner === "dealer") {
+                        setResultText("You lost!")
+                        setPlaying(false)
+                    }
+                    props.gamePointsChanged();
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
         getCard()
     }
 
-    const playerStands = () => {
-        let newDeck = dealerCards.map((card) => {
-            return card;
-        })
-
-        function getCardsValue() {
-            let value = 0;
-            newDeck.map((card) => {
-                value += card.value;
-            })
-            return value;
-        }
-
-        function checkDealerResults() {
-            const cardsValue = getCardsValue();
-            if(cardsValue <= 16 )
-            {
-                let card = drawCards(1)
-                newDeck.push(card[0])
-                checkDealerResults()
-            }
-
-            setComparingCards(true);
-            setDealerCards(newDeck)
-        }
-        checkDealerResults()
-    }
-
-    const onWin = () => {
-        setResultText("You won! You receive " + betAmount + " points.")
-        props.gamePointsChanged(betAmount)
-        resetGame()
-    }
-
-    const onLoss = () => {
-        setResultText("You lost! You lost " + betAmount + " points.")
-        const newPoints = -Math.abs(betAmount)
-        props.gamePointsChanged(newPoints)
-        resetGame()
-    }
-
     const resetGame = () => {
         setPlaying(false)
-        setComparingCards(false)
     }
 
     const handleGameStart = e => {
         e.preventDefault()
         if (typeof betAmount == "number") {
-            if (user.points > 0 && user.points - betAmount > 0) {
-                setDealerCards([]);
-                setPlayerCards([]);
-                setCardDeck(initialCardDeck);
-                setPlaying(true);
-                setPointsText("");
-                setResultText("");
-
-                let cards = drawCards(4)
-                if (cards) {
-                    setPlayerCards(playerCards => [
-                        ...playerCards, cards[0], cards[1]
-                    ])
-                    setDealerCards(dealerCards => [
-                        ...dealerCards, cards[2], cards[3]
-                    ])
+                const data = {
+                    bet: betAmount,
+                    playerId: user.id,
                 }
-            }
-            else {
-                setPointsText("You do not have sufficient points to play this game! (You have " + user.points + ", you need at least " + (betAmount) + " to play.)")
-            }
+                async function sendData() {
+                        await axios.post("http://localhost:8080/games/blackjack", data)
+                            .then((response) => {
+                                setCardDeck(response.data.cardDeck)
+                                setDealerCards(response.data.dealerCards)
+                                setPlayerCards(response.data.playerCards)
+                                setGameId(response.data.id)
+                                setPlaying(true);
+                                setPointsText("");
+                                setResultText("");
+                                props.gamePointsChanged()
+                            })
+                            .catch((error) => {
+                            if(error.response.status === 400) {
+                                setPointsText("You do not have enough points to play")
+                            }
+                        })
+                }
+                sendData()
         } else {
             alert("Input has to be a number!")
         }
-
     }
 
     const setBet = (amount) => {
@@ -281,7 +129,7 @@ const Game2Container = props => {
                 </form>
 
                 <div className="controlButtons" style={playMode}>
-                    <button onClick={playerDrawsCard}>
+                    <button onClick={playerHits}>
                         Hit
                     </button>
                     <button onClick={playerStands}>

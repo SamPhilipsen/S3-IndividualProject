@@ -24,14 +24,8 @@ public class CointossLogicTests {
     public void CoinflipTest() {
         game.chooseSide("Heads");
         game.flipCoin();
-        String coinSide = game.getCoinSide();
-        boolean result = false;
 
-        if(coinSide == "Heads" || coinSide == "Tails") {
-            result = true;
-        }
-
-        Assertions.assertTrue(result);
+        Assertions.assertNotNull(game.getCoinSide());
 
     }
 }

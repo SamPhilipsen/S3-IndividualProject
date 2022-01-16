@@ -1,4 +1,4 @@
-package very.cool.application.Model;
+package very.cool.application.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
