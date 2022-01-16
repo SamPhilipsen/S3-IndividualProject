@@ -10,26 +10,11 @@ build:
     - ./gradlew build -x test --stacktrace
     - ./gradlew.bat --stop
 
-backend tests:
+tests:
   stage: test
   script:
     - cd "REST API"
     - ./gradlew test
-    - ./gradlew.bat --stop
-
-frontend tests:
-  image: node:latest
-  stage: test
-  script:
-    - cd "REST API"
-    - ./gradlew run
-    - cd ..
-    - cd "Front end"
-    - npm ci
-    - npm run start:ci
-    - npm run e2e
-    - cd ..
-    - cd "REST API"
     - ./gradlew.bat --stop
 
 sonarqube-check:
