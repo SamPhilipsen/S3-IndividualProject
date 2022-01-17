@@ -6,16 +6,14 @@ stages:
 docker-build:
   stage: build
   services:
-  - name: docker:dind
-    entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
-
+    - docker:dind
   script:
     - cd "REST API"
-    - export DOCKER_HOST=tcp://127.0.0.1:2375 && docker build -t backendimage .
+    - docker build -t backendimage .
     - cd .. 
     - cd "Front end"
     - cd personal
-    - export DOCKER_HOST=tcp://127.0.0.1:2375 && docker build -t frontendimage .
+    - docker build -t frontendimage .
 
 build:
   stage: build
