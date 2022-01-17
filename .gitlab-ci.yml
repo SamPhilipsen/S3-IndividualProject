@@ -3,10 +3,11 @@ stages:
   - test
   - analyze
 
+services:
+  - docker:dind
+
 docker-build:
   stage: build
-  services:
-    - docker:dind
   script:
     - cd "REST API"
     - docker build -t backendimage .
