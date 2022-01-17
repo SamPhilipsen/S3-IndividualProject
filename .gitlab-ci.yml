@@ -3,18 +3,19 @@ stages:
   - test
   - analyze
 
-services:
-  - docker:19.03.12-dind
-
 docker-build:
   stage: build
+  services:
+  - docker:19.03.12-dind
+  entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
+
   script:
     - cd "REST API"
-    - export DOCKER_HOST=tcp://localhost:2375 && docker build -t backendimage .
+    - export DOCKER_HOST=tcp://127.0.0.1:2375 && docker build -t backendimage .
     - cd .. 
     - cd "Front end"
     - cd personal
-    - export DOCKER_HOST=tcp://localhost:2375 && docker build -t frontendimage .
+    - export DOCKER_HOST=tcp://127.0.0.1:2375 && docker build -t frontendimage .
 
 build:
   stage: build
