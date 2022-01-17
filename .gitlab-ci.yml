@@ -3,8 +3,11 @@ stages:
   - test
   - analyze
 
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
 services:
-  - docker:dind
+  - docker:19.03.12-dind
 
 docker-build:
   stage: build
