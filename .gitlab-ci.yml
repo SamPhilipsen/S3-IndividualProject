@@ -13,11 +13,11 @@ docker-build:
     - docker:dind
   script:
     - cd "REST API"
-    - docker build -t backendimage
+    - docker build -t backendimage .
     - cd .. 
     - cd "Front end"
     - cd personal
-    - docker build -t frontendimage
+    - docker build -t frontendimage .
 
 build:
   stage: build
