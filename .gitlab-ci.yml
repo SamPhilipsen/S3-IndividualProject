@@ -4,13 +4,10 @@ stages:
   - analyze
 
 services:
-  - docker:dind
+  - docker:19.03.12-dind
 
 docker-build:
-  image: docker:latest
   stage: build
-  services:
-    - docker:dind
   script:
     - cd "REST API"
     - docker build -t backendimage .
