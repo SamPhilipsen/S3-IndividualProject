@@ -6,8 +6,8 @@ stages:
 docker-build:
   stage: build
   services:
-  - docker:19.03.12-dind
-  entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
+  - name: docker:dind
+  - entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
 
   script:
     - cd "REST API"
