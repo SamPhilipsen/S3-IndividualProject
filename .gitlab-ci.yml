@@ -9,6 +9,7 @@ services:
 docker-build:
   stage: build
   script:
+    - while ! nc -z localhost 2375; do sleep 0.1; done
     - cd "REST API"
     - docker build -t backendimage .
     - cd .. 
