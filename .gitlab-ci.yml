@@ -13,11 +13,11 @@ docker-build:
     - docker:dind
   script:
     - cd "REST API"
-    - docker build
+    - docker build -t "$CI_REGISTRY_IMAGE${tag}"
     - cd .. 
     - cd "Front end"
     - cd personal
-    - docker build
+    - docker build -t "$CI_REGISTRY_IMAGE${tag}"
 
 build:
   stage: build
