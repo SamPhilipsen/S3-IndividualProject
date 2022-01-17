@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Personal project</a> &gt; <a href="index.source.html" class="el_package">very.cool.application.Controller</a> &gt; <span class="el_source">GameController.java</span></div><h1>GameController.java</h1><pre class="source lang-java linenums">package very.cool.application.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import very.cool.application.DTO.ReceiveBlackjackDataRequest;
+import very.cool.application.DTO.ReceiveCointossDataRequest;
+import very.cool.application.DTO.SendBlackjackDataRequest;
+import very.cool.application.DTO.SendCointossDataRequest;
+import very.cool.application.GameLogic.Blackjack;
+import very.cool.application.GameLogic.Cointoss;
+import very.cool.application.Interfaces.IGameManager;
+import very.cool.application.Interfaces.IMemberManager;
+import very.cool.application.Model.Member;
+
+@CrossOrigin(&quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/games&quot;)
+public class GameController {
+
+    private IMemberManager memberManager;
+    private IGameManager gameManager;
+
+    @Autowired
+    public GameController(IMemberManager memberManager, IGameManager gameManager)
+<span class="nc" id="L27">    {</span>
+<span class="nc" id="L28">        this.memberManager = memberManager;</span>
+<span class="nc" id="L29">        this.gameManager = gameManager;</span>
+<span class="nc" id="L30">    }</span>
+
+    @PutMapping(&quot;/cointoss&quot;)
+    public ResponseEntity playCointossGame(@RequestBody ReceiveCointossDataRequest data) {
+
+<span class="nc" id="L35">        String coinSide = gameManager.playCointossGame(data.getUserId(), data.getGameData(), data.getPointsBet());</span>
+
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if(coinSide == null) {</span>
+<span class="nc" id="L38">            return ResponseEntity.badRequest().body(null);</span>
+        }
+
+<span class="nc" id="L41">        int userPoints = memberManager.getMember(data.getUserId()).getPoints();</span>
+<span class="nc" id="L42">        SendCointossDataRequest response = new SendCointossDataRequest(userPoints, coinSide);</span>
+
+<span class="nc" id="L44">        return new ResponseEntity(response, HttpStatus.ACCEPTED);</span>
+    }
+
+    @PostMapping(&quot;/blackjack&quot;)
+    public ResponseEntity&lt;Blackjack&gt; startGame(@RequestBody ReceiveBlackjackDataRequest data) {
+<span class="nc" id="L49">        int bet = data.getBet();</span>
+<span class="nc" id="L50">        int playerId = data.getPlayerId();</span>
+
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(data == null) return ResponseEntity.notFound().build();</span>
+
+<span class="nc" id="L54">        Member member = memberManager.getMember(data.getPlayerId());</span>
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if(member.deductPoints(bet)) {</span>
+<span class="nc" id="L57">            Blackjack blackjack = new Blackjack(bet, playerId);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            if(gameManager.createBlackjackGame(blackjack)) {</span>
+<span class="nc" id="L59">                return ResponseEntity.ok().body(blackjack);</span>
+            }
+<span class="nc" id="L61">        } else {</span>
+<span class="nc" id="L62">            return ResponseEntity.badRequest().body(null);</span>
+        }
+
+<span class="nc" id="L65">        return ResponseEntity.notFound().build();</span>
+    }
+
+    @PutMapping(&quot;/blackjack&quot;)
+    public ResponseEntity updateGame(@RequestBody ReceiveBlackjackDataRequest data) {
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if(data == null) return ResponseEntity.notFound().build();</span>
+
+<span class="nc" id="L72">        Blackjack game = gameManager.playerPerformsAction(data.getGameId(), data.getAction());</span>
+
+<span class="nc" id="L74">        SendBlackjackDataRequest dto = new SendBlackjackDataRequest(game.getId(), game.getCardDeck(), game.getDealerCards(), game.getPlayerCards(), game.getWinner());</span>
+
+<span class="nc" id="L76">        return ResponseEntity.ok().body(dto);</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

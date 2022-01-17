@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Member.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Personal project</a> &gt; <a href="index.source.html" class="el_package">very.cool.application.Model</a> &gt; <span class="el_source">Member.java</span></div><h1>Member.java</h1><pre class="source lang-java linenums">package very.cool.application.Model;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name=&quot;member&quot;)
+public class Member {
+
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.AUTO,
+            generator= &quot;native&quot;
+    )
+    @GenericGenerator(
+            name = &quot;native&quot;,
+            strategy = &quot;native&quot;
+    )
+    private int id;
+
+    @Column(name = &quot;username&quot;)
+    private String username;
+
+    @Column(name = &quot;password&quot;)
+    private String password;
+
+    @Column(name = &quot;points&quot;)
+    private int points;
+
+<span class="fc" id="L31">    public Member(String username, String password, int id, int points) {</span>
+<span class="fc" id="L32">        this.username = username;</span>
+<span class="fc" id="L33">        this.password = password;</span>
+<span class="fc" id="L34">        this.id = id;</span>
+<span class="fc" id="L35">        this.points = points;</span>
+<span class="fc" id="L36">    }</span>
+
+<span class="fc" id="L38">    public Member() {</span>
+
+<span class="fc" id="L40">    }</span>
+
+<span class="fc" id="L42">    public String getUsername() { return this.username; }</span>
+<span class="nc" id="L43">    public void setUsername(String username) { this.username = username; }</span>
+
+<span class="fc" id="L45">    public String getPassword() { return this.password; }</span>
+<span class="nc" id="L46">    public void setPassword(String password) { this.password = password; }</span>
+
+<span class="fc" id="L48">    public int getId() { return this.id; }</span>
+<span class="nc" id="L49">    public void setId(int id) { this.id = id; }</span>
+
+<span class="fc" id="L51">    public int getPoints() { return this.points; }</span>
+<span class="nc" id="L52">    public void setPoints(int points) { this.points = points; }</span>
+
+    public boolean deductPoints(int bet) {
+<span class="nc bnc" id="L55" title="All 4 branches missed.">        if((this.points - bet) &gt; 0 || (this.points - bet) == 0) {</span>
+<span class="nc" id="L56">            setPoints(this.points - bet);</span>
+<span class="nc" id="L57">            return true;</span>
+        } else {
+<span class="nc" id="L59">            return false;</span>
+        }
+    }
+    
+    public void addPoints(int bet) {
+<span class="nc" id="L64">        setPoints(this.points + bet);</span>
+<span class="nc" id="L65">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
