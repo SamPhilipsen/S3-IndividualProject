@@ -11,12 +11,13 @@ docker-build:
   stage: build
   services:
     - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" .
-    - docker push "$CI_REGISTRY_IMAGE${tag}"
-
+    - cd "REST API"
+    - docker build -t  
+    - cd .. 
+    - cd "Front end"
+    - cd personal
+    - docker build -t 
 
 build:
   stage: build
