@@ -1,8 +1,9 @@
-package very.cool.application;
+package very.cool.application.MemberClassesTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import very.cool.application.FakeDataClasses.FakeMemberDataStorage;
 import very.cool.application.Service.MemberManager;
 import very.cool.application.Model.Member;
 

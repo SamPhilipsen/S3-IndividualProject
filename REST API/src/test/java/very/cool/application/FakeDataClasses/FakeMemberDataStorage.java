@@ -1,12 +1,12 @@
-package very.cool.application;
+package very.cool.application.FakeDataClasses;
 
-import very.cool.application.Interfaces.IMemberManager;
+import very.cool.application.Interfaces.IMemberData;
 import very.cool.application.Model.Member;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FakeMemberManager implements IMemberManager {
+public class FakeMemberDataStorage implements IMemberData {
     @Override
     public List<Member> getMembers() {
         return null;
@@ -14,10 +14,10 @@ public class FakeMemberManager implements IMemberManager {
 
     @Override
     public List<Member> getMembers(String name) {
-        List<Member> users = new ArrayList<>();
+        List<Member> members = new ArrayList<>();
         if(name == "Peter") {
-            users.add(new Member("Peter", "123", 0, 100));
-            return users;
+            members.add(new Member("Peter", "123", 0, 100));
+            return members;
         }
         return null;
     }
@@ -44,16 +44,16 @@ public class FakeMemberManager implements IMemberManager {
     }
 
     @Override
-    public boolean addMember(Member user) {
-        if(user.getUsername() == "TestUser") {
+    public boolean addMember(Member member) {
+        if(member.getUsername() == "TestMember") {
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean updateMember(Member user) {
-        if(user.getUsername() == "TestUser") {
+    public boolean updateMember(Member member) {
+        if(member.getUsername() == "TestMember") {
             return true;
         }
         return false;

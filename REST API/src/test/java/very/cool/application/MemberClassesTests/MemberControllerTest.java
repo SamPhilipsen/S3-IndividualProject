@@ -1,4 +1,4 @@
-package very.cool.application;
+package very.cool.application.MemberClassesTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import very.cool.application.Controller.MemberController;
 import very.cool.application.DTO.MemberDTO;
+import very.cool.application.FakeDataClasses.FakeMemberManager;
 
 import java.util.List;
 import java.util.Optional;

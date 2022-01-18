@@ -1,4 +1,4 @@
-package very.cool.application;
+package very.cool.application.GameClassesTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
