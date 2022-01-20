@@ -14,7 +14,7 @@ import very.cool.application.Interfaces.IGameManager;
 import very.cool.application.Interfaces.IMemberManager;
 import very.cool.application.Model.Member;
 
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/games")
 public class GameController {
