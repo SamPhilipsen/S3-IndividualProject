@@ -35,21 +35,21 @@ public class Member {
 <span class="fc" id="L35">        this.points = points;</span>
 <span class="fc" id="L36">    }</span>
 
-<span class="fc" id="L38">    public Member() {</span>
+<span class="nc" id="L38">    public Member() {</span>
 
-<span class="fc" id="L40">    }</span>
+<span class="nc" id="L40">    }</span>
 
-<span class="fc" id="L42">    public String getUsername() { return this.username; }</span>
+<span class="nc" id="L42">    public String getUsername() { return this.username; }</span>
 <span class="nc" id="L43">    public void setUsername(String username) { this.username = username; }</span>
 
-<span class="fc" id="L45">    public String getPassword() { return this.password; }</span>
+<span class="nc" id="L45">    public String getPassword() { return this.password; }</span>
 <span class="nc" id="L46">    public void setPassword(String password) { this.password = password; }</span>
 
-<span class="fc" id="L48">    public int getId() { return this.id; }</span>
+<span class="nc" id="L48">    public int getId() { return this.id; }</span>
 <span class="nc" id="L49">    public void setId(int id) { this.id = id; }</span>
 
 <span class="fc" id="L51">    public int getPoints() { return this.points; }</span>
-<span class="nc" id="L52">    public void setPoints(int points) { this.points = points; }</span>
+<span class="fc" id="L52">    public void setPoints(int points) { this.points = points; }</span>
 
     public boolean deductPoints(int bet) {
 <span class="nc bnc" id="L55" title="All 4 branches missed.">        if((this.points - bet) &gt; 0 || (this.points - bet) == 0) {</span>
@@ -61,8 +61,8 @@ public class Member {
     }
     
     public void addPoints(int bet) {
-<span class="nc" id="L64">        setPoints(this.points + bet);</span>
-<span class="nc" id="L65">    }</span>
+<span class="fc" id="L64">        setPoints(this.points + bet);</span>
+<span class="fc" id="L65">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

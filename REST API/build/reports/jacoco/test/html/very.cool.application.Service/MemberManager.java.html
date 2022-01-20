@@ -16,9 +16,9 @@ public class MemberManager implements IMemberManager {
 
     @Autowired
     public MemberManager(IMemberData memberData)
-<span class="fc" id="L19">    {</span>
-<span class="fc" id="L20">        fakeData = memberData;</span>
-<span class="fc" id="L21">    }</span>
+<span class="nc" id="L19">    {</span>
+<span class="nc" id="L20">        fakeData = memberData;</span>
+<span class="nc" id="L21">    }</span>
 
     public List&lt;Member&gt; getMembers()
     {
@@ -37,21 +37,21 @@ public class MemberManager implements IMemberManager {
 
     public Member getMember(int id)
     {
-<span class="fc" id="L40">        return this.fakeData.getMember(id);</span>
+<span class="nc" id="L40">        return this.fakeData.getMember(id);</span>
     }
 
     public boolean deleteMember(int id)
     {
-<span class="fc" id="L45">        return this.fakeData.deleteMember(id);</span>
+<span class="nc" id="L45">        return this.fakeData.deleteMember(id);</span>
     }
 
     public boolean addMember(Member user)
     {
-<span class="fc" id="L50">        return this.fakeData.addMember(user);</span>
+<span class="nc" id="L50">        return this.fakeData.addMember(user);</span>
     }
 
     public boolean updateMember(Member user) {
-<span class="fc" id="L54">        return this.fakeData.updateMember(user);</span>
+<span class="nc" id="L54">        return this.fakeData.updateMember(user);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

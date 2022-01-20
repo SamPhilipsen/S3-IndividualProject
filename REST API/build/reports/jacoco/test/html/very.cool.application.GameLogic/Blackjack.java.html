@@ -46,74 +46,74 @@ public class Blackjack {
 
 <span class="nc" id="L47">    public Long getId() { return this.id; }</span>
 <span class="nc" id="L48">    public void setId(Long id) { this.id = id; }</span>
-<span class="fc" id="L49">    public List&lt;Card&gt; getCardDeck() { return this.cardDeck; }</span>
+<span class="nc" id="L49">    public List&lt;Card&gt; getCardDeck() { return this.cardDeck; }</span>
 <span class="nc" id="L50">    public void setCardDeck(List&lt;Card&gt; deck) { this.cardDeck = deck; }</span>
-<span class="fc" id="L51">    public List&lt;Card&gt; getDealerCards() { return this.dealerCards; }</span>
+<span class="nc" id="L51">    public List&lt;Card&gt; getDealerCards() { return this.dealerCards; }</span>
 <span class="nc" id="L52">    public void setDealerCards(List&lt;Card&gt; deck) { this.dealerCards = deck; }</span>
-<span class="fc" id="L53">    public List&lt;Card&gt; getPlayerCards() { return this.playerCards; }</span>
+<span class="nc" id="L53">    public List&lt;Card&gt; getPlayerCards() { return this.playerCards; }</span>
 <span class="nc" id="L54">    public void setPlayerCards(List&lt;Card&gt; deck) { this.playerCards = deck; }</span>
-<span class="fc" id="L55">    public String getWinner() { return this.winner; }</span>
+<span class="nc" id="L55">    public String getWinner() { return this.winner; }</span>
 <span class="nc" id="L56">    public int getPlayerId() { return this.playerId; }</span>
 <span class="nc" id="L57">    public int getBet() { return this.bet; }</span>
 
 
-<span class="fc" id="L60">    public Blackjack(int bet, int playerId) {</span>
+<span class="nc" id="L60">    public Blackjack(int bet, int playerId) {</span>
 
-<span class="fc" id="L62">        this.playerId = playerId;</span>
-<span class="fc" id="L63">        this.bet = bet;</span>
-<span class="fc" id="L64">        this.winner = &quot;&quot;;</span>
-<span class="fc" id="L65">        this.playerCards = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L66">        this.dealerCards = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L67">        this.cardDeck = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L68">        cardDeck.add(new Card(&quot;hearts 2&quot;, 2));</span>
-<span class="fc" id="L69">        cardDeck.add(new Card(&quot;hearts 3&quot;, 3));</span>
-<span class="fc" id="L70">        cardDeck.add(new Card(&quot;hearts 4&quot;, 4));</span>
-<span class="fc" id="L71">        cardDeck.add(new Card(&quot;hearts 5&quot;, 5));</span>
-<span class="fc" id="L72">        cardDeck.add(new Card(&quot;hearts 6&quot;, 6));</span>
-<span class="fc" id="L73">        cardDeck.add(new Card(&quot;hearts 7&quot;, 7));</span>
-<span class="fc" id="L74">        cardDeck.add(new Card(&quot;hearts 8&quot;, 8));</span>
-<span class="fc" id="L75">        cardDeck.add(new Card(&quot;hearts 9&quot;, 9));</span>
-<span class="fc" id="L76">        cardDeck.add(new Card(&quot;hearts 10&quot;, 10));</span>
-<span class="fc" id="L77">        cardDeck.add(new Card(&quot;hearts jack&quot;, 10));</span>
-<span class="fc" id="L78">        cardDeck.add(new Card(&quot;hearts queen&quot;, 10));</span>
-<span class="fc" id="L79">        cardDeck.add(new Card(&quot;hearts king&quot;, 10));</span>
-<span class="fc" id="L80">        cardDeck.add(new Card(&quot;spades 2&quot;, 2));</span>
-<span class="fc" id="L81">        cardDeck.add(new Card(&quot;spades 3&quot;, 3));</span>
-<span class="fc" id="L82">        cardDeck.add(new Card(&quot;spades 4&quot;, 4));</span>
-<span class="fc" id="L83">        cardDeck.add(new Card(&quot;spades 5&quot;, 5));</span>
-<span class="fc" id="L84">        cardDeck.add(new Card(&quot;spades 6&quot;, 6));</span>
-<span class="fc" id="L85">        cardDeck.add(new Card(&quot;spades 7&quot;, 7));</span>
-<span class="fc" id="L86">        cardDeck.add(new Card(&quot;spades 8&quot;, 8));</span>
-<span class="fc" id="L87">        cardDeck.add(new Card(&quot;spades 9&quot;, 9));</span>
-<span class="fc" id="L88">        cardDeck.add(new Card(&quot;spades 10&quot;, 10));</span>
-<span class="fc" id="L89">        cardDeck.add(new Card(&quot;spades jack&quot;, 10));</span>
-<span class="fc" id="L90">        cardDeck.add(new Card(&quot;spades queen&quot;, 10));</span>
-<span class="fc" id="L91">        cardDeck.add(new Card(&quot;spades king&quot;, 10));</span>
-<span class="fc" id="L92">        cardDeck.add(new Card(&quot;diamonds 2&quot;, 2));</span>
-<span class="fc" id="L93">        cardDeck.add(new Card(&quot;diamonds 3&quot;, 3));</span>
-<span class="fc" id="L94">        cardDeck.add(new Card(&quot;diamonds 4&quot;, 4));</span>
-<span class="fc" id="L95">        cardDeck.add(new Card(&quot;diamonds 5&quot;, 5));</span>
-<span class="fc" id="L96">        cardDeck.add(new Card(&quot;diamonds 6&quot;, 6));</span>
-<span class="fc" id="L97">        cardDeck.add(new Card(&quot;diamonds 7&quot;, 7));</span>
-<span class="fc" id="L98">        cardDeck.add(new Card(&quot;diamonds 8&quot;, 8));</span>
-<span class="fc" id="L99">        cardDeck.add(new Card(&quot;diamonds 9&quot;, 9));</span>
-<span class="fc" id="L100">        cardDeck.add(new Card(&quot;diamonds 10&quot;, 10));</span>
-<span class="fc" id="L101">        cardDeck.add(new Card(&quot;diamonds jack&quot;, 10));</span>
-<span class="fc" id="L102">        cardDeck.add(new Card(&quot;diamonds queen&quot;, 10));</span>
-<span class="fc" id="L103">        cardDeck.add(new Card(&quot;diamonds king&quot;, 10));</span>
-<span class="fc" id="L104">        cardDeck.add(new Card(&quot;clubs 2&quot;, 2));</span>
-<span class="fc" id="L105">        cardDeck.add(new Card(&quot;clubs 3&quot;, 3));</span>
-<span class="fc" id="L106">        cardDeck.add(new Card(&quot;clubs 4&quot;, 4));</span>
-<span class="fc" id="L107">        cardDeck.add(new Card(&quot;clubs 5&quot;, 5));</span>
-<span class="fc" id="L108">        cardDeck.add(new Card(&quot;clubs 6&quot;, 6));</span>
-<span class="fc" id="L109">        cardDeck.add(new Card(&quot;clubs 7&quot;, 7));</span>
-<span class="fc" id="L110">        cardDeck.add(new Card(&quot;clubs 8&quot;, 8));</span>
-<span class="fc" id="L111">        cardDeck.add(new Card(&quot;clubs 9&quot;, 9));</span>
-<span class="fc" id="L112">        cardDeck.add(new Card(&quot;clubs 10&quot;, 10));</span>
-<span class="fc" id="L113">        cardDeck.add(new Card(&quot;clubs jack&quot;, 10));</span>
-<span class="fc" id="L114">        cardDeck.add(new Card(&quot;clubs queen&quot;, 10));</span>
-<span class="fc" id="L115">        cardDeck.add(new Card(&quot;clubs king&quot;, 10));</span>
-<span class="fc" id="L116">    }</span>
+<span class="nc" id="L62">        this.playerId = playerId;</span>
+<span class="nc" id="L63">        this.bet = bet;</span>
+<span class="nc" id="L64">        this.winner = &quot;&quot;;</span>
+<span class="nc" id="L65">        this.playerCards = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L66">        this.dealerCards = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L67">        this.cardDeck = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L68">        cardDeck.add(new Card(&quot;hearts 2&quot;, 2));</span>
+<span class="nc" id="L69">        cardDeck.add(new Card(&quot;hearts 3&quot;, 3));</span>
+<span class="nc" id="L70">        cardDeck.add(new Card(&quot;hearts 4&quot;, 4));</span>
+<span class="nc" id="L71">        cardDeck.add(new Card(&quot;hearts 5&quot;, 5));</span>
+<span class="nc" id="L72">        cardDeck.add(new Card(&quot;hearts 6&quot;, 6));</span>
+<span class="nc" id="L73">        cardDeck.add(new Card(&quot;hearts 7&quot;, 7));</span>
+<span class="nc" id="L74">        cardDeck.add(new Card(&quot;hearts 8&quot;, 8));</span>
+<span class="nc" id="L75">        cardDeck.add(new Card(&quot;hearts 9&quot;, 9));</span>
+<span class="nc" id="L76">        cardDeck.add(new Card(&quot;hearts 10&quot;, 10));</span>
+<span class="nc" id="L77">        cardDeck.add(new Card(&quot;hearts jack&quot;, 10));</span>
+<span class="nc" id="L78">        cardDeck.add(new Card(&quot;hearts queen&quot;, 10));</span>
+<span class="nc" id="L79">        cardDeck.add(new Card(&quot;hearts king&quot;, 10));</span>
+<span class="nc" id="L80">        cardDeck.add(new Card(&quot;spades 2&quot;, 2));</span>
+<span class="nc" id="L81">        cardDeck.add(new Card(&quot;spades 3&quot;, 3));</span>
+<span class="nc" id="L82">        cardDeck.add(new Card(&quot;spades 4&quot;, 4));</span>
+<span class="nc" id="L83">        cardDeck.add(new Card(&quot;spades 5&quot;, 5));</span>
+<span class="nc" id="L84">        cardDeck.add(new Card(&quot;spades 6&quot;, 6));</span>
+<span class="nc" id="L85">        cardDeck.add(new Card(&quot;spades 7&quot;, 7));</span>
+<span class="nc" id="L86">        cardDeck.add(new Card(&quot;spades 8&quot;, 8));</span>
+<span class="nc" id="L87">        cardDeck.add(new Card(&quot;spades 9&quot;, 9));</span>
+<span class="nc" id="L88">        cardDeck.add(new Card(&quot;spades 10&quot;, 10));</span>
+<span class="nc" id="L89">        cardDeck.add(new Card(&quot;spades jack&quot;, 10));</span>
+<span class="nc" id="L90">        cardDeck.add(new Card(&quot;spades queen&quot;, 10));</span>
+<span class="nc" id="L91">        cardDeck.add(new Card(&quot;spades king&quot;, 10));</span>
+<span class="nc" id="L92">        cardDeck.add(new Card(&quot;diamonds 2&quot;, 2));</span>
+<span class="nc" id="L93">        cardDeck.add(new Card(&quot;diamonds 3&quot;, 3));</span>
+<span class="nc" id="L94">        cardDeck.add(new Card(&quot;diamonds 4&quot;, 4));</span>
+<span class="nc" id="L95">        cardDeck.add(new Card(&quot;diamonds 5&quot;, 5));</span>
+<span class="nc" id="L96">        cardDeck.add(new Card(&quot;diamonds 6&quot;, 6));</span>
+<span class="nc" id="L97">        cardDeck.add(new Card(&quot;diamonds 7&quot;, 7));</span>
+<span class="nc" id="L98">        cardDeck.add(new Card(&quot;diamonds 8&quot;, 8));</span>
+<span class="nc" id="L99">        cardDeck.add(new Card(&quot;diamonds 9&quot;, 9));</span>
+<span class="nc" id="L100">        cardDeck.add(new Card(&quot;diamonds 10&quot;, 10));</span>
+<span class="nc" id="L101">        cardDeck.add(new Card(&quot;diamonds jack&quot;, 10));</span>
+<span class="nc" id="L102">        cardDeck.add(new Card(&quot;diamonds queen&quot;, 10));</span>
+<span class="nc" id="L103">        cardDeck.add(new Card(&quot;diamonds king&quot;, 10));</span>
+<span class="nc" id="L104">        cardDeck.add(new Card(&quot;clubs 2&quot;, 2));</span>
+<span class="nc" id="L105">        cardDeck.add(new Card(&quot;clubs 3&quot;, 3));</span>
+<span class="nc" id="L106">        cardDeck.add(new Card(&quot;clubs 4&quot;, 4));</span>
+<span class="nc" id="L107">        cardDeck.add(new Card(&quot;clubs 5&quot;, 5));</span>
+<span class="nc" id="L108">        cardDeck.add(new Card(&quot;clubs 6&quot;, 6));</span>
+<span class="nc" id="L109">        cardDeck.add(new Card(&quot;clubs 7&quot;, 7));</span>
+<span class="nc" id="L110">        cardDeck.add(new Card(&quot;clubs 8&quot;, 8));</span>
+<span class="nc" id="L111">        cardDeck.add(new Card(&quot;clubs 9&quot;, 9));</span>
+<span class="nc" id="L112">        cardDeck.add(new Card(&quot;clubs 10&quot;, 10));</span>
+<span class="nc" id="L113">        cardDeck.add(new Card(&quot;clubs jack&quot;, 10));</span>
+<span class="nc" id="L114">        cardDeck.add(new Card(&quot;clubs queen&quot;, 10));</span>
+<span class="nc" id="L115">        cardDeck.add(new Card(&quot;clubs king&quot;, 10));</span>
+<span class="nc" id="L116">    }</span>
 
 <span class="nc" id="L118">    public Blackjack(Long id, int bet, int playerId, List&lt;Card&gt; cardDeck, List&lt;Card&gt; dealerCards, List&lt;Card&gt; playerCards, String winner) {</span>
 <span class="nc" id="L119">        this.id = id;</span>
@@ -128,65 +128,65 @@ public class Blackjack {
 <span class="nc" id="L128">    public Blackjack() {}</span>
 
     private int getDeckValue(List&lt;Card&gt; cardDeck) {
-<span class="fc" id="L131">        int cardsValue = 0;</span>
-<span class="fc bfc" id="L132" title="All 2 branches covered.">        for(Card c : cardDeck) {</span>
-<span class="fc" id="L133">            cardsValue += c.getValue();</span>
-<span class="fc" id="L134">        }</span>
-<span class="fc" id="L135">        return cardsValue;</span>
+<span class="nc" id="L131">        int cardsValue = 0;</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        for(Card c : cardDeck) {</span>
+<span class="nc" id="L133">            cardsValue += c.getValue();</span>
+<span class="nc" id="L134">        }</span>
+<span class="nc" id="L135">        return cardsValue;</span>
     }
 
     private void checkIfHigherThan21() {
-<span class="fc" id="L139">        int dealerCardsValue = getDeckValue(dealerCards);</span>
-<span class="fc" id="L140">        int playerCardsValue = getDeckValue(playerCards);</span>
+<span class="nc" id="L139">        int dealerCardsValue = getDeckValue(dealerCards);</span>
+<span class="nc" id="L140">        int playerCardsValue = getDeckValue(playerCards);</span>
 
-<span class="fc bfc" id="L142" title="All 2 branches covered.">        if(dealerCardsValue &gt; 21) {</span>
-<span class="fc" id="L143">            this.winner = &quot;player&quot;;</span>
-<span class="pc bpc" id="L144" title="1 of 2 branches missed.">        } else if (playerCardsValue &gt; 21) {</span>
-<span class="fc" id="L145">            this.winner = &quot;dealer&quot;;</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if(dealerCardsValue &gt; 21) {</span>
+<span class="nc" id="L143">            this.winner = &quot;player&quot;;</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        } else if (playerCardsValue &gt; 21) {</span>
+<span class="nc" id="L145">            this.winner = &quot;dealer&quot;;</span>
         }
-<span class="fc" id="L147">    }</span>
+<span class="nc" id="L147">    }</span>
 
     private void compareCardsValues() {
-<span class="fc" id="L150">        int dealerCardsValue = getDeckValue(dealerCards);</span>
-<span class="fc" id="L151">        int playerCardsValue = getDeckValue(playerCards);</span>
+<span class="nc" id="L150">        int dealerCardsValue = getDeckValue(dealerCards);</span>
+<span class="nc" id="L151">        int playerCardsValue = getDeckValue(playerCards);</span>
 
-<span class="fc bfc" id="L153" title="All 2 branches covered.">        if(dealerCardsValue &gt; playerCardsValue) {</span>
-<span class="fc" id="L154">            this.winner = &quot;dealer&quot;;</span>
-<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        } else if (playerCardsValue &gt; dealerCardsValue) {</span>
-<span class="fc" id="L156">            this.winner = &quot;player&quot;;</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if(dealerCardsValue &gt; playerCardsValue) {</span>
+<span class="nc" id="L154">            this.winner = &quot;dealer&quot;;</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">        } else if (playerCardsValue &gt; dealerCardsValue) {</span>
+<span class="nc" id="L156">            this.winner = &quot;player&quot;;</span>
         } else {
 <span class="nc" id="L158">            this.winner = &quot;dealer&quot;;</span>
         }
-<span class="fc" id="L160">    }</span>
+<span class="nc" id="L160">    }</span>
 
     public Card drawCard() {
-<span class="fc bfc" id="L163" title="All 2 branches covered.">        if(cardDeck.size() &lt;= 0) return null;</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if(cardDeck.size() &lt;= 0) return null;</span>
 
-<span class="fc" id="L165">        Random random = new Random();</span>
+<span class="nc" id="L165">        Random random = new Random();</span>
 
-<span class="fc" id="L167">        Card randomCard = cardDeck.get(random.nextInt(cardDeck.size()));</span>
-<span class="fc" id="L168">        cardDeck.remove(randomCard);</span>
+<span class="nc" id="L167">        Card randomCard = cardDeck.get(random.nextInt(cardDeck.size()));</span>
+<span class="nc" id="L168">        cardDeck.remove(randomCard);</span>
 
-<span class="fc" id="L170">        return randomCard;</span>
+<span class="nc" id="L170">        return randomCard;</span>
     }
 
     public void startGame() {
-<span class="fc" id="L174">        Collections.addAll(dealerCards, drawCard(), drawCard());</span>
-<span class="fc" id="L175">        Collections.addAll(playerCards, drawCard(), drawCard());</span>
-<span class="fc" id="L176">    }</span>
+<span class="nc" id="L174">        Collections.addAll(dealerCards, drawCard(), drawCard());</span>
+<span class="nc" id="L175">        Collections.addAll(playerCards, drawCard(), drawCard());</span>
+<span class="nc" id="L176">    }</span>
 
     public void drawPlayerCard() {
-<span class="fc" id="L179">        Card card = this.drawCard();</span>
-<span class="fc" id="L180">        this.playerCards.add(card);</span>
-<span class="fc" id="L181">        checkIfHigherThan21();</span>
-<span class="fc" id="L182">    }</span>
+<span class="nc" id="L179">        Card card = this.drawCard();</span>
+<span class="nc" id="L180">        this.playerCards.add(card);</span>
+<span class="nc" id="L181">        checkIfHigherThan21();</span>
+<span class="nc" id="L182">    }</span>
 
     public void playerStands() {
-<span class="pc bpc" id="L185" title="1 of 4 branches missed.">        while(getDeckValue(dealerCards) &lt; 17 &amp;&amp; this.winner.equals(&quot;&quot;)){</span>
-<span class="fc" id="L186">            dealerCards.add(drawCard());</span>
+<span class="nc bnc" id="L185" title="All 4 branches missed.">        while(getDeckValue(dealerCards) &lt; 17 &amp;&amp; this.winner.equals(&quot;&quot;)){</span>
+<span class="nc" id="L186">            dealerCards.add(drawCard());</span>
         }
-<span class="fc" id="L188">        compareCardsValues();</span>
-<span class="fc" id="L189">        checkIfHigherThan21();</span>
-<span class="fc" id="L190">    }</span>
+<span class="nc" id="L188">        compareCardsValues();</span>
+<span class="nc" id="L189">        checkIfHigherThan21();</span>
+<span class="nc" id="L190">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

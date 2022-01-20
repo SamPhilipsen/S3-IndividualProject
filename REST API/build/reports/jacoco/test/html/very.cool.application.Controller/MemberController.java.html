@@ -21,47 +21,47 @@ public class MemberController {
 
     @Autowired
     public MemberController(IMemberManager memberManager)
-<span class="fc" id="L24">    {</span>
-<span class="fc" id="L25">        this.memberManager = memberManager;</span>
-<span class="fc" id="L26">    }</span>
+<span class="nc" id="L24">    {</span>
+<span class="nc" id="L25">        this.memberManager = memberManager;</span>
+<span class="nc" id="L26">    }</span>
 
 
     @GetMapping(&quot;{id}&quot;)
     public ResponseEntity&lt;MemberDTO&gt; getMemberPath(@PathVariable(value = &quot;id&quot;) int id ) {
-<span class="fc" id="L31">        Member member = memberManager.getMember(id);</span>
+<span class="nc" id="L31">        Member member = memberManager.getMember(id);</span>
 
-<span class="fc bfc" id="L33" title="All 2 branches covered.">        if(member != null) {</span>
-<span class="fc" id="L34">            MemberDTO memberDTO = new MemberDTO(member.getUsername(), member.getPassword(), member.getId(), member.getPoints());</span>
-<span class="fc" id="L35">            return ResponseEntity.ok().body(memberDTO);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if(member != null) {</span>
+<span class="nc" id="L34">            MemberDTO memberDTO = new MemberDTO(member.getUsername(), member.getPassword(), member.getId(), member.getPoints());</span>
+<span class="nc" id="L35">            return ResponseEntity.ok().body(memberDTO);</span>
         } else {
-<span class="fc" id="L37">            return ResponseEntity.notFound().build();</span>
+<span class="nc" id="L37">            return ResponseEntity.notFound().build();</span>
         }
     }
 
     @GetMapping
     public ResponseEntity&lt;List&lt;MemberDTO&gt;&gt; getMembers(@RequestParam(value = &quot;name&quot;) Optional&lt;String&gt; name) {
-<span class="fc" id="L43">        List&lt;Member&gt; members = null;</span>
-<span class="fc" id="L44">        List&lt;MemberDTO&gt; DTOMembers = new ArrayList&lt;MemberDTO&gt;();</span>
+<span class="nc" id="L43">        List&lt;Member&gt; members = null;</span>
+<span class="nc" id="L44">        List&lt;MemberDTO&gt; DTOMembers = new ArrayList&lt;MemberDTO&gt;();</span>
 
-<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if(name.isPresent()) {</span>
-<span class="fc" id="L47">            members = memberManager.getMembers(name.get());</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if(name.isPresent()) {</span>
+<span class="nc" id="L47">            members = memberManager.getMembers(name.get());</span>
         }
         else {
 <span class="nc" id="L50">            members = memberManager.getMembers();</span>
         }
-<span class="fc bfc" id="L52" title="All 2 branches covered.">        if(members != null) {</span>
-<span class="fc bfc" id="L53" title="All 2 branches covered.">            for(Member member : members) {</span>
-<span class="fc" id="L54">                DTOMembers.add(new MemberDTO(member.getUsername(), member.getPassword(), member.getId(), member.getPoints()));</span>
-<span class="fc" id="L55">            }</span>
-<span class="fc" id="L56">            return ResponseEntity.ok().body(DTOMembers);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(members != null) {</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            for(Member member : members) {</span>
+<span class="nc" id="L54">                DTOMembers.add(new MemberDTO(member.getUsername(), member.getPassword(), member.getId(), member.getPoints()));</span>
+<span class="nc" id="L55">            }</span>
+<span class="nc" id="L56">            return ResponseEntity.ok().body(DTOMembers);</span>
         }
-<span class="fc" id="L58">        return ResponseEntity.notFound().build();</span>
+<span class="nc" id="L58">        return ResponseEntity.notFound().build();</span>
     }
 
     @DeleteMapping(&quot;{id}&quot;)
     public ResponseEntity deletePost(@PathVariable int id) {
-<span class="fc" id="L63">        memberManager.deleteMember(id);</span>
-<span class="fc" id="L64">        return ResponseEntity.ok().build();</span>
+<span class="nc" id="L63">        memberManager.deleteMember(id);</span>
+<span class="nc" id="L64">        return ResponseEntity.ok().build();</span>
     }
 
     //POST example
@@ -73,26 +73,26 @@ public class MemberController {
     //}
     @PostMapping()
     public ResponseEntity&lt;String&gt; createMember(@RequestBody MemberDTO memberDTO) {
-<span class="fc" id="L76">        Member member = new Member(memberDTO.getUsername(), memberDTO.getPassword(), memberDTO.getId(), memberDTO.getPoints());</span>
+<span class="nc" id="L76">        Member member = new Member(memberDTO.getUsername(), memberDTO.getPassword(), memberDTO.getId(), memberDTO.getPoints());</span>
 
-<span class="fc bfc" id="L78" title="All 2 branches covered.">        if(!memberManager.addMember(member)) {</span>
-<span class="fc" id="L79">            String entity = &quot;Member with id &quot; + member.getId() + &quot; already exists&quot;;</span>
-<span class="fc" id="L80">            return new ResponseEntity&lt;String&gt;(entity, HttpStatus.CONFLICT);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if(!memberManager.addMember(member)) {</span>
+<span class="nc" id="L79">            String entity = &quot;Member with id &quot; + member.getId() + &quot; already exists&quot;;</span>
+<span class="nc" id="L80">            return new ResponseEntity&lt;String&gt;(entity, HttpStatus.CONFLICT);</span>
         } else {
-<span class="fc" id="L82">            String url = &quot;member/&quot; + member.getId();</span>
-<span class="fc" id="L83">            URI uri = URI.create(url);</span>
-<span class="fc" id="L84">            return new ResponseEntity(uri, HttpStatus.CREATED);</span>
+<span class="nc" id="L82">            String url = &quot;member/&quot; + member.getId();</span>
+<span class="nc" id="L83">            URI uri = URI.create(url);</span>
+<span class="nc" id="L84">            return new ResponseEntity(uri, HttpStatus.CREATED);</span>
         }
     }
 
     @PutMapping()
     public ResponseEntity&lt;Member&gt; updateMember(@RequestBody MemberDTO memberDTO) {
-<span class="fc" id="L90">        Member member = new Member(memberDTO.getUsername(), memberDTO.getPassword(), memberDTO.getId(), memberDTO.getPoints());</span>
+<span class="nc" id="L90">        Member member = new Member(memberDTO.getUsername(), memberDTO.getPassword(), memberDTO.getId(), memberDTO.getPoints());</span>
 
-<span class="fc bfc" id="L92" title="All 2 branches covered.">        if(memberManager.updateMember(member)) {</span>
-<span class="fc" id="L93">            return ResponseEntity.noContent().build();</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if(memberManager.updateMember(member)) {</span>
+<span class="nc" id="L93">            return ResponseEntity.noContent().build();</span>
         } else {
-<span class="fc" id="L95">            return new ResponseEntity(&quot;Please provide a valid student number.&quot;, HttpStatus.NOT_FOUND);</span>
+<span class="nc" id="L95">            return new ResponseEntity(&quot;Please provide a valid student number.&quot;, HttpStatus.NOT_FOUND);</span>
         }
     }
 

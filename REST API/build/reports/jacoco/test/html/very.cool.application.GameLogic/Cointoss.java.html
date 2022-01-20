@@ -3,35 +3,35 @@
 import java.util.Random;
 
 public class Cointoss {
-<span class="fc" id="L6">    private String[] sides = {&quot;Heads&quot;, &quot;Tails&quot;};</span>
+<span class="nc" id="L6">    private String[] sides = {&quot;Heads&quot;, &quot;Tails&quot;};</span>
 
     private String chosenSide;
     private String coinSide;
 
     public String getChosenSide() {
-<span class="fc" id="L12">        return this.chosenSide;</span>
+<span class="nc" id="L12">        return this.chosenSide;</span>
     }
     public String getCoinSide() {
-<span class="fc" id="L15">        return this.coinSide;</span>
+<span class="nc" id="L15">        return this.coinSide;</span>
     }
 
-<span class="fc" id="L18">    public Cointoss() {</span>
-<span class="fc" id="L19">    }</span>
+<span class="nc" id="L18">    public Cointoss() {</span>
+<span class="nc" id="L19">    }</span>
 
     public void chooseSide(String side) {
-<span class="fc" id="L22">        this.chosenSide = side;</span>
-<span class="fc" id="L23">    }</span>
+<span class="nc" id="L22">        this.chosenSide = side;</span>
+<span class="nc" id="L23">    }</span>
 
     public boolean flipCoin() {
-<span class="fc" id="L26">        Random random = new Random();</span>
-<span class="fc" id="L27">        int index = random.nextInt(sides.length);</span>
-<span class="fc" id="L28">        String result = sides[index];</span>
-<span class="fc" id="L29">        coinSide = result;</span>
+<span class="nc" id="L26">        Random random = new Random();</span>
+<span class="nc" id="L27">        int index = random.nextInt(sides.length);</span>
+<span class="nc" id="L28">        String result = sides[index];</span>
+<span class="nc" id="L29">        coinSide = result;</span>
 
-<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if(result.equals(chosenSide)) {</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if(result.equals(chosenSide)) {</span>
 <span class="nc" id="L32">            return true;</span>
         }
-<span class="fc" id="L34">        return false;</span>
+<span class="nc" id="L34">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
