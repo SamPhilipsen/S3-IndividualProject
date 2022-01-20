@@ -3,35 +3,32 @@ stages:
   - test
   - analyze
 
-variables:
-  DOCKER_TLS_CERTDIR: "/certs"
+#services:
+#  - docker:19.03.12-dind
 
-services:
-  - docker:19.03.12-dind
-
-docker-backend:
-  stage: test
-  script:
-    - docker build -t application-backend-image --target backend .
-
-docker-frontend:
-  stage: build
-  script:
-    - docker build -t application-frontend-image --target frontend .
-
-#build:
-#  stage: build
-#  script:D
-#    - cd "REST API"
-#    - ./gradlew build -x test --stacktrace
-#    - ./gradlew.bat --stop
-
-#tests:
+#docker-backend:
 #  stage: test
 #  script:
-#    - cd "REST API"
-#    - ./gradlew test
-#    - ./gradlew.bat --stop
+#    - docker build -t application-backend-image --target backend .
+
+#docker-frontend:
+#  stage: build
+#  script:
+#    - docker build -t application-frontend-image --target frontend .
+
+build:
+  stage: build
+  script:
+    - cd "REST API"
+    - ./gradlew build -x test --stacktrace
+    - ./gradlew.bat --stop
+
+tests:
+  stage: test
+  script:
+    - cd "REST API"
+    - ./gradlew test
+    - ./gradlew.bat --stop
 
 sonarqube-check:
   stage: analyze
