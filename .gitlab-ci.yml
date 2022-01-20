@@ -9,29 +9,29 @@ variables:
 services:
   - docker:19.03.12-dind
 
+docker-test:
+  stage: test
+  script:
+    - docker build -t application-test-image --target test .
+
 docker-build:
   stage: build
   script:
-    - cd "REST API"
-    - docker build -t backendimage .
-    - cd .. 
-    - cd "Front end"
-    - cd personal
-    - docker build -t frontendimage .
+    - docker build -t application-build-image --target build .
 
-build:
-  stage: build
-  script:
-    - cd "REST API"
-    - ./gradlew build -x test --stacktrace
-    - ./gradlew.bat --stop
+#build:
+#  stage: build
+#  script:
+#    - cd "REST API"
+#    - ./gradlew build -x test --stacktrace
+#    - ./gradlew.bat --stop
 
-tests:
-  stage: test
-  script:
-    - cd "REST API"
-    - ./gradlew test
-    - ./gradlew.bat --stop
+#tests:
+#  stage: test
+#  script:
+#    - cd "REST API"
+#    - ./gradlew test
+#    - ./gradlew.bat --stop
 
 sonarqube-check:
   stage: analyze
