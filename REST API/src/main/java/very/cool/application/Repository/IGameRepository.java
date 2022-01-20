@@ -11,8 +11,5 @@ import very.cool.application.Model.Card;
 import java.util.List;
 
 public interface IGameRepository extends JpaRepository<Blackjack, Long> {
-    /*@Modifying
-    @Query("UPDATE Blackjack b SET b.cardDeck = :cardDeck, b.dealerCards = :dealerCards, b.playerCards = :playerCards WHERE b.id = :id")
-    int updateBlackjackGame(@Param("id") Long id, @Param("cardDeck") List<Card> cardDeck, @Param("playerCards") List<Card> playerCards, @Param("dealerCards") List<Card> dealerCards);*/
 
 }

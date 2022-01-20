@@ -15,11 +15,6 @@ const CointossContainer = props => {
         setUser(props.loggedInUser);
     }, [props.loggedInUser])
 
-    const flipCoinRequest = async () => {
-
-
-    }
-
     const handleCointoss = e => {
         e.preventDefault()
 

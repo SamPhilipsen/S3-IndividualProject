@@ -30,7 +30,7 @@ public class GameController {
     }
 
     @PutMapping("/cointoss")
-    public ResponseEntity playCointossGame(@RequestBody ReceiveCointossDataRequest data) {
+    public ResponseEntity<SendCointossDataRequest> playCointossGame(@RequestBody ReceiveCointossDataRequest data) {
 
         String coinSide = gameManager.playCointossGame(data.getUserId(), data.getGameData(), data.getPointsBet());
 
@@ -45,18 +45,17 @@ public class GameController {
     }
 
     @PostMapping("/blackjack")
-    public ResponseEntity<Blackjack> startGame(@RequestBody ReceiveBlackjackDataRequest data) {
+    public ResponseEntity<SendBlackjackDataRequest> startGame(@RequestBody ReceiveBlackjackDataRequest data) {
         int bet = data.getBet();
         int playerId = data.getPlayerId();
-
-        if(data == null) return ResponseEntity.notFound().build();
 
         Member member = memberManager.getMember(data.getPlayerId());
 
         if(member.deductPoints(bet)) {
             Blackjack blackjack = new Blackjack(bet, playerId);
             if(gameManager.createBlackjackGame(blackjack)) {
-                return ResponseEntity.ok().body(blackjack);
+                SendBlackjackDataRequest dto = new SendBlackjackDataRequest(blackjack.getId(), blackjack.getCardDeck(),blackjack.getDealerCards(), blackjack.getPlayerCards(), blackjack.getWinner());
+                return ResponseEntity.ok().body(dto);
             }
         } else {
             return ResponseEntity.badRequest().body(null);
@@ -66,7 +65,7 @@ public class GameController {
     }
 
     @PutMapping("/blackjack")
-    public ResponseEntity updateGame(@RequestBody ReceiveBlackjackDataRequest data) {
+    public ResponseEntity<SendBlackjackDataRequest> updateGame(@RequestBody ReceiveBlackjackDataRequest data) {
         if(data == null) return ResponseEntity.notFound().build();
 
         Blackjack game = gameManager.playerPerformsAction(data.getGameId(), data.getAction());

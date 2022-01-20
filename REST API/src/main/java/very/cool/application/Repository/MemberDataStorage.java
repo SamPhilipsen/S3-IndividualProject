@@ -14,10 +14,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberDataStorage implements IMemberData {
 
-    @Autowired
     IMemberRepository repo;
 
     private final BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    public MemberDataStorage(IMemberRepository fakeRepo) {
+        this.repo = fakeRepo;
+        passwordEncoder = new BCryptPasswordEncoder();
+    }
 
     public List<Member> getMembers() { return repo.findAll(); }
 
