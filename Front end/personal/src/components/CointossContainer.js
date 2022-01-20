@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react"
 import "../styling/cointoss-styles.css"
 import BettingComponent from "./BettingComponent";
+import axios from "axios";
 
 const CointossContainer = props => {
     const [user, setUser] = useState(props.loggedInUser);
@@ -14,35 +15,38 @@ const CointossContainer = props => {
         setUser(props.loggedInUser);
     }, [props.loggedInUser])
 
-    /*const flipCoinRequest = async () => {
-        try {
-
-        }
-    }*/
-
     const handleCointoss = e => {
         e.preventDefault()
-        var newPoints;
-        var sides = ['Heads', 'Tails'];
 
         if(typeof betAmount == "number") {
-            if(user.points > 0 && user.points - betAmount > 0) {
-                let result = sides[Math.floor(Math.random()*sides.length)]
-
-                if(result === coinSide) {
-                    newPoints = betAmount;
-                    setPointsText("You win! You receive " + betAmount + " points.")
-                } else {
-                    newPoints = -Math.abs(betAmount)
-                    setPointsText("You lose! You lost " + betAmount + " points.")
+                const data = {
+                    'id': user.id,
+                    'gameData': coinSide,
+                    'pointsBet': betAmount
                 }
-                setWinningSideText("The winning side is: " + result)
-                props.gamePointsChanged(newPoints);
-            }
-            else {
-                setPointsText("You do not have sufficient points to play this game! (You have " + user.points + ", you need at least " + (betAmount) + " to play.)")
-            }
-        } else {
+
+                async function getData() {
+                    let preText;
+                    await axios.put("http://localhost:8080/games/cointoss", data)
+                        .then((response) => {
+                            setWinningSideText("The winning side is: " + response.data.gameData)
+
+                            if(response.data.gameData === coinSide) {
+                                preText = "You won! You earned "
+                            } else {
+                                preText = "You lose! You lost "
+                            }
+                            setPointsText(preText + betAmount + " points.")
+                            props.gamePointsChanged();
+                        })
+                        .catch((error) => {
+                            if(error.response.status === 400) {
+                                setPointsText("You do not have enough points to play")
+                            }
+                        })
+                }
+                getData()
+            } else {
             alert("Input can only be a number!");
         }
     }
@@ -65,7 +69,7 @@ const CointossContainer = props => {
                 <input
                     type="radio"
                     value="Heads"
-                    name="bet-coinside"
+                    className="bet-coinside"
                     checked={coinSide === "Heads"}
                     onChange={rbChanged}
                 />
@@ -73,7 +77,7 @@ const CointossContainer = props => {
                 <input
                     type="radio"
                     value="Tails"
-                    name="bet-coinside"
+                    className="bet-coinside"
                     checked={coinSide === "Tails"}
                     onChange={rbChanged}
                 />

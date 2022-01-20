@@ -13,7 +13,7 @@ const Header = props => {
 
     const handleLogout = () => {
         setUser([]);
-        localStorage.removeItem('loggedInUser')
+        localStorage.removeItem('userId')
         localStorage.removeItem('authenticationToken')
         delete axios.defaults.headers.common["Authorization"]
         history.push("");

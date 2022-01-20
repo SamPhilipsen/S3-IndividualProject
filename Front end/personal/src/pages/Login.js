@@ -10,8 +10,8 @@ const Login = () => {
     const [errorText, setErrorText] = useState("");
     const [isLoading, setLoading] = useState(false)
 
-    const [password, setPassword] = useState("123")
-    const [username, setUsername] = useState("Peter")
+    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState("")
     const history = useHistory();
 
 
@@ -32,7 +32,7 @@ const Login = () => {
                 axios.defaults.headers.common['Authorization'] = token.Authorization;
 
                 response = await axios.get('http://localhost:8080/members?name=' + username);
-                localStorage.setItem('loggedInUser', JSON.stringify(response.data[0]));
+                localStorage.setItem('userId', JSON.stringify(response.data[0].id));
                 localStorage.setItem('authenticationToken', token.Authorization);
 
                 history.push("/menu");
@@ -67,16 +67,18 @@ const Login = () => {
             </h1>
             <div className="loginContainer">
                 <h2>Username</h2>
-                <input
+                <input className="username-input"
                     type="text"
                     value={username}
                     onChange={usernameChange}
+                    placeholder="Username"
                 />
                 <h2>Password</h2>
-                <input
+                <input className="password-input"
                     type="text"
                     value={password}
                     onChange={passwordChange}
+                    placeholder="Password"
                 />
                 <br/>
                 <br/>

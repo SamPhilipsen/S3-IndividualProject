@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import very.cool.application.Interfaces.IMemberManager;
 import very.cool.application.Model.Member;
-import very.cool.application.Model.MemberDTO;
+import very.cool.application.DTO.MemberDTO;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ import java.util.Optional;
 @RequestMapping("/members")
 public class MemberController {
 
-    @Autowired
     private IMemberManager memberManager;
 
+    @Autowired
     public MemberController(IMemberManager memberManager)
     {
         this.memberManager = memberManager;

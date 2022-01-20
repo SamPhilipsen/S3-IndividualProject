@@ -4,34 +4,28 @@ import Login from "../pages/Login";
 import Header from "./Header";
 import CointossContainer from "./CointossContainer";
 import axios from "axios";
-import Game2Container from "./Game2Container";
+import BlackjackContainer from "./BlackjackContainer";
 
 const MainSite = () => {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('loggedInUser')));
+    const [user, setUser] = useState();
     const [token] = useState(localStorage.getItem('authenticationToken'));
     axios.defaults.headers.common['Authorization'] = token;
 
     useEffect(() => {
-        localStorage.setItem('loggedInUser', JSON.stringify(user))
+        getUserData()
+    }, [])
 
-        async function sendData() {
-
-            try {
-                const response = await axios.put("http://localhost:8080/members", user);
-                return response
-            } catch (error) {
-                console.error(error);
-            }
+    async function getUserData() {
+        try {
+            const response = await axios.get("http://localhost:8080/members/" + localStorage.getItem("userId"));
+            setUser(response.data)
+        } catch (error) {
+            console.error(error);
         }
-        sendData();
-    })
+    }
 
-    const handlePointsChange = (newPoints) => {
-        const totalPoints = user.points + newPoints;
-        setUser({
-            ...user,
-            points: totalPoints,
-        })
+    const handlePointsChange = () => {
+        getUserData()
     }
 
     if(user) {
@@ -51,7 +45,7 @@ const MainSite = () => {
                         />
                         <br />
                         <br />
-                        <Game2Container
+                        <BlackjackContainer
                             loggedInUser={user}
                             gamePointsChanged = {handlePointsChange}
                         />

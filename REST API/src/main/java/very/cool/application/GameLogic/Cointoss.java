@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class Cointoss {
     private String[] sides = {"Heads", "Tails"};
-    private Random random = new Random();
 
     private String chosenSide;
     private String coinSide;
@@ -24,11 +23,12 @@ public class Cointoss {
     }
 
     public boolean flipCoin() {
+        Random random = new Random();
         int index = random.nextInt(sides.length);
         String result = sides[index];
         coinSide = result;
 
-        if(result.equals(coinSide)) {
+        if(result.equals(chosenSide)) {
             return true;
         }
         return false;

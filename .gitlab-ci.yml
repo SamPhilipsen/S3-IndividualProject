@@ -3,6 +3,19 @@ stages:
   - test
   - analyze
 
+#services:
+#  - docker:19.03.12-dind
+
+#docker-backend:
+#  stage: test
+#  script:
+#    - docker build -t application-backend-image --target backend .
+
+#docker-frontend:
+#  stage: build
+#  script:
+#    - docker build -t application-frontend-image --target frontend .
+
 build:
   stage: build
   script:
@@ -10,7 +23,7 @@ build:
     - ./gradlew build -x test --stacktrace
     - ./gradlew.bat --stop
 
-test:
+tests:
   stage: test
   script:
     - cd "REST API"
