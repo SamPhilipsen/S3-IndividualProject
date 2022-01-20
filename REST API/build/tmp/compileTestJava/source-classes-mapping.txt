@@ -20,3 +20,5 @@ very/cool/application/GameClassesTests/GameManagerTest.java
  very.cool.application.GameClassesTests.GameManagerTest
 very/cool/application/MemberClassesTests/MemberLogicTests.java
  very.cool.application.MemberClassesTests.MemberLogicTests
+very/cool/application/MemberClassesTests/MemberDataStorageTests.java
+ very.cool.application.MemberClassesTests.MemberDataStorageTests

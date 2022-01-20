@@ -69,7 +69,7 @@ const CointossContainer = props => {
                 <input
                     type="radio"
                     value="Heads"
-                    name="bet-coinside"
+                    className="bet-coinside"
                     checked={coinSide === "Heads"}
                     onChange={rbChanged}
                 />
@@ -77,7 +77,7 @@ const CointossContainer = props => {
                 <input
                     type="radio"
                     value="Tails"
-                    name="bet-coinside"
+                    className="bet-coinside"
                     checked={coinSide === "Tails"}
                     onChange={rbChanged}
                 />

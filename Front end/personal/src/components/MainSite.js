@@ -4,7 +4,7 @@ import Login from "../pages/Login";
 import Header from "./Header";
 import CointossContainer from "./CointossContainer";
 import axios from "axios";
-import Game2Container from "./Game2Container";
+import BlackjackContainer from "./BlackjackContainer";
 
 const MainSite = () => {
     const [user, setUser] = useState();
@@ -45,7 +45,7 @@ const MainSite = () => {
                         />
                         <br />
                         <br />
-                        <Game2Container
+                        <BlackjackContainer
                             loggedInUser={user}
                             gamePointsChanged = {handlePointsChange}
                         />

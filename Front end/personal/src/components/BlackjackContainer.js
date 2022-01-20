@@ -3,7 +3,7 @@ import "../styling/game2-styles.css"
 import BettingComponent from "./BettingComponent";
 import axios from "axios";
 
-const Game2Container = props => {
+const BlackjackContainer = props => {
     const [user, setUser] = useState(props.loggedInUser);
     const [pointsText, setPointsText] = useState("")
     const [resultText, setResultText] = useState("")
@@ -161,4 +161,4 @@ const Game2Container = props => {
         </div>
     )
 }
-export default Game2Container
+export default BlackjackContainer
