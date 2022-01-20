@@ -9,19 +9,19 @@ variables:
 services:
   - docker:19.03.12-dind
 
-docker-test:
+docker-backend:
   stage: test
   script:
-    - docker build -t application-test-image --target test .
+    - docker build -t application-backend-image --target backend .
 
-docker-build:
+docker-frontend:
   stage: build
   script:
-    - docker build -t application-build-image --target build .
+    - docker build -t application-frontend-image --target frontend .
 
 #build:
 #  stage: build
-#  script:
+#  script:D
 #    - cd "REST API"
 #    - ./gradlew build -x test --stacktrace
 #    - ./gradlew.bat --stop
