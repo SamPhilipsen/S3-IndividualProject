@@ -11,4 +11,4 @@ A gitlab runner builds and tests the code with each push for the backend, while 
 
 The project is my introduction to a lot of software development concepts and tools.
 
-<h2><b>This project was copied from gitlab, not every functionality works!</b></h2>
+<h2><b>This project was copied from gitlab, not every functionality works</b></h2>
